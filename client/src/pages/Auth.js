@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as baseActions from '../redux/modules/base';
+import * as baseActions from '../store/modules/base';
 
 import { AuthWrapper } from '../components/Auth';
 

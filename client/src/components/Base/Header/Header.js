@@ -44,7 +44,7 @@ const HeaderContents = styled.div`
 const Logo = styled.div`
     font-size: 1.4rem;
     letter-spacing: 2px;
-    color: ${oc.teal[7]};
+    color: ${oc.blue[4]};
     font-family: 'Rajdhani';
 `;
 
@@ -56,7 +56,7 @@ const Spacer = styled.div`
 // 하단 그래디언트 테두리
 const GradientBorder = styled.div`
     height: 3px;
-    background: linear-gradient(to right, ${oc.teal[6]}, ${oc.cyan[5]});
+    background: linear-gradient(to right, ${oc.blue[1]}, ${oc.blue[4]});
 `;
 
 const Header = ({children}) => {
@@ -64,12 +64,13 @@ const Header = ({children}) => {
         <Positioner>
             <WhiteBackground>
                 <HeaderContents>
-                    <Logo>HEURM</Logo>
+                    <Logo>ensemble makers</Logo>
                     <Spacer/>
                     {children}
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>
+
         </Positioner>
     );
 };

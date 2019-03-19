@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "immutable": "^4.0.0-rc.12",
+    "node-sass": "^4.11.0",
     "open-color": "^1.6.3",
     "query-string": "^6.4.0",
     "react": "^16.8.3",

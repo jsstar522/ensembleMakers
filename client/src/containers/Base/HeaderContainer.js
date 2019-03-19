@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import Header, { LoginButton } from '../../components/Base/Header';
-import * as userActions from '../../redux/modules/user';
+import Header from '../../components/Base/Header';
+import { LoginButton } from '../../components/Base/LoginButton';
+import { UserButtonContainer } from '../../containers/Base';
+
+import * as userActions from '../../store/modules/user';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import storage from '../../lib/storage';
+import { UserMenu } from '../../components/Base/UserMenu';
 
 class HeaderContainer extends Component {
     handleLogout = async () => {
@@ -24,12 +28,9 @@ class HeaderContainer extends Component {
 
         return (
             <Header>
-                { user.get('logged') 
-                    ? (<div>
-                    {user.getIn(['loggedInfo', 'email'])} 
-                    <div onClick={this.handleLogout}>(로그아웃)</div>
-                    </div> )
-                        : <LoginButton/> 
+                <UserButtonContainer/>
+                { user.get('logged')
+                    ? <UserButtonContainer/> : <LoginButton/>
                 }
             </Header>
         );

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, Auth } from './pages';
-import HeaderContainer from './containers/Base/HeaderContainer';
+import { HeaderContainer } from './containers/Base';
+import { UserMenuContainer } from './containers/Base';
 
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as userActions from './redux/modules/user';
+import * as userActions from './store/modules/user';
 
 import storage from './lib/storage';
 
@@ -34,6 +35,7 @@ class App extends Component {
         return (
             <div>
                 <HeaderContainer/>
+                <UserMenuContainer/>
                 <Route exact path="/" component={Home}/>
                 <Route path="/auth" component={Auth}/>
             </div>

@@ -1,0 +1,20 @@
+.UserButton {
+  position: relative;
+  color: blue;
+  border: 1px solid;
+  width: 85px;
+  height: 55px;
+  transition: all 0.15s ease-in;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+  .content {
+    margin: 0;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
+}

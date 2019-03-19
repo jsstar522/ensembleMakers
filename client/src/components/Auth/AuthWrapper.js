@@ -20,7 +20,7 @@ const ShadowedBox = styled.div`
 
 // 로고
 const LogoWrapper = styled.div`
-    background: ${oc.teal[7]};
+    background: ${oc.blue[4]};
     height: 5rem;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@ const Logo = styled(Link)`
     color: white;
     font-family: 'Rajdhani';
     font-size: 2.4rem;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     text-decoration: none;
 `;
 
@@ -46,7 +46,7 @@ const AuthWrapper = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo to="/">HEURM</Logo>
+                <Logo to="/">ensemble makers</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
