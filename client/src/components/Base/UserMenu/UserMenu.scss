@@ -1,6 +1,35 @@
-.UserMenu {
+.user-menu-wrapper {
   position: relative;
-  top: 100px;
-  padding-left: 100px;
-  color: blue;
+  z-index: z('user-menu');
+  .user-menu-positioner {
+    position: fixed;
+    // right: 0;
+    right: 0.3rem;
+    top: 3.6rem;
+    .user-menu {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      z-index: 1;
+      position: relative;
+      font-size: 1.2rem;
+      background: white;
+      min-width: 10rem;
+      border: 1px solid grey;
+      .menu-items {
+        text-align: center;
+        .line {
+          position: relative;
+          width: 90%;
+          height: 1px;
+          background: black;
+          opacity: 0.2;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import './UserButton.scss';
 
-const UserButton = () => (
-
-  <div className="UserButton">
-    <div className="content"> ddd </div>
+const UserButton = ({children, onClick}) => (
+  <div className="UserButton" onClick={onClick}>
+    <div className="content"> {children} </div>
   </div>
 
 );
