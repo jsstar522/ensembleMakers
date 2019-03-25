@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
 import * as authActions from '../../store/modules/auth';
 import * as userActions from '../../store/modules/user';
 import {isEmail, isLength, isAlphanumeric} from 'validator';
 
 
 
-class Register extends Component {
+class RegisterContainer extends Component {
 
     //새로고침하면 항상 초기화
     componentWillUnmount() {
@@ -207,4 +207,4 @@ export default connect(
         AuthActions: bindActionCreators(authActions, dispatch),
         UserActions: bindActionCreators(userActions, dispatch)
     })
-)(Register);
+)(RegisterContainer);

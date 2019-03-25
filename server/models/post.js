@@ -21,11 +21,11 @@ const postSchema = new Schema({
     type: Number,
     required: true
   },
-  host: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
+  // host: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: true
+  // },
   participants: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Portion"
@@ -44,7 +44,7 @@ function validatePost(post) {
     kinds: Joi.array(),
     price: Joi.number().min(1000).required(),
     totalQuantity: Joi.number(),
-    host: Joi.array().required(),
+    // host: Joi.array().required(),
     participants: Joi.array()
   }
   return Joi.validate(post, schema);

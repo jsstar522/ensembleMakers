@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
 import * as authActions from '../../store/modules/auth';
 import * as userActions from '../../store/modules/user';
 import queryString from 'query-string';
 
 import storage from '../../lib/storage';
 
-class Login extends Component {
+class LoginContainer extends Component {
 
     componentDidMount() {
         const { location } = this.props;
@@ -104,4 +104,4 @@ export default connect(
         AuthActions: bindActionCreators(authActions, dispatch),
         UserActions: bindActionCreators(userActions, dispatch)
     })
-)(Login);
+)(LoginContainer);

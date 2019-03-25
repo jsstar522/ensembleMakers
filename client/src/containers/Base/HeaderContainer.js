@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../../components/Base/Header';
 import { LoginButton } from '../../components/Base/LoginButton';
-import { UserMenu } from '../../components/Base/UserMenu';
 import { UserButtonContainer } from '../../containers/Base';
 import * as userActions from '../../store/modules/user';
 import { connect } from 'react-redux';
