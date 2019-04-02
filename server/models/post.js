@@ -40,7 +40,8 @@ function validatePost(post) {
   const schema = {
     title: Joi.string().required(),
     description: Joi.string().required(),
-    images: Joi.array(),
+    // images: Joi.array(),
+    images: Joi.string(),
     kinds: Joi.array(),
     price: Joi.number().min(1000).required(),
     totalQuantity: Joi.number(),

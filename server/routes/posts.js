@@ -3,7 +3,39 @@ const { User } = require('../models/user');
 const { Portion } = require('../models/portion');
 
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
 const router = express.Router();
+
+// upload image
+// create upload folder on disk
+fs.readdir('uploads', (error) => {
+  // disk에 uploads 폴더가 없을 시 생성
+  if(error){
+    fs.mkdirSync('uploads');
+  }
+});
+// upload file on disk
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb){
+      cb(null, 'uploads/');
+    },
+    filename(req, file, cb){
+      const ext = path.extname(file.originalname);
+      cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 }
+});
+
+router.post('/img', upload.single('images'), (req, res) =>{
+  console.log(req.file);
+  res.send(`/img/${req.file.filename}`);
+})
+
 
 // get all posts
 router.get('/', async (req, res) => {
@@ -26,11 +58,20 @@ router.get('/:id', async (req, res) => {
   res.send(post);
 });
 
+// multer 미들웨어를 끼지 않으면 req.body가 비어있다.
+const multerMiddleware = multer({
+  storage: multer.memoryStorage(),
+});
+
+// ** multerMiddleware 빼도 됨
+
 // create post
-router.post('/', async (req, res) => {
+router.post('/', multerMiddleware.single('images'), async (req, res) => {
+
   const { error } = validate(req.body);
   console.log(error);
   if (error) return res.status(400).send(error.message);
+  console.log(req.body);
   let post = new Post(req.body);
   post = await post.save();
 
