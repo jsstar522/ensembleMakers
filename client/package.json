@@ -12,6 +12,7 @@
     "react-cookie": "^3.0.8",
     "react-dom": "^16.8.3",
     "react-hot-loader": "^4.5.3",
+    "react-images-upload": "^1.2.6",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",

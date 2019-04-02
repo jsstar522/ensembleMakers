@@ -5,9 +5,11 @@ import * as PostAPI from '../../lib/api/post';
 
 const CHANGE_INPUT = 'post/changeInput';
 const POST = 'post/POST';
+const POST_IMG = 'post/postImg';
 
 export const changeInput = createAction(CHANGE_INPUT);
 export const post = createAction(POST, PostAPI.post);
+export const postImg = createAction(POST_IMG, PostAPI.postImg);
 
 const initialState = Map({
   form: Map({})
@@ -21,5 +23,9 @@ export default handleActions({
   ...pender({
     type: POST,
     onSuccess: (state, action) => state.set('post', Map(action.payload.data))
+  }),
+  ...pender({
+    type: POST_IMG,
+    onSuccess: (state, action) => state.setIn(['form', 'images'], action.payload.data)
   })
 }, initialState);

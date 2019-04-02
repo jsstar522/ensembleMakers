@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { PostContent, InputWithLabel, AuthBox, PostButton } from '../../components/Post';
+import { PostContent, InputWithLabel, InputWithImage, AuthBox, PostButton } from '../../components/Post';
 import * as postActions from '../../store/modules/post';
 
 class PostContainer extends Component {
@@ -26,9 +26,18 @@ class PostContainer extends Component {
     }
 
   }
+
+  handleChangeImg = (e) => {
+    const formData = new FormData();
+    const { PostActions } = this.props;
+    console.log(e.target.files[0]);
+    formData.append("images", e.target.files[0]);
+    PostActions.postImg(formData);
+  }
+
   render(){
     const { title, description, images, kinds, totalQuantity, price } = this.props.form;
-    const { handleChange, handlePost } = this;
+    const { handleChange, handleChangeImg, handlePost } = this;
     return(
       <PostContent name="post">
         <AuthBox>
@@ -46,14 +55,15 @@ class PostContainer extends Component {
               value={description}
               onChange={handleChange}
           />
-        </AuthBox>
-        <InputWithLabel 
-            label="images" 
+
+          <InputWithImage
+            label="images"
             name="images"
-            placeholder="images" 
             value={images}
-            onChange={handleChange}
-        />
+            onChange={handleChangeImg}
+          />
+        </AuthBox>
+        
         <InputWithLabel 
             label="kinds" 
             name="kinds"

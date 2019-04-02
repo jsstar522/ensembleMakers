@@ -20,3 +20,21 @@ createAction(POST, postAPI.post)에서 postAPI.post는 함수형태.
 postAPI.post = ({title, description, …}) => axios.post('/api/posts', {title, description…})
 
 `즉, payload를 그대로 반환하는 것이 아닌, payload를 HTTP로 서버에 전송하는 작업을 수행한 것이다.`
+
+
+# formData
+
+axios.post에서 payload를 파일로 보낼 때.
+
+```javascript 
+/// postContainer의 handle메서드
+handleChangeImg = (e) => {
+    const formData = new FormData();
+    const { PostActions } = this.props;
+    console.log(e.target.files[0]);
+    formData.append("images", e.target.files[0]);
+    PostActions.postImg(formData);
+  }
+
+/// axios api부분
+export const postImg = (formData) => axios.post('/api/posts/img', formData);
