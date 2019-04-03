@@ -16,8 +16,8 @@ class PostContainer extends Component {
   }
 
   handlePost = async () => {
-    const { form, PostActions } = this.props;
-    const { title, description, images, kinds, totalQuantity, price } = form.toJS();
+    const { postForm, PostActions } = this.props;
+    const { title, description, images, kinds, totalQuantity, price } = postForm.toJS();
 
     try{
       await PostActions.post({title, description, images, kinds, totalQuantity, price});
@@ -36,7 +36,7 @@ class PostContainer extends Component {
   }
 
   render(){
-    const { title, description, images, kinds, totalQuantity, price } = this.props.form;
+    const { title, description, images, kinds, totalQuantity, price } = this.props.postForm;
     const { handleChange, handleChangeImg, handlePost } = this;
     return(
       <PostContent name="post">
@@ -93,7 +93,7 @@ class PostContainer extends Component {
 
 export default connect(
   (state) => ({
-    form: state.post.get('form'),
+    postForm: state.post.get('postForm'),
   }),
   (dispatch) => ({
     PostActions: bindActionCreators(postActions, dispatch)
