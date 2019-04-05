@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { EnsembleList } from '../components/Ensemble/EnsembleList';
-import { GetPostContainer } from '../containers/Post'
+import { PostListContainer } from '../containers/PostList';
 
 class Home extends Component {
     render() {
         return (
-            <GetPostContainer/>
+            <PostListContainer/>
         );
     }
 }

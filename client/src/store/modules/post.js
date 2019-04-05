@@ -14,7 +14,7 @@ export const post = createAction(POST, PostAPI.post);
 export const postImg = createAction(POST_IMG, PostAPI.postImg);
 
 const initialState = Map({
-  allPost: List(),
+  allPosts: List([]),
   postForm: Map({})
 });
 
@@ -25,7 +25,8 @@ export default handleActions({
   },
   ...pender({
     type: GET_All_POST,
-    onSuccess: (state, action) => state.push('allPost', Map(action.payload.data))
+    // onSuccess: (state, action) => state.set('allPosts', Map(action.payload.data))
+    onSuccess: (state, action) => state.set('allPosts', List(action.payload.data)) 
   }),
   ...pender({
     type: POST,

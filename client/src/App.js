@@ -14,7 +14,7 @@ class App extends Component {
 
     initializeUserInfo = async () => {
         const loggedInfo = storage.get('loggedInfo');
-        console.log(storage.get('loggedInfo'));
+        // console.log(storage.get('loggedInfo'));
         if(!loggedInfo) return;
         
         const { UserActions } = this.props;
