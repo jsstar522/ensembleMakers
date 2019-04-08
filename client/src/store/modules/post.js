@@ -35,5 +35,5 @@ export default handleActions({
   ...pender({
     type: POST_IMG,
     onSuccess: (state, action) => state.setIn(['postForm', 'images'], action.payload.data)
-  })
+  })  
 }, initialState);

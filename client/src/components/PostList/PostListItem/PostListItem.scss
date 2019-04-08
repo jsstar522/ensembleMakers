@@ -1,0 +1,12 @@
+.item {
+  position: relative;
+  color: skyblue;
+  border: 1px solid;
+  padding-top: 100%;
+  transition: all 0.15s ease-in;
+  overflow: visible;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}

@@ -5,6 +5,7 @@ import { shadow, media } from '../../../lib/styleUtils';
 
 // 상단 고정, 그림자
 const Positioner = styled.div`
+    z-index: 1;
     display: flex;
     flex-direction: column;
     position: fixed;

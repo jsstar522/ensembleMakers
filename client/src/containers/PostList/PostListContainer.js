@@ -15,14 +15,14 @@ class PostListContainer extends Component {
     const { allPosts } = this.props;
     const allPostList = allPosts
       .map(
-        allPost => <PostList 
+        (allPost, i) => <PostList 
+        key={i}
         id={allPost._id} 
         title={allPost.title}
         img={allPost.images}
-
         />
       )
-
+    console.log(allPostList);
     return(
       <div>{allPostList}</div>
     )
