@@ -30,12 +30,10 @@ const upload = multer({
   }),
   limits: { fileSize: 5 * 1024 * 1024 }
 });
-
 router.post('/img', upload.single('images'), (req, res) =>{
   console.log(req.file);
   res.send(`/img/${req.file.filename}`);
 })
-
 
 // get all posts
 router.get('/', async (req, res) => {
@@ -63,9 +61,8 @@ const multerMiddleware = multer({
   storage: multer.memoryStorage(),
 });
 
-// ** multerMiddleware 빼도 됨
-
 // create post
+// ** multerMiddleware 빼도 됨
 router.post('/', multerMiddleware.single('images'), async (req, res) => {
 
   const { error } = validate(req.body);
