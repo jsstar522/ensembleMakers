@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { PostList } from '../../components/PostList/PostList';
+import { PostListItem } from '../../components/PostList/PostListItem';
 import * as postActions from '../../store/modules/post';
 
 class PostListContainer extends Component {
@@ -15,7 +16,7 @@ class PostListContainer extends Component {
     const { allPosts } = this.props;
     const allPostList = allPosts
       .map(
-        (allPost, i) => <PostList 
+        (allPost, i) => <PostListItem
         key={i}
         id={allPost._id} 
         title={allPost.title}
@@ -24,7 +25,9 @@ class PostListContainer extends Component {
       )
     console.log(allPostList);
     return(
-      <div>{allPostList}</div>
+        <ul class="list img-list">
+          {allPostList}
+        </ul>
     )
   }
 }

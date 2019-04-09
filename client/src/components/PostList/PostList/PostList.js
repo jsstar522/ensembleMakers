@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import oc from 'open-color';
 import styled from 'styled-components';
 import { PostListItem } from '../PostListItem';
+import './PostList.scss';
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,13 +18,12 @@ class PostList extends Component {
     const { id, title, img } = this.props;
     
     return(
-      <Wrapper>
-        <PostListItem
-          id={id}
-          title={title}
-          img={img}
-        />
-      </Wrapper>
+      // <PostListItem
+      //   id={id}
+      //   title={title}
+      //   img={img}
+      // />
+      <div>aa</div>
     )
   }
 }
