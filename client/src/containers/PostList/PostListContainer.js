@@ -23,11 +23,11 @@ class PostListContainer extends Component {
         img={allPost.images}
         />
       )
-    console.log(allPostList);
+    // console.log(allPostList);
     return(
-        <ul class="list img-list">
+        <PostList>
           {allPostList}
-        </ul>
+        </PostList>
     )
   }
 }

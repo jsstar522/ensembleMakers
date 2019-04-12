@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Auth, Post } from './pages';
+import { Home, Auth, Post, Product } from './pages';
 import { HeaderContainer } from './containers/Base';
 import { UserMenuContainer } from './containers/Base';
 
@@ -39,6 +39,7 @@ class App extends Component {
                 <Route exact path="/" component={Home}/>
                 <Route path="/auth" component={Auth}/>
                 <Route path="/post" component={Post}/>
+                <Route path="/product" component={Product}/>
             </div>
         );
     }

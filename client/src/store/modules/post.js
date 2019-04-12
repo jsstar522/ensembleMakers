@@ -5,17 +5,20 @@ import * as PostAPI from '../../lib/api/post';
 
 const CHANGE_INPUT = 'post/changeInput';
 const GET_All_POST = 'post/GET_All_POST';
+const GET_POST_BY_ID = 'post/GET_POST_BY_ID';
 const POST = 'post/POST';
 const POST_IMG = 'post/postImg';
 
 export const changeInput = createAction(CHANGE_INPUT);
 export const getAllPost = createAction(GET_All_POST, PostAPI.getAllPost);
+export const getPostById = createAction(GET_POST_BY_ID, PostAPI.getPostById);
 export const post = createAction(POST, PostAPI.post);
 export const postImg = createAction(POST_IMG, PostAPI.postImg);
 
 const initialState = Map({
   allPosts: List([]),
-  postForm: Map({})
+  postForm: Map({}),
+  postById: Map({})
 });
 
 export default handleActions({
@@ -25,8 +28,11 @@ export default handleActions({
   },
   ...pender({
     type: GET_All_POST,
-    // onSuccess: (state, action) => state.set('allPosts', Map(action.payload.data))
     onSuccess: (state, action) => state.set('allPosts', List(action.payload.data)) 
+  }),
+  ...pender({
+    type: GET_POST_BY_ID,
+    onSuccess: (state, action) => state.set('postById', Map(action.payload.data))
   }),
   ...pender({
     type: POST,
