@@ -1,0 +1,12 @@
+// border 높이 화면 100% 유지하기
+html, body, #root, #root>div{
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  z-index: -20;
+}
+
+.order-manage-wrapper {
+  height: 100%;
+  padding-top: 5rem;
+}

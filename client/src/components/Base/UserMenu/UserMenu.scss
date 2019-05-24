@@ -1,6 +1,7 @@
 .user-menu-wrapper {
   position: relative;
-  z-index: z('user-menu');
+  // z-index: z('user-menu');
+  z-index: 1;
   .user-menu-positioner {
     position: fixed;
     // right: 0;

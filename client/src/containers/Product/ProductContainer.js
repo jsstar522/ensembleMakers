@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ProductForm } from '../../components/Product/ProductForm';
+import { ProductContent } from '../../components/Product/ProductContent';
 import * as postActions from '../../store/modules/post';
 
 class ProductContainer extends Component {
   
-  componentWillMount() {
+  componentDidMount() {
     const { PostActions } = this.props;
-    const id = '5ca7072f3149ec4f074c17d5';
+    const id = this.props.match.params.id;
     PostActions.getPostById(id);
   }
 
   render(){
     const { postById } = this.props;
     const title = postById.get('title');
+    const postId = postById.get('_id');
     return(
-      <ProductForm id={title}></ProductForm>
+      <ProductContent id={postId} title={title} >
+      </ProductContent>
     )
   }
 }
 
 export default connect(
   (state) => ({
-    postById: state.post.get('postById'),
+    postById: state.post.get('postById')
   }),
   (dispatch) => ({
     PostActions: bindActionCreators(postActions, dispatch),

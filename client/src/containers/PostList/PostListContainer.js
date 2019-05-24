@@ -7,7 +7,7 @@ import * as postActions from '../../store/modules/post';
 
 class PostListContainer extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     const { PostActions } = this.props;
     PostActions.getAllPost();
   }

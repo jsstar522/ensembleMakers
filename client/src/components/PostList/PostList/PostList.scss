@@ -1,98 +1,31 @@
 .post-list-wrap{
   padding-top: 70px;
   width: 100%;
-
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
 }
 
-/* CSS Animations */
-@-webkit-keyframes fadeout {
-  0%   { background: #fff; }
-  10%   { background: #eee; }
-  100% { background: #fff; }
-}
-@-moz-keyframes fadeout {
-  0%   { background: #fff; }
-  10%   { background: #eee; }
-  100% { background: #fff; }
-}
-@-o-keyframes fadeout {
-  0%   { background: #fff; }
-  10%   { background: #eee; }
-  100% { background: #fff; }
-}
-@keyframes fadeout {
-  0%   { background: #fff; }
-  10%   { background: #eee; }
-  100% { background: #fff; }
-}
+// /* CSS Animations */
+// @-webkit-keyframes fadeout {
+//   0%   { background: #fff; }
+//   10%   { background: #eee; }
+//   100% { background: #fff; }
+// }
+// @-moz-keyframes fadeout {
+//   0%   { background: #fff; }
+//   10%   { background: #eee; }
+//   100% { background: #fff; }
+// }
+// @-o-keyframes fadeout {
+//   0%   { background: #fff; }
+//   10%   { background: #eee; }
+//   100% { background: #fff; }
+// }
+// @keyframes fadeout {
+//   0%   { background: #fff; }
+//   10%   { background: #eee; }
+//   100% { background: #fff; }
+// }
 
-// 칸당 2개
-@media all and (min-width: 30em) {
-  .list {
-    padding: 0.5em;
-    max-width: 70em;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  .list li {
-    padding: 0.5em;
-    display: block;
-    width: 50%;
-    float: left;
-    background: none;
-    border: 0;
-  }
-  .inner {
-    display: block;
-    width: 100%;
-  }
-  // .li-img, .li-text, .inner {
-  //   display: block;
-  //   width: auto;
-  //   padding: 0;
-  // }
-  .li-text {
-    padding: 0.5em 0;
-  }
-}
-
-// 칸당 3개
-@media all and (min-width: 50em) {
-  .list {
-    padding: 0.5em;
-    max-width: 80em;
-  }
-  .list li {
-    padding: 0.5em;
-    width: 33.333333%;
-  }
-  .inner {
-    display: block;
-    width: 100%;
-  }
-  .li-text {
-    padding: 0.5em 0;
-  }
-}
-
-// 칸당 4개
-@media all and (min-width: 70em) {
-  .list {
-    padding: 0.5em;
-    max-width: 90em;
-  }
-  .list li {
-    width: 25%;
-    height: 100%;
-    border: 1px solid black;
-  }
-  .inner {
-    display: block;
-    width: 100%;
-    
-  }
-  .li-text {
-    padding: 0.5em 0;
-  }
-}
 
