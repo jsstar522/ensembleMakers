@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
+  auth: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -38,6 +43,7 @@ const Post = mongoose.model('Post', postSchema);
 
 function validatePost(post) {
   const schema = {
+    // email: Joi.string().required(),
     title: Joi.string().required(),
     description: Joi.string().required(),
     // images: Joi.array(),

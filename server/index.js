@@ -31,6 +31,9 @@ const authRouter = require('./routes/auth');
 const portionsRouter = require('./routes/portions');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
+const reviewsRouter = require('./routes/reviews');
+const customerRouter = require('./routes/customer');
+const orderRouter = require('./routes/order');
 
 /**
  * Middleware
@@ -61,6 +64,9 @@ app.use('/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/portions', portionsRouter);
 app.use('/api/posts', postsRouter);
+app.use('/api/reviews', reviewsRouter);
+app.use('/api/customer', customerRouter);
+app.use('/api/order', orderRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

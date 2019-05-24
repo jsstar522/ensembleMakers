@@ -66,7 +66,7 @@ const multerMiddleware = multer({
 router.post('/', multerMiddleware.single('images'), async (req, res) => {
 
   const { error } = validate(req.body);
-  console.log(error);
+  // console.log(error);
   if (error) return res.status(400).send(error.message);
   console.log(req.body);
   let post = new Post(req.body);
