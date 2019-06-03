@@ -1,0 +1,26 @@
+#root > div > div:nth-child(2) > div:nth-child(2) {
+  height: 100%;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // z-index: 0;
+  height: 90%;
+  width: 60%;
+  overflow: auto;
+  z-index: 10;
+
+  // 모바일 환경 Modal 크기
+  @media only screen and (max-width:480px) {
+    width: 80%;
+  }
+
+}
+
+.modal-box {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.2);
+}

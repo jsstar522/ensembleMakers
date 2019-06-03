@@ -30,8 +30,8 @@ class PostContainer extends Component {
   handleChangeImg = (e) => {
     const formData = new FormData();
     const { PostActions } = this.props;
-    console.log(e.target.files[0]);
     formData.append("images", e.target.files[0]);
+    console.log(formData)
     PostActions.postImg(formData);
   }
 
@@ -61,6 +61,7 @@ class PostContainer extends Component {
             name="images"
             value={images}
             onChange={handleChangeImg}
+            multiple
           />
         </AuthBox>
         

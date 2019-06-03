@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Auth, Post, Product, CustomerInfoPost, OrderManage } from './pages';
+import { Home, Auth, Post, Product, CustomerInfo, OrderManage } from './pages';
 import { HeaderContainer } from './containers/Base';
 import { UserMenuContainer } from './containers/Base';
 
@@ -40,7 +40,7 @@ class App extends Component {
                 <Route path="/auth" component={Auth}/>
                 <Route path="/post" component={Post}/>
                 <Route path="/product" component={Product}/>
-                <Route path="/customerInfo" component={CustomerInfoPost}/>
+                <Route path="/customerInfo" component={CustomerInfo}/>
                 <Route path="/orderManage" component={OrderManage}/>
             </div>
         );

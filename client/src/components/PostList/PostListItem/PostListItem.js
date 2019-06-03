@@ -8,6 +8,7 @@ class PostListItem extends Component {
     const { id, title, img } = this.props;
     const imgURL = "http://localhost:5000"+img;
     const pageURL = "/product/" + id;
+    console.log(imgURL)
     return( 
       <a href={pageURL} className="post-list-item-wrap">
         <div className="post-list-item-img">

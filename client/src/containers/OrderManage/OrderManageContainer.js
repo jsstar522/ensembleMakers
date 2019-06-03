@@ -5,11 +5,10 @@ import { OrderManageWrapper } from '../../components/OrderManage/OrderManageWrap
 import { OrderManageState } from '../../components/OrderManage/OrderManageState';
 import { OrderManageList } from '../../components/OrderManage/OrderManageList';
 import { OrderManageDetail } from '../../components/OrderManage/OrderManageDetail';
-import { DetailPostButton } from '../../components/OrderManage/DetailPostButton';
 import { DetailInput } from '../../components/OrderManage/DetailInput';
 import * as orderActions from '../../store/modules/order';
 import * as customerActions from '../../store/modules/customer';
-import { accessSync } from 'fs';
+import * as modalActions from '../../store/modules/modal';
 
 class OrderManageContainer extends Component {
   
@@ -19,14 +18,9 @@ class OrderManageContainer extends Component {
     CustomerActions.getAllCustomerInfo();
   }
 
-  handleChange = (e) => {
+  handleViewChange = (view) => {
     const { OrderActions } = this.props;
-    const { name, value } = e.target;
-
-    OrderActions.changeInput({
-      name,
-      value
-    });
+    OrderActions.viewChange(view)
   }
 
   handleGetById = async(id) => {
@@ -43,75 +37,74 @@ class OrderManageContainer extends Component {
     }
   };
 
-  handleChangeState = async() => {
+  handleChangeState = async(state) => {
     const { CustomerActions } = this.props;
     const { customerById } = this.props;
     const id = customerById.toJS()._id;
-    const state = "processing";
 
     try {
       await CustomerActions.changeState({id, state})
-      //성공하면 재렌더링이 필요할듯하다..
     }catch(e) {
       console.log(e);
     }
   }
 
-  // handlePostOrder = async() => {
-  //   const { OrderActions } = this.props;
-  //   const customerId = this.props.customerById.toJS()._id;
-  //   const { postForm } = this.props;
-  //   const { size } = postForm.toJS();
+  handleOpenEditorModal = () => {
+    const { orderById } = this.props;
+    const { ModalActions } = this.props;
 
-  //   try {
-  //   await OrderActions.postOrder({customerId, size});
-  //   }catch(e) {
-  //     console.log(e);
-  //   }
-  // }
+    ModalActions.show({
+      visible: "editor",
+      modalContents: orderById.toJS()
+    })
+  }
+
+  handleOpenImageModal = () => {
+    const { ModalActions } = this.props;
+    ModalActions.show({
+      visible: "image"
+    })
+  }
 
   render() {
-    const { allCustomers, customerById, orderById } = this.props;
-    const { handleGetById, handleChange, handlePostOrder, handleChangeState } = this;
-    // 변수이름 size라고 하면 오류
-    const { sizeValue } = this.props.postForm;
-
-    //customer전체명단 불러오기
-    const allCustomerList = allCustomers
-      .map(
-        (allCustomer, i) => <div
-        key={i}
-        id={allCustomer._id}
-        name={allCustomer.name}
-        phone={allCustomer.phone}
-        address={allCustomer.address}
-        onClick={() => handleGetById(allCustomer._id)}
-        >{allCustomer.name}<br/>{allCustomer.state}</div>
-      )
+    const { view, allCustomers, customerById, orderById } = this.props;
+    const { handleViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal } = this;
 
     return(
       <OrderManageWrapper>
-        <OrderManageState/>
-        <OrderManageList>{allCustomerList}</OrderManageList>
-        <OrderManageDetail>
-          {customerById.get('name')}<br/>
-          {customerById.get('_id')}<br/>
-          {customerById.get('phone')}<br/>
-          {customerById.get('address')}<br/>
-          {customerById.get('state')}<br/>
-          <div>-------------------------------</div>
-          {orderById.get('_id')}
-          {/* <DetailInput
-            label="size" 
-            name="size"
-            placeholder="사이즈"
-            value={sizeValue}
-            onChange={handleChange}
-          /> */}
-          <DetailPostButton
-            onClick={handlePostOrder}
-          >저장하기</DetailPostButton>
-          <div onClick={handleChangeState}>상태바꾸기</div>
+        <OrderManageState
+          state={view}
+          onClick={handleViewChange}
+        />
+        <OrderManageList
+          allCustomers={allCustomers}
+          view={view}
+          customerById={customerById.toJS()._id}
+          onClick={handleGetById}
+        />
+        <OrderManageDetail
+          name={orderById.getIn(['customerId', 'name'])}
+          date={customerById.get('createdAt')}
+          phone={customerById.get('phone')}
+          state={orderById.getIn(['customerId', 'state'])}
+          model={orderById.toJS().model}
+          rightSize={orderById.toJS().rightSize}
+          leftSize={orderById.toJS().leftSize}
+          last={orderById.toJS().last}
+          sole={orderById.toJS().sole}
+          midsole={orderById.toJS().midsole}
+          sockLining={orderById.toJS().sockLining}
+          heel={orderById.toJS().heel}
+          decoration={orderById.toJS().decoration}
+          material={orderById.toJS().material}
+          innerMaterial={orderById.toJS().innerMaterial}
+          color={orderById.toJS().color}
+          detail={orderById.toJS().detail}
+          onChangeState={handleChangeState}
+        >
+          <div onClick={handleOpenEditorModal}>모달켜기</div>
+          <div onClick={handleOpenImageModal}>이미지모달</div>
+          
         </OrderManageDetail>
       </OrderManageWrapper>
     )
@@ -120,14 +113,15 @@ class OrderManageContainer extends Component {
 
 export default connect(
   (state) => ({
+    view: state.order.get('view'),
+    allCustomers: state.customer.get('allCustomers'),
+    customerById: state.customer.get('customerById'),
     allOrders: state.order.get('allOrders'),
     orderById: state.order.get('orderById'),
-    postForm: state.order.get('postForm'),
-    allCustomers: state.customer.get('allCustomers'),
-    customerById: state.customer.get('customerById')
   }),
   (dispatch) => ({
     OrderActions: bindActionCreators(orderActions, dispatch),
-    CustomerActions: bindActionCreators(customerActions, dispatch)
+    CustomerActions: bindActionCreators(customerActions, dispatch),
+    ModalActions: bindActionCreators(modalActions, dispatch)
   })
 )(OrderManageContainer);

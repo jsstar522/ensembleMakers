@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { CustomerInfoContainer } from '../containers/CustomerInfo';
 
-class CustomerInfoPost extends Component {
+class CustomerInfo extends Component {
   render(){
     return(
       <CustomerInfoContainer/>
@@ -10,4 +10,4 @@ class CustomerInfoPost extends Component {
   }
 }
 
-export default CustomerInfoPost;
+export default CustomerInfo;

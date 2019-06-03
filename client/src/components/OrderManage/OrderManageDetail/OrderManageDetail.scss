@@ -1,8 +1,29 @@
-.order-manage-detail {
-  // display: inline-block;
+.order-manage-detail-wrapper {
   float: left;
-  overflow: hidden;
+  overflow: auto;
+  padding: 1rem;
   width: 60%;
   height: 96%;
   border: 1px solid silver;
+  background-color: white;
+}
+
+.order-manage-detail-line {
+  margin-top: 1.3rem;
+  margin-bottom: 1.5rem;
+  border: 0.02rem solid #d8d6d6;
+}
+
+.header-name {
+  font-size: 2rem;
+}
+.header-date {
+  position: relative;
+  right: -5rem;
+  float: right;
+  margin-top: 2.5rem;
+  font-size: 1rem; 
+}
+.header-phone {
+  font-size: 1rem;
 }

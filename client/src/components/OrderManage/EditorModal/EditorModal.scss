@@ -1,0 +1,57 @@
+.edit-modal-wrapper {
+  margin: 1.5rem;
+  margin-top: 3rem;
+  overflow: auto;
+}
+
+.edit-modal-header {
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  width: 100px;
+}
+
+.edit-modal-form-table {
+  width: 100%;
+}
+
+.edit-modal-button-wrapper {
+  position: relatvie;
+  margin: auto;
+  margin-top: 1rem;
+  bottom: 0;
+  padding: 0.7rem;
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  background-color: #228be6;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  color: white;
+  text-shadow: 0 0 2px #1971c2;
+
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+
+  &:hover {
+    background-color: #4dabf7;
+  }
+}
+
+.edit-modal-cancel-button {
+
+  position: absolute;
+  right: 1rem;
+  top: 0.2rem;
+  cursor: pointer;
+  font-size: 2rem;
+
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+
+.editor-modal-line {
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+  border: 0.03rem solid #d8d6d6;
+}

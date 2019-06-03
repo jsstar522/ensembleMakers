@@ -1,0 +1,30 @@
+.detail-contents-wrapper {
+  margin: 1.5rem;
+  margin-top: 3rem;
+  overflow: auto;
+}
+
+.detail-contents-form-table {
+  width: 100%;
+  td {
+    font-size: 1.2rem;
+    // border: 1px solid black;
+  }
+  .detail-contents-label {
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 20%;
+  }
+  .detail-contents-value {
+    width: 30%;
+  }
+  .detail-contents-image {
+    border: 1px solid #d8d6d6;
+    width: 50%;
+  }
+  .detail-contents-value2 {
+    width: 30%;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+  }
+}

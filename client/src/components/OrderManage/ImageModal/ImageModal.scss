@@ -1,0 +1,23 @@
+.image-modal-wrapper {
+  margin: 1rem;
+  overflow: auto;
+}
+
+.image-preview-wrapper {
+  margin: auto;
+  width: 95%;
+  height: 10rem;
+  border: 1px solid black;
+  overflow: auto;
+}
+
+.image-preview-item {
+  width: 20%;
+  height: 9rem;
+  margin: 0.5rem;
+  border: 1px solid black;
+}
+
+.button-wrapper {
+  display: flex;
+}
