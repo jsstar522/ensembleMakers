@@ -8,13 +8,13 @@ const customerSchema = new Schema({
     required: true
   },
   phone: {
-    type: Number,
+    type: String,
     required: true
   },
   address: {
     type: String,
   },
-  // 제작전(ordered), 제작중(producing), 제작완료(finished)
+  // 주문완료(ordered), 제작중(producing), 제작완료(finished)
   state: {
     type: String,
     default: "ordered"
@@ -28,7 +28,7 @@ const Customer = mongoose.model('Customer', customerSchema);
 function validateCustomer(customer) {
   const schema = {
     name: Joi.string().required(),
-    phone: Joi.number().required(),
+    phone: Joi.string().required(),
     address: Joi.string()
   }
   return Joi.validate(customer, schema);
