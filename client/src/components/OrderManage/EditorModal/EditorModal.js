@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './EditorModal.scss';
+import { FaTimes } from 'react-icons/fa';
 import { DetailInput } from '../DetailInput';
 
 import styled from 'styled-components';
@@ -53,9 +54,9 @@ class EditorModal extends Component {
     return(
       <div className="edit-modal-wrapper">
         <div 
-          className="edit-modal-cancel-button"
+          className="modal-cancel-button"
           onClick={handleHide}
-        >x
+        ><FaTimes/>
         </div>
         <StateBox state={state}>{stateText}</StateBox>
         <div className="edit-modal-header">{name}</div>

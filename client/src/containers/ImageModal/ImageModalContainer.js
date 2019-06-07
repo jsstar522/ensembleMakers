@@ -7,8 +7,6 @@ import { Dimmed } from '../../components/OrderManage/Dimmed';
 import * as modalActions from '../../store/modules/modal';
 import * as orderActions from '../../store/modules/order';
 
-const fileURLList = [];
-
 class ImageModalContainer extends Component {
 
   handleChange = async(e) => {
@@ -22,11 +20,15 @@ class ImageModalContainer extends Component {
       let reader = new FileReader();
       reader.readAsDataURL(e.target.files[i])
       reader.onload = () => {
-        ModalActions.imageURL(reader.result);
+        ModalActions.imageURLChange(reader.result);
       }
     }
+
+    // 같은사진 중복으로 올리면 change가 일어나지 않아 올라가지 않는 버그가 있음.
+
   }
 
+  // 사진 등록
   handlePost = async() => {
     const { ModalActions, OrderActions } = this.props;
     const { orderById, images, postForm } = this.props;
@@ -41,24 +43,33 @@ class ImageModalContainer extends Component {
       id, formData
     })
     // imgPost 후 modal 종료
-    this.handleHide();
-
-    console.log(formData.getAll('images'));
+    await this.handleHide();
+    // console.log(formData.getAll('images'));
   }
 
-  // 올릴 이미지 목록제거
-  handleDeleteURL = (e) => {
-    const { images }  = this.props;
-
+  // 올릴 이미지 목록, 미리보기 제거
+  handleDeleteURL = async(i) => {
+    const { ModalActions } = this.props;
+    await ModalActions.imageDelete(i);
+    await ModalActions.imageURLDelete(i);
   }
 
+  // 등록되어 있는 사진 삭제
+  handleDeleteImg = async(i) => {
+    const { OrderActions } = this.props;
+    const { orderById } = this.props;
+    const id = orderById.get('_id')
+    const imgName = await orderById.toJS().images[i].split('/')[2]
+    await OrderActions.removeImg({ id, imgName })
+  }
+
+  // 모달 숨기기
   handleHide = () => {
     const { ModalActions } = this.props;
     const { images, imageURLs } = this.props;
 
     // post 후 images state 초기화
     if(images){
-      // images.formData.delete('images');
       ModalActions.imageInit();
       ModalActions.imageURLInit();
     }
@@ -68,19 +79,20 @@ class ImageModalContainer extends Component {
   }
 
   render() {
-    const { visible, images, imageURLs } = this.props;
-    const { handleChange, handlePost, handleHide, handleDeleteURL } = this;
+    const { visible, orderById, images, imageURLs } = this.props;
+    const { handleChange, handlePost, handleHide, handleDeleteURL, handleDeleteImg } = this;
 
     return(
       visible === "image" &&
       <div>
         <Modal mode={visible}>
           <ImageModal 
-            images={images}
+            images={orderById.get('images')}
             imageURLs={imageURLs}
             onChange={handleChange} 
             onPost={handlePost}
-            onDelete={handleDeleteURL}
+            onDeleteURL={handleDeleteURL}
+            onDeleteImg={handleDeleteImg}
             onHide={handleHide}
           />
         </Modal>
@@ -92,8 +104,8 @@ class ImageModalContainer extends Component {
 
 export default connect(
   (state) => ({
-    orderById: state.order.get('orderById'),
     visible: state.modal.get('visible'),
+    orderById: state.order.get('orderById'),
     images: state.modal.get('images'),
     imageURLs: state.modal.get('imageURLs')
   }),

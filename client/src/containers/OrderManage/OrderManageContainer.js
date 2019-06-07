@@ -23,6 +23,11 @@ class OrderManageContainer extends Component {
     OrderActions.viewChange(view)
   }
 
+  handleImgTextViewChange = (view) => {
+    const { OrderActions } = this.props;
+    OrderActions.imgTextViewChange(view);
+  }
+
   handleGetById = async(id) => {
     const { allCustomers, customerById, postForm } = this.props;
     const { CustomerActions, OrderActions } = this.props;
@@ -67,8 +72,8 @@ class OrderManageContainer extends Component {
   }
 
   render() {
-    const { view, allCustomers, customerById, orderById } = this.props;
-    const { handleViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal } = this;
+    const { view, imgTextView, allCustomers, customerById, orderById } = this.props;
+    const { handleViewChange, handleImgTextViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal } = this;
 
     return(
       <OrderManageWrapper>
@@ -100,11 +105,13 @@ class OrderManageContainer extends Component {
           innerMaterial={orderById.toJS().innerMaterial}
           color={orderById.toJS().color}
           detail={orderById.toJS().detail}
+          images={orderById.toJS().images}
+          imgTextView={imgTextView}
           onChangeState={handleChangeState}
+          onChangeImgText={handleImgTextViewChange}
+          onOpenImageModal={handleOpenImageModal}
         >
           <div onClick={handleOpenEditorModal}>모달켜기</div>
-          <div onClick={handleOpenImageModal}>이미지모달</div>
-          
         </OrderManageDetail>
       </OrderManageWrapper>
     )
@@ -114,6 +121,7 @@ class OrderManageContainer extends Component {
 export default connect(
   (state) => ({
     view: state.order.get('view'),
+    imgTextView: state.order.get('imgTextView'),
     allCustomers: state.customer.get('allCustomers'),
     customerById: state.customer.get('customerById'),
     allOrders: state.order.get('allOrders'),

@@ -66,9 +66,9 @@ const StateButton = styled.div`
 
 class OrderManageDetail extends Component {
   render() {
-    const { children } = this.props;
-    const { name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail } = this.props;
-    const { onChangeState } = this.props;
+    const { imgTextView } = this.props;
+    const { name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { onChangeState, onChangeImgText, onOpenImageModal } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
@@ -95,13 +95,16 @@ class OrderManageDetail extends Component {
           innerMaterial={innerMaterial}
           color={color}
           detail={detail}
+          images={images}
+          imgTextView={imgTextView}
+          onChangeImgText={onChangeImgText}
+          onOpenImageModal={onOpenImageModal}
         />
 
         <StateButton 
         state={state}
         onClick={state=="ordered" ? () => onChangeState("processing") : state=="processing" ? () => onChangeState("finished") : null}
         >{state=="ordered" ? <div>제작중으로<br/>변경하기</div> : state=="processing" ? <div>제작완료로<br/>변경하기</div> : null}</StateButton>
-        {children}
       </div>
     )
   }

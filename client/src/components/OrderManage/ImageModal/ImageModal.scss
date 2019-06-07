@@ -3,21 +3,183 @@
   overflow: auto;
 }
 
+.file-box {
+  position: absolute;
+  left: 50%; 
+  margin-left: -35px;
+}
+.file-button {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  background-color: #ff5a5f;
+  color: #FFFFFF;
+  border-style: solid;
+  padding-top: 0;
+  font-size: 30px;
+  text-align: center;
+}
+.file-button-hidden {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  opacity: 0;
+  cursor: pointer;
+
+  filter: alpha(opacity=0);
+  -ms-filter: "alpha(opacity=0)";
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+}
+
+.preview-ref-text {
+  width: 100%;
+  text-align: center;
+  margin-top: 5rem;
+  color: #cccccc;
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+.list-ref-text {
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #bcbaba;
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+
+.image-list-wrapper {
+  margin: auto;
+  margin-top: 1.5rem;
+  width: 95%;
+  height: 12rem;
+  border: 1px solid #bcbaba;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+// 스크롤바 숨기기
+.image-list-wrapper::-webkit-scrollbar { 
+  display: none; 
+}
+
+.image-list-item {
+  float: left;
+  width: 9rem;
+  height: 9rem;
+  margin: 0.5rem;
+  margin-top: -0.5rem;
+}
+
 .image-preview-wrapper {
   margin: auto;
+  margin-top: 1.5rem;
   width: 95%;
-  height: 10rem;
-  border: 1px solid black;
-  overflow: auto;
+  height: 12rem;
+  border: 1px solid #cccccc;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+// 스크롤바 숨기기
+.image-preview-wrapper::-webkit-scrollbar { 
+  display: none; 
 }
 
 .image-preview-item {
+  float: left;
   width: 20%;
-  height: 9rem;
+  height: 10rem;
   margin: 0.5rem;
-  border: 1px solid black;
 }
 
-.button-wrapper {
-  display: flex;
+.image-resize {
+  width: 100px;
+  height: 160px;
+}
+
+.image-remove-button {
+  position: absolute;
+  clear: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  background-color: #ff5a5f;
+  color: white;
+  text-align: center;
+  padding-top: 0.3rem;
+  cursor: pointer;
+  &:hover {
+    background-color: red;
+  }
+}
+
+.right-button {
+  position: absolute;
+  float: left;
+  right: 0.5rem;
+  padding-top: 0.85rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #d0ebff;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  &:hover{
+    background-color: #4dabf7;
+  }
+}
+.left-button {
+  position: absolute;
+  float: left;
+  left: 0.5rem;
+  padding-top: 0.85rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #d0ebff;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  &:hover{
+    background-color: #4dabf7;
+  }
+}
+
+.remove-button {
+  position: absolute;
+  margin-top: 0.6rem;
+  right: 1rem;
+  top: 0.2rem;
+}
+
+.image-modal-post-button {
+  border: 2px solid #ff5a5f;
+  color: #ff5a5f;
+  margin: auto;
+  margin-top: 1rem;
+  padding-top: 0.6rem;
+  width: 15%;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #ff5a5f;
+    color: white;
+  }
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 }

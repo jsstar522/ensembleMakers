@@ -38,16 +38,17 @@
   }
 }
 
-.edit-modal-cancel-button {
-
+.modal-cancel-button {
   position: absolute;
+  margin-top: 0.6rem;
   right: 1rem;
   top: 0.2rem;
+  color: black;
   cursor: pointer;
-  font-size: 2rem;
-
-  // 글자드래그 방지
-  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+  font-size: 1.5rem;
+  &:hover {
+    color: red;
+  }
 }
 
 .editor-modal-line {

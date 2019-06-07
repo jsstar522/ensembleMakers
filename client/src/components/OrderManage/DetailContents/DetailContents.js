@@ -3,7 +3,9 @@ import './DetailContents.scss';
 
 class DetailContents extends Component {
   render() {
-    const { model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail } = this.props;
+    const { imgTextView } = this.props;
+    const { model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { onChangeImgText, onOpenImageModal } = this.props;
     return(
       <div className="detail-contents-wrapper">
         <table className="detail-contents-form-table">
@@ -11,7 +13,10 @@ class DetailContents extends Component {
           <tr>
             <td className="detail-contents-label">모델명</td>
             <td className="detail-contents-value">{model}</td>
-            <td rowSpan="7" colSpan="2" className="detail-contents-image"></td>
+            <td rowSpan="7" colSpan="2" className="detail-contents-image" onClick={onOpenImageModal}>
+            {images && <img className="detail-image-wrapper" src={images[0]} alt="Detail images" onMouseOver={() => {onChangeImgText(true)}} onMouseOut={() => {onChangeImgText(false)}}/>}
+            {imgTextView && <div className="detail-image-ref-text">등록된 이미지가 총 {images.length}개 있습니다.<br/> 이미지를 등록/삭제 하시려면 클릭하세요.</div>}
+            </td>
           </tr>
           <tr>
             <td className="detail-contents-label">라스트</td>
