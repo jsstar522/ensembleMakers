@@ -60,6 +60,8 @@ const upload = multer({
   }),
   limits: { fileSize: 5 * 1024 * 1024 }
 });
+
+// post images
 router.patch('/img/:id', upload.array('images', 10), async(req, res) => {
   let fileList = [];
   for(let i = 0; i < req.files.length; i++) {
@@ -68,10 +70,30 @@ router.patch('/img/:id', upload.array('images', 10), async(req, res) => {
   const order = await Order.findByIdAndUpdate(
     req.params.id,
     {
-      "images": fileList
+      $push: {"images": fileList}
     }
   )
-  await res.send(order);
+  await res.send(fileList);
+})
+
+// delete images
+router.delete('/img/:id', async(req, res) => {
+  console.log(req.params.id);
+  console.log(req.body.imgName)
+
+  // uploads/파일 삭제
+  fs.unlink(`uploads/${req.body.imgName}`, async(err) => {
+    // db내용 삭제
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        // $pull: {"images": `/img/${req.body}`}
+        $pull: { images: { $in: [`/img/${req.body.imgName}`] }}
+      }
+    )
+    await res.send(req.body.imgName);
+  })
+  
 })
 
 
