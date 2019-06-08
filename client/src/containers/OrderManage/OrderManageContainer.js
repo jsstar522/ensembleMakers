@@ -111,8 +111,9 @@ class OrderManageContainer extends Component {
           onChangeImgText={handleImgTextViewChange}
           onOpenImageModal={handleOpenImageModal}
         >
-          <div onClick={handleOpenEditorModal}>모달켜기</div>
+        <div onClick={handleOpenEditorModal}>모달켜기</div>
         </OrderManageDetail>
+        
       </OrderManageWrapper>
     )
   }

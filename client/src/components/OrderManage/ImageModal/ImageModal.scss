@@ -53,14 +53,16 @@
 }
 
 .image-list-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
   margin: auto;
   margin-top: 1.5rem;
+  padding: 10px;
   width: 95%;
   height: 12rem;
   border: 1px solid #bcbaba;
   overflow-x: auto;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
@@ -71,22 +73,29 @@
 }
 
 .image-list-item {
-  float: left;
-  width: 9rem;
+  width: 10rem;
   height: 9rem;
   margin: 0.5rem;
   margin-top: -0.5rem;
 }
+.image-list-item img{
+  float: left;
+  width: 150px;
+  height: 154px;
+  margin-right: 10rem;
+}
 
 .image-preview-wrapper {
-  margin: auto;
-  margin-top: 1.5rem;
-  width: 95%;
-  height: 12rem;
-  border: 1px solid #cccccc;
-  overflow-x: auto;
+  position: relative;
   display: flex;
   flex-direction: row;
+  margin: auto;
+  margin-top: 1.5rem;
+  padding: 10px;
+  width: 95%;
+  height: 12rem;
+  border: 1px solid #bcbaba;
+  overflow-x: auto;
   align-items: center;
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
@@ -97,20 +106,27 @@
 }
 
 .image-preview-item {
-  float: left;
-  width: 20%;
-  height: 10rem;
+  width: 10rem;
+  height: 9rem;
   margin: 0.5rem;
+  margin-top: -0.5rem;
+}
+.image-preview-item img{
+  float: left;
+  width: 150px;
+  height: 154px;
+  margin-right: 10rem;
 }
 
-.image-resize {
+.image-resize{
   width: 100px;
   height: 160px;
+  display: block;
 }
 
 .image-remove-button {
   position: absolute;
-  clear: left;
+  clear: both;
   width: 25px;
   height: 25px;
   border-radius: 50px;
@@ -126,6 +142,7 @@
 
 .right-button {
   position: absolute;
+  z-index: 10;
   float: left;
   right: 0.5rem;
   padding-top: 0.85rem;
@@ -136,6 +153,7 @@
   color: white;
   text-align: center;
   font-size: 1.5rem;
+  margin-top: -8rem;
   cursor: pointer;
   &:hover{
     background-color: #4dabf7;
@@ -153,6 +171,7 @@
   color: white;
   text-align: center;
   font-size: 1.5rem;
+  margin-top: -8rem;
   cursor: pointer;
   &:hover{
     background-color: #4dabf7;

@@ -66,6 +66,7 @@ const StateButton = styled.div`
 
 class OrderManageDetail extends Component {
   render() {
+    const { children } = this.props;
     const { imgTextView } = this.props;
     const { name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { onChangeState, onChangeImgText, onOpenImageModal } = this.props;
@@ -100,7 +101,7 @@ class OrderManageDetail extends Component {
           onChangeImgText={onChangeImgText}
           onOpenImageModal={onOpenImageModal}
         />
-
+        {children}
         <StateButton 
         state={state}
         onClick={state=="ordered" ? () => onChangeState("processing") : state=="processing" ? () => onChangeState("finished") : null}

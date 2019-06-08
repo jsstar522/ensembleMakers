@@ -29,10 +29,9 @@ class ImageModal extends Component {
         .map((image, i) => {
           return(
           <div key={i} className="image-list-item">
+            <img src={`http://localhost:5000`+image}/>
             <div className="image-remove-button" onClick={() => {onDeleteImg(i)}}><FaTimes/></div>
-            <img className="image-resize" src={`http://localhost:5000`+image}/>
           </div>
-          // <img key={i} className="image-list-item" src={`http://localhost:5000`+image} onClick={() => {onDeleteImg(i)}}/>
           )
       })
     }
@@ -65,17 +64,17 @@ class ImageModal extends Component {
         </div>
         <div className="preview-ref-text">사진을 추가하려면 + 버튼을 누르세요</div>
         <div className="image-preview-wrapper">
-          <div className="right-button" onClick={() => scrollRight("div.image-preview-wrapper")}><FaAngleRight/></div>
-          <div className="left-button" onClick={() => scrollLeft("div.image-preview-wrapper")}><FaAngleLeft/></div>
           {imageURLList}
         </div>
+        <div className="right-button" onClick={() => scrollRight("div.image-preview-wrapper")}><FaAngleRight/></div>
+          <div className="left-button" onClick={() => scrollLeft("div.image-preview-wrapper")}><FaAngleLeft/></div>
         <div className="image-modal-post-button" onClick={onPost}>올리기</div>
         <div className="list-ref-text">등록되어 있는 사진</div>
         <div className="image-list-wrapper">
-          <div className="right-button" onClick={() => scrollRight("div.image-list-wrapper")}><FaAngleRight/></div>
-          <div className="left-button" onClick={() => scrollLeft("div.image-list-wrapper")}><FaAngleLeft/></div>
           {imageList}
         </div>
+        <div className="right-button" onClick={() => scrollRight("div.image-list-wrapper")}><FaAngleRight/></div>
+        <div className="left-button" onClick={() => scrollLeft("div.image-list-wrapper")}><FaAngleLeft/></div>
         <div className="modal-cancel-button" onClick={onHide}><FaTimes/></div>
       </div>
     )

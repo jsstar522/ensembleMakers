@@ -14,7 +14,7 @@ class DetailContents extends Component {
             <td className="detail-contents-label">모델명</td>
             <td className="detail-contents-value">{model}</td>
             <td rowSpan="7" colSpan="2" className="detail-contents-image" onClick={onOpenImageModal}>
-            {images && <img className="detail-image-wrapper" src={images[0]} alt="Detail images" onMouseOver={() => {onChangeImgText(true)}} onMouseOut={() => {onChangeImgText(false)}}/>}
+            {images && <img className="detail-image-wrapper" src={images[0]} onMouseOver={() => {onChangeImgText(true)}} onMouseOut={() => {onChangeImgText(false)}}/>}
             {imgTextView && <div className="detail-image-ref-text">등록된 이미지가 총 {images.length}개 있습니다.<br/> 이미지를 등록/삭제 하시려면 클릭하세요.</div>}
             </td>
           </tr>
