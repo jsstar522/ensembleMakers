@@ -8,6 +8,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 require('dotenv').config();
 const passportConfig = require('./services');
+const autoIncrement = require('mongoose-auto-increment');
 
 const express = require('express');
 const app = express();
@@ -22,6 +23,9 @@ mongoose
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch(error => console.error(error.message));
+
+// autoIncrement 초기화
+autoIncrement.initialize(mongoose.connection);
 
 /**  
  * Routes
