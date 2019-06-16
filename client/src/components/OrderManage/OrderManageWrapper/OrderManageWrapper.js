@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { OrderManageState } from '../OrderManageState';
-import { OrderManageList } from '../OrderManageList';
-import { OrderManageDetail } from '../OrderManageDetail';
 import './OrderManageWrapper.scss';
 
 class OrderManageWrapper extends Component {

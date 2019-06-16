@@ -20,7 +20,7 @@ class OrderManageContainer extends Component {
 
   handleViewChange = (view) => {
     const { OrderActions } = this.props;
-    OrderActions.viewChange(view)
+    OrderActions.viewChange(view);
   }
 
   handleImgTextViewChange = (view) => {
@@ -37,18 +37,24 @@ class OrderManageContainer extends Component {
     try {
       await CustomerActions.getCustomerInfoById(customerInfo._id)
       await OrderActions.getOrderById(customerInfo._id)
+      // order detail 창 보이기
+      await OrderActions.detailViewChange(true)
     }catch(e) {
       console.log(e);
     }
   };
 
   handleChangeState = async(state) => {
-    const { CustomerActions } = this.props;
+    const { CustomerActions, OrderActions } = this.props;
     const { customerById } = this.props;
     const id = customerById.toJS()._id;
 
     try {
       await CustomerActions.changeState({id, state})
+      // order detail view 초기화
+      await OrderActions.detailViewChange(false);
+      // orderById state 초기화
+      await OrderActions.orderInit();
     }catch(e) {
       console.log(e);
     }
@@ -71,9 +77,31 @@ class OrderManageContainer extends Component {
     })
   }
 
+  handlePatchProcessingNext = async(id, processing) => {
+    const { OrderActions } = this.props;
+    OrderActions.patchProcessing({
+      id: id, 
+      processing: processing});
+    OrderActions.changeProcessingState({
+      id: id,
+      processingState: 'next'
+    });
+  }
+
+  handlePatchProcessingPre = async(id, processing) => {
+    const { OrderActions } = this.props;
+    OrderActions.deleteProcessing({
+      id: id, 
+      processing: processing});
+    OrderActions.changeProcessingState({
+      id: id,
+      processingState: 'pre'
+    });
+  }
+
   render() {
-    const { view, imgTextView, allCustomers, customerById, orderById } = this.props;
-    const { handleViewChange, handleImgTextViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal } = this;
+    const { view, detailView, imgTextView, allCustomers, customerById, orderById } = this.props;
+    const { handleViewChange, handleImgTextViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal, handlePatchProcessingNext, handlePatchProcessingPre } = this;
 
     return(
       <OrderManageWrapper>
@@ -88,6 +116,8 @@ class OrderManageContainer extends Component {
           onClick={handleGetById}
         />
         <OrderManageDetail
+          id={orderById.get('_id')}
+          orderNumber={orderById.get('orderNumber')}
           name={orderById.getIn(['customerId', 'name'])}
           date={customerById.get('createdAt')}
           phone={customerById.get('phone')}
@@ -107,13 +137,19 @@ class OrderManageContainer extends Component {
           detail={orderById.toJS().detail}
           images={orderById.toJS().images}
           imgTextView={imgTextView}
+          detailView={detailView}
+          lastComplete={orderById.toJS().lastComplete}
+          cutComplete={orderById.toJS().cutComplete}
+          upperComplete={orderById.toJS().upperComplete}
+          soleComplete={orderById.toJS().soleComplete}
+          processingState={orderById.toJS().processingState}
           onChangeState={handleChangeState}
           onChangeImgText={handleImgTextViewChange}
+          onOpenEditorModal={handleOpenEditorModal}
           onOpenImageModal={handleOpenImageModal}
-        >
-        <div onClick={handleOpenEditorModal}>모달켜기</div>
-        </OrderManageDetail>
-        
+          onPatchProcessingNext={handlePatchProcessingNext}
+          onPatchProcessingPre={handlePatchProcessingPre}
+        />
       </OrderManageWrapper>
     )
   }
@@ -122,6 +158,7 @@ class OrderManageContainer extends Component {
 export default connect(
   (state) => ({
     view: state.order.get('view'),
+    detailView: state.order.get('detailView'),
     imgTextView: state.order.get('imgTextView'),
     allCustomers: state.customer.get('allCustomers'),
     customerById: state.customer.get('customerById'),

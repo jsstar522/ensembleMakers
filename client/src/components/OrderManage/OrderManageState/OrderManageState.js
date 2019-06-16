@@ -6,6 +6,7 @@ import oc from 'open-color';
 import PropTypes from 'prop-types';
 
 const StyledStateItem = styled.div`
+  position: relative;
   height: 100%;
   flex: 1;
   display: flex;

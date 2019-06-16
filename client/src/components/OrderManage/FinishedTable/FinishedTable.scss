@@ -1,0 +1,41 @@
+.processing-table-wrapper {
+  margin: 1.5rem;
+  overflow: hidden;
+}
+
+.processing-form-table {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.complete-button {
+  border: 1px solid black;
+}
+
+.processing-box {
+  position: absolute;
+  float: left;
+  border: 3px solid red;
+  width: 20%;
+  height: 100%;
+  left: 80%;
+}
+
+.processing-label {
+  position: relative;
+  font-size: 0.9rem;
+  height: 3rem;
+  width: 20%;
+  border: 2px solid #d8d6d6;
+  text-align: center;
+}
+
+.processing-value {
+  position: relative;
+  font-size: 0.9rem;
+  height: 3rem;
+  width: 20%;
+  border: 2px solid #d8d6d6;
+  text-align: center;
+}

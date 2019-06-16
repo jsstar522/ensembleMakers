@@ -67,8 +67,9 @@ class ImageModal extends Component {
           {imageURLList}
         </div>
         <div className="right-button" onClick={() => scrollRight("div.image-preview-wrapper")}><FaAngleRight/></div>
-          <div className="left-button" onClick={() => scrollLeft("div.image-preview-wrapper")}><FaAngleLeft/></div>
+        <div className="left-button" onClick={() => scrollLeft("div.image-preview-wrapper")}><FaAngleLeft/></div>
         <div className="image-modal-post-button" onClick={onPost}>올리기</div>
+        <hr className="image-modal-line"/>
         <div className="list-ref-text">등록되어 있는 사진</div>
         <div className="image-list-wrapper">
           {imageList}

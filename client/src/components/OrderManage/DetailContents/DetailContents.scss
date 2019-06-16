@@ -1,6 +1,6 @@
 .detail-contents-wrapper {
   margin: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   overflow: auto;
 }
 
@@ -44,11 +44,10 @@
 
 .detail-image-ref-text {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  margin-top: 7rem;
-  margin-left: 2rem;
+  // 가운데 정렬
+  width: 100%; left:0; right:0; margin-left:auto; margin-right:auto; 
+  height: 22%; top: 0; bottom:0; margin-top:auto; margin-bottom:auto;
+
   text-align: center;
   color: black;
   font-size: 1rem;
