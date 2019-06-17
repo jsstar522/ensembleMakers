@@ -7,6 +7,7 @@ import { ReviewPost } from '../../components/Order/ReviewPost';
 import { ReviewRead } from '../../components/Order/ReviewRead';
 import * as orderActions from '../../store/modules/order';
 import * as reviewActions from '../../store/modules/review';
+import { formatDate } from '../../lib/dateFunction';
 
 class OrderContainer extends Component {
 
@@ -38,6 +39,7 @@ class OrderContainer extends Component {
     let data = review.toJS().data;
     // payload에 orderById 추가
     data['orderNumber'] = orderById.get('orderNumber');
+    data['customerId'] = orderById.getIn(['customerId', '_id']);
     await ReviewActions.postReview(data);
     await ReviewActions.changeMode('read');
   }
@@ -85,13 +87,13 @@ class OrderContainer extends Component {
           id={orderById.get('_id')}
           orderNumber={orderById.get('orderNumber')}
           name={orderById.getIn(['customerId', 'name'])}
-          date={orderById.getIn(['customerId', 'createdAt'])}
+          date={formatDate(orderById.getIn(['customerId', 'createdAt']))}
           phone={orderById.getIn(['customerId', 'phone'])}
           state={orderById.getIn(['customerId', 'state'])}
-          lastComplete={orderById.toJS().lastComplete}
-          cutComplete={orderById.toJS().cutComplete}
-          upperComplete={orderById.toJS().upperComplete}
-          soleComplete={orderById.toJS().soleComplete}
+          lastComplete={orderById.toJS().lastComplete && formatDate(orderById.toJS().lastComplete)}
+          cutComplete={orderById.toJS().cutComplete && formatDate(orderById.toJS().cutComplete)}
+          upperComplete={orderById.toJS().upperComplete && formatDate(orderById.toJS().upperComplete)}
+          soleComplete={orderById.toJS().soleComplete && formatDate(orderById.toJS().soleComplete)}
           processingState={orderById.toJS().processingState}
           onPatchProcessingNext={handlePatchProcessingNext}
           onPatchProcessingPre={handlePatchProcessingPre}

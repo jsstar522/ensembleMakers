@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ReactToPrint from "react-to-print";
 import './OrderManageDetail.scss'
 import { DetailContents } from '../DetailContents';
 import { ProcessingTable } from '../ProcessingTable';
 import { FinishedTable } from '../FinishedTable';
 import { Review } from '../Review';
 import { ShowOrderNum } from '../ShowOrderNum';
+import { Print } from '../Print';
 
 import styled from 'styled-components';
 import oc from 'open-color';
@@ -70,7 +72,7 @@ const StateButton = styled.div`
 
 class OrderManageDetail extends Component {
   render() {
-    const { imgTextView, detailView } = this.props;
+    const { imgTextView, detailView, review } = this.props;
     const { id, orderNumber, name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
     const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
@@ -121,13 +123,14 @@ class OrderManageDetail extends Component {
             onChangeImgText={onChangeImgText}
             onOpenImageModal={onOpenImageModal}
           />
+
           { // state가 ordered일 때,  주문번호 등록창 보이기
             state==="ordered" ? <ShowOrderNum orderNumber={orderNumber}/> : null}
           { // state가 finished일 때, 등록/수정 버튼과 state 변경 버튼 삭제 
             state==="finished" ? null 
               : <div className="order-manage-post-button" onClick={onOpenEditorModal}>등록 및 수정하기</div>}
           { // state가 finished일 때, 리뷰창 보이기
-            state==="finished" ? <Review/> : null}
+            state==="finished" ? <Review review={review}/> : null}
 
           { // state에 따라서 다른 버튼 모양
             state==="ordered" ? <StateButton 
@@ -139,6 +142,37 @@ class OrderManageDetail extends Component {
             onClick={() => onChangeState("finished")}
             >제작완료로<br/>변경하기</StateButton>
               : null}
+          
+          <div className="print-button">
+            <ReactToPrint
+              trigger={() => <a>인쇄하기</a>}
+              content={() => this.componentRef}
+            />
+            <Print 
+              ref={e => (this.componentRef = e)} 
+              name={name}
+              phone={phone}
+              orderNumber={orderNumber}
+              date={date}
+              model={model}
+              rightSize={rightSize}
+              leftSize={leftSize}
+              last={last}
+              sole={sole}
+              midsole={midsole}
+              sockLining={sockLining}
+              heel={heel}
+              decoration={decoration}
+              material={material}
+              innerMaterial={innerMaterial}
+              color={color}
+              detail={detail}
+              images={images}
+            />
+          </div>
+
+
+
         </div> 
           // 이름을 클릭하지 않았을 때 나타나는 내용
           : <div className="detail-default-content">고객 주문서를 확인하려면 왼쪽에 있는 해당 <b>주문상태</b>와 <b>고객이름</b>을 클릭하세요.</div>}

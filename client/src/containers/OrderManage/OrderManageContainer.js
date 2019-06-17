@@ -9,12 +9,14 @@ import { DetailInput } from '../../components/OrderManage/DetailInput';
 import * as orderActions from '../../store/modules/order';
 import * as customerActions from '../../store/modules/customer';
 import * as modalActions from '../../store/modules/modal';
+import * as reviewActions from '../../store/modules/review';
+import { formatDate } from '../../lib/dateFunction';
 
 class OrderManageContainer extends Component {
   
   componentDidMount() {
-    // OrderManageList에 customerInfo 불러오기
     const { CustomerActions } = this.props;
+    // OrderManageList에 customerInfo 불러오기
     CustomerActions.getAllCustomerInfo();
   }
 
@@ -30,13 +32,14 @@ class OrderManageContainer extends Component {
 
   handleGetById = async(id) => {
     const { allCustomers, customerById, postForm } = this.props;
-    const { CustomerActions, OrderActions } = this.props;
+    const { CustomerActions, OrderActions, ReviewActions } = this.props;
 
     const customerInfo = allCustomers.find(customer => customer._id === id );
 
     try {
-      await CustomerActions.getCustomerInfoById(customerInfo._id)
-      await OrderActions.getOrderById(customerInfo._id)
+      await CustomerActions.getCustomerInfoById(customerInfo._id);
+      await OrderActions.getOrderById(customerInfo._id);
+      await ReviewActions.getReviewByCustomerId(customerInfo._id);
       // order detail 창 보이기
       await OrderActions.detailViewChange(true)
     }catch(e) {
@@ -100,7 +103,7 @@ class OrderManageContainer extends Component {
   }
 
   render() {
-    const { view, detailView, imgTextView, allCustomers, customerById, orderById } = this.props;
+    const { view, detailView, imgTextView, allCustomers, customerById, orderById, review } = this.props;
     const { handleViewChange, handleImgTextViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal, handlePatchProcessingNext, handlePatchProcessingPre } = this;
 
     return(
@@ -119,7 +122,7 @@ class OrderManageContainer extends Component {
           id={orderById.get('_id')}
           orderNumber={orderById.get('orderNumber')}
           name={orderById.getIn(['customerId', 'name'])}
-          date={orderById.getIn(['customerId', 'createdAt'])}
+          date={formatDate(orderById.getIn(['customerId', 'createdAt']))}
           phone={orderById.getIn(['customerId', 'phone'])}
           state={orderById.getIn(['customerId', 'state'])}
           model={orderById.toJS().model}
@@ -138,11 +141,12 @@ class OrderManageContainer extends Component {
           images={orderById.toJS().images}
           imgTextView={imgTextView}
           detailView={detailView}
-          lastComplete={orderById.toJS().lastComplete}
-          cutComplete={orderById.toJS().cutComplete}
-          upperComplete={orderById.toJS().upperComplete}
-          soleComplete={orderById.toJS().soleComplete}
+          lastComplete={orderById.toJS().lastComplete && formatDate(orderById.toJS().lastComplete)}
+          cutComplete={orderById.toJS().cutComplete && formatDate(orderById.toJS().cutComplete)}
+          upperComplete={orderById.toJS().upperComplete && formatDate(orderById.toJS().upperComplete)}
+          soleComplete={orderById.toJS().soleComplete && formatDate(orderById.toJS().soleComplete)}
           processingState={orderById.toJS().processingState}
+          review={review.toJS()}
           onChangeState={handleChangeState}
           onChangeImgText={handleImgTextViewChange}
           onOpenEditorModal={handleOpenEditorModal}
@@ -164,10 +168,12 @@ export default connect(
     customerById: state.customer.get('customerById'),
     allOrders: state.order.get('allOrders'),
     orderById: state.order.get('orderById'),
+    review: state.review.get('data'),
   }),
   (dispatch) => ({
     OrderActions: bindActionCreators(orderActions, dispatch),
     CustomerActions: bindActionCreators(customerActions, dispatch),
-    ModalActions: bindActionCreators(modalActions, dispatch)
+    ModalActions: bindActionCreators(modalActions, dispatch),
+    ReviewActions: bindActionCreators(reviewActions, dispatch),
   })
 )(OrderManageContainer);

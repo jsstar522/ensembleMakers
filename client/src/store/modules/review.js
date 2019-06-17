@@ -7,12 +7,14 @@ const CHANGE_MODE = 'review/changeMode';
 const CHANGE_INPUT = 'review/changeInput';
 const CHANGE_RATING = 'review/changeRating';
 const GET_REVIEW_BY_NUM = 'review/getReviewById';
+const GET_REVIEW_BY_CUSTOMER_ID = 'review/getReviewByCustomerId'
 const POST_REVIEW = 'review/postReview';
 const PATCH_REVIEW = 'review/patchReview';
 
 export const changeMode = createAction(CHANGE_MODE);
 export const changeInput = createAction(CHANGE_INPUT);
 export const getReviewByNum = createAction(GET_REVIEW_BY_NUM, ReviewAPI.getReviewByNum);
+export const getReviewByCustomerId = createAction(GET_REVIEW_BY_CUSTOMER_ID, ReviewAPI.getReviewByCustomerId);
 export const changeRating = createAction(CHANGE_RATING);
 export const postReview = createAction(POST_REVIEW, ReviewAPI.postReview);
 export const patchReview = createAction(PATCH_REVIEW, ReviewAPI.patchReview);
@@ -39,7 +41,13 @@ export default handleActions({
   ...pender({
     type: GET_REVIEW_BY_NUM,
     onSuccess: (state, action) => {
-      return action.payload.data && state.set('data', action.payload.data);
+      return action.payload.data ? state.set('data', Map(action.payload.data)) : state.set('data', Map({rating: -1, content: ''}));
+    }
+  }),
+  ...pender({
+    type: GET_REVIEW_BY_CUSTOMER_ID,
+    onSuccess: (state, action) => {
+      return action.payload.data ? state.set('data', Map(action.payload.data)) : state.set('data', Map({rating: -1, content: ''}));
     }
   }),
   ...pender({
