@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 import * as OrderAPI from '../../lib/api/order';
-import { finished } from 'stream';
 
 const CHANGE_INPUT = 'order/changeInput';
 const VIEW_CHANGE = 'order/viewChange';
@@ -11,6 +10,7 @@ const IMG_TEXT_VIEW_CHANGE = 'order/imgTextViewChange';
 const ORDER_INIT = 'order/orderInit';
 const GET_ALL_ORDER = 'order/getAllOrder';
 const GET_ORDER_BY_ID = 'order/getOrderById';
+const GET_ORDER_BY_NUM = 'order/getOrderByNum';
 const POST_ORDER = 'order/postOrder';
 const PATCH_ORDER = 'order/patchOrder';
 const PATCH_IMG = 'order/patchImg';
@@ -26,6 +26,7 @@ export const imgTextViewChange = createAction(IMG_TEXT_VIEW_CHANGE);
 export const orderInit = createAction(ORDER_INIT);
 export const getAllOrder = createAction(GET_ALL_ORDER, OrderAPI.getAllOrder);
 export const getOrderById = createAction(GET_ORDER_BY_ID, OrderAPI.getOrderById);
+export const getOrderByNum = createAction(GET_ORDER_BY_NUM, OrderAPI.getOrderByNum);
 export const postOrder = createAction(POST_ORDER, OrderAPI.postOrder);
 export const patchOrder = createAction(PATCH_ORDER, OrderAPI.patchOrder);
 export const patchImg = createAction(PATCH_IMG, OrderAPI.patchImg);
@@ -65,6 +66,12 @@ export default handleActions({
   }),
   ...pender({
     type: GET_ORDER_BY_ID,
+    onSuccess: (state, action) => {
+      return state.set('orderById', Map(action.payload.data))
+  }
+  }),
+  ...pender({
+    type: GET_ORDER_BY_NUM,
     onSuccess: (state, action) => {
       return state.set('orderById', Map(action.payload.data))
   }

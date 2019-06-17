@@ -119,8 +119,8 @@ class OrderManageContainer extends Component {
           id={orderById.get('_id')}
           orderNumber={orderById.get('orderNumber')}
           name={orderById.getIn(['customerId', 'name'])}
-          date={customerById.get('createdAt')}
-          phone={customerById.get('phone')}
+          date={orderById.getIn(['customerId', 'createdAt'])}
+          phone={orderById.getIn(['customerId', 'phone'])}
           state={orderById.getIn(['customerId', 'state'])}
           model={orderById.toJS().model}
           rightSize={orderById.toJS().rightSize}

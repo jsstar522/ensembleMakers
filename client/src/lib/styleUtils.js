@@ -6,8 +6,15 @@ export const sizes = {
     wide: '1200px',
     desktop: '992px',
     tablet: '768px',
-    phone: '376px'
+    phone: '320px'
 };
+
+export const device = {
+    phone: `(min-width: ${sizes.phone})`,
+    tablet: `(min-width: ${sizes.tablet})`,
+    desktop: `(min-width: ${sizes.desktop})`,
+    wide: `(min-width: ${sizes.wide})`
+  };
 
 export const media = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) => css`

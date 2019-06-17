@@ -11,7 +11,7 @@ const ProcessingLabel = styled.td`
   height: 3rem;
   width: 20%;
   border: 2px solid #d8d6d6;
-  ${props => props.processing ? "border-left: 3px solid red; border-right: 3px solid red; border-top: 3px solid red;" : null}
+  ${props => props.processing ? "border-left: 3px solid #ff5a5f; border-right: 3px solid #ff5a5f; border-top: 3px solid #ff5a5f;" : null}
   text-align: center;
 `
 const ProcessingValue = styled.td`
@@ -20,7 +20,7 @@ const ProcessingValue = styled.td`
   height: 3rem;
   width: 20%;
   border: 2px solid #d8d6d6;
-  ${props => props.processing ? "border-left: 3px solid red; border-right: 3px solid red; border-bottom: 3px solid red;" : null}
+  ${props => props.processing ? "border-left: 3px solid #ff5a5f; border-right: 3px solid #ff5a5f; border-bottom: 3px solid #ff5a5f;" : null}
   text-align: center;
 `
 
@@ -29,7 +29,6 @@ class ProcessingTable extends Component {
     const { id } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
     const { onPatchProcessingNext, onPatchProcessingPre } = this.props;
-    // 현재 진행사항
 
     return(
       <div className="processing-table-wrapper">
@@ -49,19 +48,19 @@ class ProcessingTable extends Component {
           </tr>
           <tr>
             <ProcessingValue processing={processingState===0 ? true: false}>
-              {processingState == 0 ? <div><div className="complete-button" onClick={() => {onPatchProcessingNext(id, "lastComplete")}}>완료</div></div> : lastComplete}
+              {processingState == 0 ? "제작중" : lastComplete}
             </ProcessingValue>
             <ProcessingValue processing={processingState===1 ? true: false}>
-              {processingState == 1 ? <div><div className="complete-button" onClick={() => {onPatchProcessingNext(id, "cutComplete")}}>완료</div><div className="complete-button" onClick={() => {onPatchProcessingPre(id, "lastComplete")}}>전단계취소</div></div> : cutComplete}
+              {processingState == 1 ? "제작중" : cutComplete}
             </ProcessingValue>
             <ProcessingValue processing={processingState===2 ? true: false}>
-              {processingState == 2 ? <div><div className="complete-button" onClick={() => {onPatchProcessingNext(id, "upperComplete")}}>완료</div><div className="complete-button" onClick={() => {onPatchProcessingPre(id, "cutComplete")}}>전단계취소</div></div> : upperComplete}
+              {processingState == 2 ? "제작중" : upperComplete}
             </ProcessingValue>
             <ProcessingValue processing={processingState===3 ? true: false}>
-              {processingState == 3 ? <div><div className="complete-button" onClick={() => {onPatchProcessingNext(id, "soleComplete")}}>완료</div><div className="complete-button" onClick={() => {onPatchProcessingPre(id, "upperComplete")}}>전단계취소</div></div> : soleComplete}
+              {processingState == 3 ? "제작중" : soleComplete}
             </ProcessingValue>
             <ProcessingValue processing={processingState===4 ? true: false}>
-              {processingState == 4 ? <div><div>제작완료</div><div className="complete-button" onClick={() => {onPatchProcessingPre(id, "soleComplete")}}>전단계취소</div></div> : null}
+              {processingState == 4 ? "제작완료" : null}
             </ProcessingValue>
           </tr>
           </tbody>

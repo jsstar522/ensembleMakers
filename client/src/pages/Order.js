@@ -5,9 +5,10 @@ import { OrderContainer } from '../containers/Order';
 
 class Order extends Component {
   render() {
+    const { id } = this.props.match.params;
     return(
       <div>
-        <OrderContainer/>
+        <OrderContainer id={id}/>
       </div>
     )
   }

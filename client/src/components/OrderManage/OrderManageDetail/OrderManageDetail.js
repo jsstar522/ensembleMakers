@@ -30,7 +30,6 @@ const StateBox = styled.div`
 
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-
 `
 
 const StateButton = styled.div`
@@ -74,7 +73,7 @@ class OrderManageDetail extends Component {
     const { imgTextView, detailView } = this.props;
     const { id, orderNumber, name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
-    const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal,onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
+    const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
@@ -84,10 +83,10 @@ class OrderManageDetail extends Component {
       <div className="order-manage-detail-wrapper">
         {detailView ? <div>
           <StateBox state={state}>{stateText}</StateBox>
-          <div className="header-date">주문날짜 {date}</div>
           <div className="header-name">{name}</div>
           <div className="header-phone">전화번호 {phone}</div>
           <div className="header-order-number">주문번호 {orderNumber}</div>
+          <div className="header-date">주문날짜 {date}</div>
           <hr className="order-manage-detail-line"/>
           {state == "processing" && <ProcessingTable
             id={id}

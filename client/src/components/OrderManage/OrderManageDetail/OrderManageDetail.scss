@@ -27,11 +27,32 @@
   font-size: 2rem;
 }
 .header-date {
-  position: relative;
-  right: -5rem;
-  float: right;
-  margin-top: 2.8rem;
-  font-size: 1rem; 
+  position: absolute;
+  right: 15px;
+  margin-top: -1.2rem;
+  font-size: 1rem;
+  
+  // phone
+  @media screen and (min-width: 320px) {
+    position: relative;
+    margin-top: 0.3rem;
+    right: 0;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    position: absolute;
+    right: 15px;
+    margin-top: -1.2rem;
+    font-size: 1rem;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    right: 15px;
+    margin-top: -1.2rem;
+    font-size: 1rem;
+  }
+
 }
 .header-phone {
   margin-top: 0.3rem;
@@ -59,6 +80,7 @@
   &:hover {
     background-color: #ff5a5f;
     color: white;
+    transition: all .3s;
   }
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
