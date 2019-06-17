@@ -125,6 +125,11 @@
       font-size: 2.5rem
     }
   }
+
+  &.is-selected {
+    color: #FFD700;
+  }
+
   &__checkbox {
     @extend %visually-hidden;
   }

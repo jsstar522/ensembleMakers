@@ -7,8 +7,15 @@ const router = express.Router();
 
 // get review by id
 router.get('/:id', async(req, res, next) => {
-  let review = await Review.findOne({"orderNumber": req.params.id});
-  if(!review) return res.send(fasle);
+  let review = await Review.findOne({"orderNumber": req.params.id}).populate('customerId');
+  if(!review) res.send(false);
+  res.send(review);
+});
+
+// get review by customerId
+router.get('/customer/:id', async(req, res, next) => {
+  let review = await Review.findOne({"customerId": req.params.id}).populate('customerId');
+  if(!review) res.send(false);
   res.send(review);
 })
 

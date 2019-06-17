@@ -43,7 +43,9 @@ const HeaderContents = styled.div`
 
 // 로고
 const Logo = styled.div`
+    width: 100%;
     font-size: 1.4rem;
+    text-align: center;
     letter-spacing: 2px;
     color: ${oc.blue[4]};
     font-family: 'Rajdhani';
@@ -67,7 +69,8 @@ const Header = ({children}) => {
                 <HeaderContents>
                     <Logo>ensemble makers</Logo>
                     <Spacer/>
-                    {children}
+                    {/* 로그인 메뉴 */}
+                    {/* {children} */}
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>
