@@ -6,13 +6,28 @@ const router = express.Router();
 // get all review
 
 // get review by id
+router.get('/:id', async(req, res, next) => {
+  let review = await Review.findOne({"orderNumber": req.params.id});
+  if(!review) return res.send(fasle);
+  res.send(review);
+})
 
 // create review
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
-  // console.log(error);
   if (error) return res.status(400).send(error.message);
-  res.send(req.body);
+  let review = new Review(req.body);
+  review = await review.save();
+  res.send(review);
 });
+
+// patch review
+router.patch('/:id', async(req, res, next) => {
+  let review = await Review.findOne({"orderNumber": req.params.id});
+  review["rating"] = req.body.rating;
+  review["content"] = req.body.content;
+  review.save();
+  res.send(review);
+})
 
 module.exports = router;
