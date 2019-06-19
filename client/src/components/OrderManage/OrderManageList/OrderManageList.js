@@ -24,7 +24,7 @@ class OrderManageList extends Component {
     })
 
     return(
-      <div className="order-manage-list">{allCustomerList}</div>
+      <div className="order-manage-list-wrapper">{allCustomerList}</div>
     )
   }
 }

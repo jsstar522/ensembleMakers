@@ -51,7 +51,6 @@ class ImageModal extends Component {
       <div className="image-modal-wrapper">
         <div className="file-box">
           <input 
-            type="button"
             value="+"
             className="file-button"
             />

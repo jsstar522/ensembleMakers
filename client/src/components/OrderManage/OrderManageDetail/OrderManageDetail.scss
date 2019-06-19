@@ -3,7 +3,7 @@
   float: left;
   overflow: auto;
   padding: 1rem;
-  width: 60%;
+  width: 70%;
   height: 96%;
   border: 1px solid silver;
   background-color: white;
@@ -52,8 +52,34 @@
     margin-top: -1.2rem;
     font-size: 1rem;
   }
-
 }
+.header-address {
+  position: absolute;
+  right: 15px;
+  font-size: 1rem;
+  
+  // phone
+  @media screen and (min-width: 320px) {
+    position: relative;
+    margin-top: 0.3rem;
+    right: 0;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    position: absolute;
+    right: 15px;
+    margin-top: -2.7rem;
+    font-size: 1rem;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    right: 15px;
+    margin-top: -2.7rem;
+    font-size: 1rem;
+  }
+}
+
 .header-phone {
   margin-top: 0.3rem;
   font-size: 1rem;
@@ -66,19 +92,19 @@
 .order-manage-post-button {
   position: absolute;
   float: left;
-  border: 2px solid #ff5a5f;
-  color: #ff5a5f;
+  border: 2px solid #fa6e57;
+  color: #fa6e57;
   margin-top: 1rem;
   margin-bottom: 1rem;
   left: 28%;
   padding-top: 0.6rem;
-  width: 115px;
+  width: 125px;
   height: 40px;
 
   text-align: center;
   cursor: pointer;
   &:hover {
-    background-color: #ff5a5f;
+    background-color: #fa6e57;
     color: white;
     transition: all .3s;
   }
@@ -89,15 +115,13 @@
 .print-button {
   position: relative;
   float: right;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   margin-right: 1.5rem;
   height: 3rem;
   width: 5rem;
-  border: 1px solid #ff5a5f;
-  color: #ff5a5f;
   overflow: hidden;
   cursor: pointer;
+  text-align: center;
   &:hover{
-
   }
 }

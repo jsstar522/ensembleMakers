@@ -10,7 +10,7 @@ import { Print } from '../Print';
 
 import styled from 'styled-components';
 import oc from 'open-color';
-import PropTypes from 'prop-types';
+import MdPrint from 'react-ionicons/lib/MdPrint';
 
 const StateBox = styled.div`
   position: relative;
@@ -25,8 +25,8 @@ const StateBox = styled.div`
 
   border-radius: 5px;
   //state에 따라 박스 색 변경
-  background-color: ${props => props.state == "ordered" ? oc.orange[4] : props.state == "processing" ? oc.pink[4] : oc.lime[3]};
-  text-shadow: 0 0 2px ${props => props.state == "ordered" ? oc.orange[6] : props.state == "processing" ? oc.pink[6] : oc.lime[6]};
+  background-color: ${props => props.state == "ordered" ? "#f69e53" : props.state == "processing" ? "#fa6e57" : "#4695d6"};
+  text-shadow: 0 0 2px ${props => props.state == "ordered" ? "#f69e53" : props.state == "processing" ? "#fa6e57" : "#4695d6"};
   color: white;
   padding-top: 3px;
 
@@ -38,12 +38,12 @@ const StateButton = styled.div`
   position: absolute;
   float: left;
   border: 2px solid ${props => 
-    props.state=="ordered" ? "#f46195"
-    : props.state=="processing" ? "#9dc651"
+    props.state=="ordered" ? "#fa6e57"
+    : props.state=="processing" ? "#4695d6"
     : null};
   color: ${props => 
-    props.state=="ordered" ? "#f46195" 
-    : props.state=="processing" ? "#9dc651"
+    props.state=="ordered" ? "#fa6e57"
+    : props.state=="processing" ? "#4695d6"
     : null};
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -59,8 +59,8 @@ const StateButton = styled.div`
 
   &:hover {
     background-color: ${props => 
-      props.state=="ordered" ? "#f46195" 
-    : props.state=="processing" ? "#9dc651"
+      props.state=="ordered" ? "#fa6e57"
+    : props.state=="processing" ? "#4695d6"
     : null};
     color: white;
   }
@@ -73,7 +73,7 @@ const StateButton = styled.div`
 class OrderManageDetail extends Component {
   render() {
     const { imgTextView, detailView, review } = this.props;
-    const { id, orderNumber, name, phone, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { id, orderNumber, name, phone, address ,date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
     const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
     let stateText;
@@ -89,6 +89,7 @@ class OrderManageDetail extends Component {
           <div className="header-phone">전화번호 {phone}</div>
           <div className="header-order-number">주문번호 {orderNumber}</div>
           <div className="header-date">주문날짜 {date}</div>
+          <div className="header-address">{address}</div>
           <hr className="order-manage-detail-line"/>
           {state == "processing" && <ProcessingTable
             id={id}
@@ -145,13 +146,14 @@ class OrderManageDetail extends Component {
           
           <div className="print-button">
             <ReactToPrint
-              trigger={() => <a>인쇄하기</a>}
+              trigger={() => <div><MdPrint/><div>인쇄하기</div></div>}
               content={() => this.componentRef}
             />
             <Print 
               ref={e => (this.componentRef = e)} 
               name={name}
               phone={phone}
+              address={address}
               orderNumber={orderNumber}
               date={date}
               model={model}

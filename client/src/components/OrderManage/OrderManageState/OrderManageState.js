@@ -15,8 +15,8 @@ const StyledStateItem = styled.div`
   background-color: white;
 
   /* state에 따라 다른 색상 */
-  color: ${ props => props.state ? oc.blue[5] : oc.gray[6] };
-  border-right: ${ props => props.state ? '2px' : '0px'} solid ${oc.blue[4]};
+  color: ${ props => props.state ? "#4695D6" : oc.gray[6] };
+  border-right: ${ props => props.state ? '2px' : '0px'} solid #4695D6;
 
   font-size: 1.4rem;
   cursor: pointer;

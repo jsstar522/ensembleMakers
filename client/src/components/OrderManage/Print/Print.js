@@ -3,7 +3,7 @@ import './Print.scss';
 
 class Print extends Component {
   render() {
-    const { name, phone, orderNumber, date, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { name, phone, orderNumber, date, address,model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
 
     let imageDivs = [];
     for(let i = 1; i < images.length; i++){
@@ -22,6 +22,7 @@ class Print extends Component {
             <div className="print-header-phone">전화번호 {phone}</div>
             <div className="print-header-order-number">주문번호 {orderNumber}</div>
             <div className="print-header-date">주문날짜 {date}</div>
+            <div className="print-header-address">{address}</div>
           </div>
           <table className="order-table-wrapper">
             <tbody>

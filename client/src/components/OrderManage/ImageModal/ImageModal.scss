@@ -4,7 +4,7 @@
 }
 
 .file-box {
-  position: absolute;
+  position: relative;
   left: 50%; 
   margin-left: -35px;
 }
@@ -13,10 +13,9 @@
   width: 70px;
   height: 70px;
   border-radius: 50px;
-  background-color: #ff5a5f;
+  background-color: #fa6e57;
   color: #FFFFFF;
   border-style: solid;
-  padding-top: 0;
   font-size: 30px;
   text-align: center;
 }
@@ -179,8 +178,8 @@
 }
 
 .image-modal-post-button {
-  border: 2px solid #ff5a5f;
-  color: #ff5a5f;
+  border: 2px solid #fa6e57;
+  color: #fa6e57;
   margin: auto;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
@@ -190,7 +189,7 @@
   text-align: center;
   cursor: pointer;
   &:hover {
-    background-color: #ff5a5f;
+    background-color: #fa6e57;
     color: white;
   }
   // 글자드래그 방지
