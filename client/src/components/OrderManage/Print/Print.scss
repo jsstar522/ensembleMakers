@@ -7,7 +7,7 @@
 .order-table-wrapper {
   width: 90%;
   height: 70%;
-  margin-top: 12rem;
+  margin-top: 16rem;
   border: 3px solid black;
   border-collapse: collapse;
   font-size: 3rem;
@@ -39,17 +39,22 @@
 }
 .print-header-date {
   margin-top: 0.5rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .print-header-phone {
   margin-top: 0.5rem;
-  font-size: 3rem;
+  font-size: 2rem;
+}
+
+.print-header-address {
+  margin-top: 0.5rem;
+  font-size: 2rem;
 }
 
 .print-header-order-number {
   margin-top: 0.5rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .print-contents-image {
