@@ -1,0 +1,172 @@
+.detail-fixedbar-wrapper {
+  position: relative;
+  // width: 48%;
+  
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 100%;
+    // margin-left: 6px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 48%;
+    // margin-left: 12.3px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 48%;
+    // margin-left: 28px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    width: 48%;
+    // margin-left: 28px;
+  }
+}
+
+.detail-fixedbar {
+  // position: sticky;
+  top: 20px;
+  padding: 10px;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 1px 1px 1px 1px hsl(0, 2%, 84%);
+  @media screen and (min-width: 320px) {
+    position: relative; 
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    position: sticky;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    position: sticky;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    position: sticky;
+  }
+}
+
+.detail-image-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  // phone
+  @media screen and (min-width: 320px) {
+    
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 162px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 225.6px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    height: 328.3px;
+  }
+  cursor: pointer;
+}
+
+.detail-image {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+.detail-image-ref-text {
+  position: absolute;
+  // 텍스트 가운데 정렬
+  width: 100%; left:0; right:0; margin-left:auto; margin-right:auto; 
+  height: 22%; top: 0; bottom:0; margin-top:auto; margin-bottom:auto;
+
+  text-align: center;
+  color: black;
+  font-size: 1rem;
+  //마우스오버 비활성화, 텍스트도 마우스 오버를 활성화 해두면 텍스트에 마우스가 올라갔을 때 이벤트가 실행됨
+  pointer-events: none;
+}
+
+.order-manage-post-button {
+  border: 2px solid #484848;
+  border-radius: 5px;
+  color: #484848;
+  // width: 125px;
+  width: 48%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 0;
+  cursor: pointer;
+  &:hover {
+    background-color: #484848;
+    color: white;
+    transition: all .3s;
+  }
+  // 글자드래그 방지
+  -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+  
+  // phone
+  @media screen and (min-width: 320px) {
+    font-size: 12px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    font-size: 16px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    font-size: 16px;
+  }
+
+}
+
+.print-button {
+  border: 2px solid #484848;
+  border-radius: 5px;
+  color: #484848;
+  // width: 125px;
+  width: 48%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 0;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  &:hover{
+    background-color: #484848;
+    color: white;
+    transition: all .3s;
+  }
+  // phone
+  @media screen and (min-width: 320px) {
+    font-size: 12px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    font-size: 16px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    font-size: 16px;
+  }
+}

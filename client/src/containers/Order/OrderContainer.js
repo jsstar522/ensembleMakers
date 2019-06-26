@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { OrderWrapper } from '../../components/Order/OrderWrapper';
 import { ProcessingControll } from '../../components/Order/ProcessingControll';
+import { MakerInfo } from '../../components/Order/MakerInfo';
 import { ReviewPost } from '../../components/Order/ReviewPost';
 import { ReviewRead } from '../../components/Order/ReviewRead';
 import * as orderActions from '../../store/modules/order';
@@ -98,6 +99,7 @@ class OrderContainer extends Component {
           onPatchProcessingNext={handlePatchProcessingNext}
           onPatchProcessingPre={handlePatchProcessingPre}
         />
+        <MakerInfo/>
         { // 작업완료시 리뷰읽기
           state==="finished" && mode==="read" && <ReviewRead
             reviewId={review.toJS().data._id}
