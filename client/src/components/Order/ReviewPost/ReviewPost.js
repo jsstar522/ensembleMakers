@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './ReviewPost.scss';
 
+import MdRefresh from 'react-ionicons/lib/MdRefresh';
+
 class ReviewPost extends Component {
 
   handleChange = (e) => {
@@ -12,7 +14,7 @@ class ReviewPost extends Component {
   
   render() {
     const { mode, reviewRating, reviewContent } = this.props;
-    const { onChangeReviewRating, onPostReview, onPatchReview } = this.props;
+    const { onChangeReviewRating, onPostReview, onPatchReview, onChangeMode } = this.props;
     const { handleChange } = this;
 
     // rating star
@@ -35,6 +37,7 @@ class ReviewPost extends Component {
 
     return(
       <div className="review-post-wrapper">
+        <div className="review-cancel-button" onClick={() => onChangeMode('read')}>취소</div>
         <div className="review-post-button" onClick={mode==="write" ? onPostReview : onPatchReview}>저장</div>
         <div className="review-post-header">후기</div>
         <form className="review-post-form">

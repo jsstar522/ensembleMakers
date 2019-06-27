@@ -24,7 +24,9 @@ class ReviewRead extends Component {
 
     return(
       <div className="review-read-wrapper">
-        <div className="review-change-mode-button" onClick={reviewId ? () => {onChangeMode("modify")} : () => {onChangeMode("write")}}>작성/수정</div>
+        { reviewId ? <div className="review-change-mode-button" onClick={() => {onChangeMode("modify")}}>수정</div> :
+          <div className="review-change-mode-button" onClick={() => {onChangeMode("write")}}>작성</div>
+        }
         <div className="review-read-header">후기</div>
         <form className="review-read-form">
           <div className="review-read-rating">

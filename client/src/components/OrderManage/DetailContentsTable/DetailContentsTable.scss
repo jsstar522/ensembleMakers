@@ -35,24 +35,26 @@
   width: 50%;
 }
 
+.detail-contents-cell-header {
+  display: table-cell;
+  width: 50%;
+  height: 35px;
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: bold;
+  color: #484848;
+  // border: 1px solid black;
+}
+
 .detail-contents-cell {
   display: table-cell;
-  font-size: 18px;
   width: 50%;
-  height: 40px;
+  height: 35px;
   vertical-align: middle;
-  border: 1px solid black;
+  font-size: 15px;
+  color: #484848;
+  // border: 1px solid black;
 }
-
-.detail-contents-comment-cell {
-  display: table-cell;
-  font-size: 18px;
-  width: 100%;
-  height: 40px;
-  vertical-align: middle;
-  border: 1px solid black;
-}
-
 
 .detail-contents-table-line {
   width: 100%;

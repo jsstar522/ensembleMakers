@@ -51,7 +51,6 @@ class OrderManageDetail extends Component {
             <div className="header-name">{name}</div>
             <div className="header-phone">전화번호 {phone}</div>
             <div className="header-order-number">주문번호 {orderNumber}</div>
-            <div className="header-address">{address}</div>
             <div className="header-date">주문날짜 {date}</div>
             <hr className="order-manage-detail-line"/>
             {state == "processing" && <ProcessingTable
@@ -70,6 +69,7 @@ class OrderManageDetail extends Component {
               soleComplete={soleComplete}/>}
             <div className="detail-contents-wrapper">
               <DetailContentsTable
+                address={address}
                 model={model}
                 rightSize={rightSize}
                 leftSize={leftSize}

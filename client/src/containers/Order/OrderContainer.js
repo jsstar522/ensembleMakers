@@ -118,6 +118,7 @@ class OrderContainer extends Component {
             onChangeReviewRating={handleChangeReviewRating}
             onPostReview={handlePostReview}
             onPatchReview={handlePatchReview}
+            onChangeMode={handleChangeMode}
           />
         }
       </OrderWrapper>
