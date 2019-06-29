@@ -51,16 +51,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
-  resave: false,
-  saveUninitialized: true,
-  secret: process.env.COOKIE_SECRET,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    maxAge: (60 * 60 * 1000)
-  },
-}));
+//로그인세션
+//app.use(session({
+//  resave: false,
+//  saveUninitialized: true,
+//  secret: process.env.COOKIE_SECRET,
+//  cookie: {
+//    httpOnly: true,
+//    secure: false,
+//    maxAge: (60 * 60 * 1000)
+//  },
+//}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

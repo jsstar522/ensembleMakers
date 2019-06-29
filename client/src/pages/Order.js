@@ -7,7 +7,7 @@ class Order extends Component {
   render() {
     return(
       <div>
-        <OrderContainer/>
+        <OrderContainer id={id}/>
       </div>
     )
   }
