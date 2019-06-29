@@ -1,0 +1,78 @@
+.print-page-wrapper {
+  position: relative;
+  height: 1900px;
+  padding-left: 10rem;
+}
+
+.order-table-wrapper {
+  width: 90%;
+  height: 70%;
+  margin-top: 16rem;
+  border: 3px solid black;
+  border-collapse: collapse;
+  font-size: 3rem;
+  td, tr {
+    border: 3px solid black;
+  }
+}
+
+.print-contents-label {
+  width: 25%;
+  text-align: center;
+  font-weight: 200;
+}
+
+.print-contents-value {
+  width: 25%;
+  padding-left: 1rem;
+  font-weight: 800;
+}
+
+.print-header-wrapper {
+  height: 10%;
+  padding-top: 4rem;
+}
+
+.print-header-name {
+  margin-top: 0.5rem;
+  font-size: 4rem;
+}
+.print-header-date {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.print-header-phone {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.print-header-address {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.print-header-order-number {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.print-contents-image {
+  position: relative;
+  border: 1px solid #d8d6d6;
+  width: 50%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.print-image-wrapper {
+  width: 100%;
+  height: 80%;
+  display: block;
+}
+
+.print-full-image {
+  padding-top: 10rem;
+  height: 100%;
+  width: 90%;
+}

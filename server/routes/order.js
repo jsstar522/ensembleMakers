@@ -16,7 +16,13 @@ router.get('/', async(req, res, next) => {
 // get order by id
 router.get('/:id', async(req, res, next) => {
   // customerId로 조회
-  let order = await Order.findOne({"customerId" : req.params.id}).populate('customerId');
+  let order = await Order.findOne({"customerId": req.params.id}).populate('customerId');
+  res.send(order);
+})
+
+// get order by orderNumber
+router.get('/byNum/:id', async(req, res, next) => {
+  let order = await Order.findOne({"orderNumber": req.params.id}).populate('customerId');
   res.send(order);
 })
 

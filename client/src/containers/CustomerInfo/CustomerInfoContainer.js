@@ -22,7 +22,7 @@ class CustomerInfoContainer extends Component {
 
   handlePost = async(e) => {
     const { CustomerActions, OrderActions } = this.props;
-    const { postForm } = this.props;
+    const { postForm, history } = this.props;
     const { name, phone, address } = postForm.toJS();
 
     try {
@@ -30,6 +30,7 @@ class CustomerInfoContainer extends Component {
      // customerInfo 작성과 비워진 주문서(order) 동시에 작성
      const customerId = customerInfo.data._id;
      await OrderActions.postOrder({customerId});
+     window.location = await '/customerInfoSuccess/';
     } catch(e) {
       console.log(e);
     }
@@ -40,8 +41,7 @@ class CustomerInfoContainer extends Component {
     const { handleChange, handlePost } = this;
     return(
       <CustomerInfoWrapper>
-        <div>ZOE</div>
-        <div>주문날짜</div>
+        <div className="customer-info-header"><b>ZOE 수제화</b></div>
         <CustomerInfoInput 
           label="이름"
           name="name"

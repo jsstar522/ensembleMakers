@@ -6,6 +6,7 @@ class DetailContents extends Component {
     const { imgTextView } = this.props;
     const { model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { onChangeImgText, onOpenImageModal } = this.props;
+
     return(
       <div className="detail-contents-wrapper">
         <table className="detail-contents-form-table">

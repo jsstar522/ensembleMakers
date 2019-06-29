@@ -38,6 +38,24 @@
   }
 }
 
+.editor-modal-post-button {
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
+  padding-top: 7px;
+  border: 2px solid #1d79c4;
+  color: #1d79c4;
+  text-align: center;
+  background-color: white;
+  width: 7rem;
+  height: 2.4rem;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #1d79c4;
+  }
+}
+
 .modal-cancel-button {
   position: absolute;
   margin-top: 0.6rem;

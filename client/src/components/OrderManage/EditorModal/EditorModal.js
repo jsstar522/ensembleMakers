@@ -184,10 +184,10 @@ class EditorModal extends Component {
                   onChange={handleChange}
                 /></td>
             </tr>
-            <tr><td colSpan="2"><hr className="editor-modal-line"></hr></td></tr>
+            
             </tbody>
           </table>
-        <div className="edit-modal-" onClick={handlePatch}>저장하기</div>
+        <div className="editor-modal-post-button" onClick={handlePatch}>저장하기</div>
       </div>
     )
   }

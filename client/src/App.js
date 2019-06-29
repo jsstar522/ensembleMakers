@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Auth, Post, Product, CustomerInfo, OrderManage, Order } from './pages';
+import { Home, Auth, Post, Product, CustomerInfo, CustomerInfoSuccess, OrderManage, Order } from './pages';
 import { HeaderContainer } from './containers/Base';
 import { UserMenuContainer } from './containers/Base';
 
@@ -12,24 +12,25 @@ import storage from './lib/storage';
 
 class App extends Component {
 
-    initializeUserInfo = async () => {
-        const loggedInfo = storage.get('loggedInfo');
-        // console.log(storage.get('loggedInfo'));
-        if(!loggedInfo) return;
+    // 로그인 세션 종료
+    // initializeUserInfo = async () => {
+    //     const loggedInfo = storage.get('loggedInfo');
+    //     // console.log(storage.get('loggedInfo'));
+    //     if(!loggedInfo) return;
         
-        const { UserActions } = this.props;
-        UserActions.setLoggedInfo(loggedInfo);
-        try{
-            await UserActions.checkStatus();
-        }catch(e){
-            storage.remove('loggedInfo');
-            window.location.href = '/auth/login?expired';
-        }
-    }
+    //     const { UserActions } = this.props;
+    //     UserActions.setLoggedInfo(loggedInfo);
+    //     try{
+    //         await UserActions.checkStatus();
+    //     }catch(e){
+    //         storage.remove('loggedInfo');
+    //         window.location.href = '/auth/login?expired';
+    //     }
+    // }
 
-    componentDidMount(){
-        this.initializeUserInfo()
-    };
+    // componentDidMount(){
+    //     this.initializeUserInfo()
+    // };
 
     render() {
         return (
@@ -42,6 +43,7 @@ class App extends Component {
                 <Route path="/post" component={Post}/>
                 <Route path="/product" component={Product}/>
                 <Route path="/customerInfo" component={CustomerInfo}/>
+                <Route path="/customerInfoSuccess" component={CustomerInfoSuccess}/>
                 <Route path="/orderManage" component={OrderManage}/>
             </div>
         );

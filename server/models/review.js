@@ -7,7 +7,7 @@ const reviewSchema = new Schema({
   orderNumber: {
     type: Number,
     required: true,
-    ref: "Order",
+    ref: "Order"
   },
   customerId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -15,8 +15,8 @@ const reviewSchema = new Schema({
     ref: "Customer"
   },
   rating: {
-     type: Number,
-     required: true
+    type: Number,
+    required: true
   },
   content: {
     type: String,

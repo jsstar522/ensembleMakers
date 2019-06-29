@@ -7,14 +7,32 @@
 
   left: 50%;
   transform: translate(-50%, 0%);
-
+  margin-top: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  width: 15%;
+  border: 2px solid #1d79c4;
+  color: #1d79c4;
 
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
+
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 130px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 170px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 170px;
+  }
+
+  &:hover {
+    color: white;
+    background-color: #1d79c4;
+  }
 
 }

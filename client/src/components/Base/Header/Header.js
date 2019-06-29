@@ -43,9 +43,11 @@ const HeaderContents = styled.div`
 
 // 로고
 const Logo = styled.div`
+    width: 100%;
     font-size: 1.4rem;
+    text-align: center;
     letter-spacing: 2px;
-    color: ${oc.blue[4]};
+    color: #4695D6;
     font-family: 'Rajdhani';
 `;
 
@@ -57,7 +59,7 @@ const Spacer = styled.div`
 // 하단 그래디언트 테두리
 const GradientBorder = styled.div`
     height: 3px;
-    background: linear-gradient(to right, ${oc.blue[1]}, ${oc.blue[4]});
+    background: linear-gradient(to right, #f69e53, #fa6e57, #4695D6);
 `;
 
 const Header = ({children}) => {
@@ -67,7 +69,8 @@ const Header = ({children}) => {
                 <HeaderContents>
                     <Logo>ensemble makers</Logo>
                     <Spacer/>
-                    {children}
+                    {/* 로그인 메뉴 */}
+                    {/* {children} */}
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>

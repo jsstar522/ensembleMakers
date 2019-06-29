@@ -1,0 +1,250 @@
+.review-post-wrapper {
+  position: relative;
+  border: 2px solid #d8d6d6;
+  background-color: white;
+  width: 80%;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  margin-bottom: 3rem;
+  // phone
+  @media screen and (min-width: 320px) {
+    height: 18rem;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 10rem;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 10rem;
+  }
+
+}
+
+.review-post-header {
+  border: 1px solid #d8d6d6;
+  height: 3rem;
+  font-size: 1.5rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  color: #484848;
+  background-color: #e9f1f9;
+}
+
+.review-post-form {
+  position: relative;
+  // border: 1px solid #d8d6d6;
+
+  @media screen and (min-width: 320px) {
+    height: 15rem;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 7rem;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 7rem;
+  }
+}
+
+.review-post-rating {
+  padding-top: 0.6rem;
+  padding-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  font-size: 1rem;
+  color: #484848;
+  text-align: center;
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 100%;
+    height: 7rem;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 30%;
+    height: 7rem;
+    float: left;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 30%;
+    height: 7rem;
+    float: left;
+  }
+}
+
+.rating-ref-text {
+    // phone
+    @media screen and (min-width: 320px) {
+      font-size: 0.8rem;
+    }
+    // desktop
+    @media screen and (min-width: 992px) {
+      font-size: 1rem;
+    }
+    // tablet
+    @media screen and (min-width: 768px) {
+      font-size: 1rem;
+    }
+}
+
+.rating-text {
+  // phone
+  @media screen and (min-width: 320px) {
+    margin-top: -0.5rem;
+    font-size: 1rem;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    margin-top: -0.5rem;
+    font-size: 1rem;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    margin-top: -0.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+
+// rating star
+%visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
+.star-rating {
+  &__star {
+    display: inline-block;
+    padding: 6px;
+    vertical-align: middle;
+    line-height: 1;
+    color: #ABABAB;
+    transition: color .2s ease-out;
+
+    @media screen and (min-width: 320px) {
+      font-size: 1.8rem
+    }
+    // desktop
+    @media screen and (min-width: 992px) {
+      font-size: 2.5rem
+    }
+    // tablet
+    @media screen and (min-width: 768px) {
+      font-size: 2.5rem
+    }
+
+
+    &:hover {
+      cursor: pointer;
+    }
+    &.is-selected {
+      color: #FFD700;
+    }
+    &.is-disabled:hover {
+      cursor: default;
+    }
+  }
+  &__checkbox {
+    @extend %visually-hidden;
+  }
+}
+
+
+.review-post-contents {
+  padding-top: 0.6rem;
+  padding-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  color: #484848;
+
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 100%;
+    height: 8rem;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 70%;
+    height: 7rem;
+    float: left;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 70%;
+    height: 7rem;
+    float: left;
+  }
+}
+
+.input-review-text {
+  width: 100%;
+  height: 95%;
+  border: 1px solid #ff5a5f;
+  box-shadow: 0px 0px 7px 0px #ff5a5f;
+  line-height: 20px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  overflow: auto;
+  resize: none;
+}
+
+.input-review-rating {
+  width: 100%;
+  height: 95%;
+  border: 1px solid #ff5a5f;
+  box-shadow: 0px 0px 9px 0px #ff5a5f;
+  line-height: 20px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+.review-post-button {
+  position: absolute;
+  border: 2px solid #1d79c4;
+  color: #1d79c4;
+  right: 0;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 5rem;
+    height: 2rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    padding-top: 6px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 7rem;
+    height: 2.4rem;
+    font-size: 1.2rem;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    padding-top: 7px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 7rem;
+    height: 2.4rem;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    padding-top: 7px;
+  }
+
+  &:hover {
+    color: white;
+    background-color: #1d79c4;
+  }
+}
+
