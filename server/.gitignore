@@ -24,3 +24,6 @@ yarn-error.log*
 
 # index.js
 src/index.js
+
+# uploads folder
+uploads/

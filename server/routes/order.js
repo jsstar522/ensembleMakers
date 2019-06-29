@@ -26,6 +26,12 @@ router.get('/byNum/:id', async(req, res, next) => {
   res.send(order);
 })
 
+// get order by orderNumber
+router.get('/byNum/:id', async(req, res, next) => {
+  let order = await Order.findOne({"orderNumber": req.params.id}).populate('customerId');
+  res.send(order);
+})
+
 // post order
 router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
@@ -108,7 +114,7 @@ const upload = multer({
       cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
     },
   }),
-  limits: { fileSize: 5 * 1024 * 1024 }
+  limits: { fileSize: 50 * 1024 * 1024 }
 });
 
 // post images
