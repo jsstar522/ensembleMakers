@@ -4,6 +4,12 @@ import './Print.scss';
 class Print extends Component {
   render() {
     const { name, phone, orderNumber, date, address,model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const items = []
+    const listItems = items.map((item, index) =>
+        <li key={index}>
+            {item.text}
+        </li>
+    );
 
     let imageDivs = [];
     for(let i = 1; i < images.length; i++){
