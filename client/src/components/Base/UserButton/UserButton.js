@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './UserButton.scss';
 
-const UserButton = ({children, onClick}) => (
-  <div className="UserButton" onClick={onClick}>
-    <div className="content"> {children} </div>
-  </div>
-
-);
+class UserButton extends Component { 
+  render() {
+    const { children } = this.props;
+    const { onLogout } = this.props;
+    return(
+      <div className="UserButton">
+        <div className="content"> {children} </div>
+        <div className="logout" onClick={onLogout}>로그아웃</div>
+      </div>
+    )
+  }
+}
 
 export default UserButton;

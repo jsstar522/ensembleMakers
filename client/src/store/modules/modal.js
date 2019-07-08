@@ -25,9 +25,9 @@ export const imageURLDelete = createAction(IMAGE_URL_DELETE);
 
 
 const initialState = Map({
+  // visible = image, editor, company
   visible: false,
   modalContents: Map({}),
-  // images: List([]),
   images: List([]),
   imageURLs: List([])
 });
@@ -42,8 +42,10 @@ export default handleActions({
     return state.set('visible', false)
   },
   [CHANGE]: (state, action) => {
-    const { name, value } = action.payload;
-    return state.setIn(['modalContents', name], value)
+    const { name, value, label } = action.payload;
+    return state.setIn(['modalContents', name, 'value'], value)
+                .setIn(['modalContents', name, 'label'], "테스트")
+    // return state.setIn(['modalContents', name], value)
   },
   [IMAGE_CHANGE]: (state, action) => {
     const images = state.get('images')

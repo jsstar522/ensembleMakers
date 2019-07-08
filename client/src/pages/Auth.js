@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as baseActions from '../store/modules/base';
-
-import { AuthWrapper } from '../components/Auth';
-
+import { bindActionCreators } from 'redux';
 import { Route } from 'react-router-dom';
+
+import { AuthWrapper } from '../components/Auth/AuthWrapper';
 import { LoginContainer, RegisterContainer } from '../containers/Auth';
+import { CompanySearchModalContainer } from '../containers/CompanySearchModal';
+import * as baseActions from '../store/modules/base';
+import { stat } from 'fs';
 
 class Auth extends Component {
     // 페이지에 진입 할 때 헤더를 비활성화
@@ -20,12 +21,14 @@ class Auth extends Component {
     }
 
     render() {
+        const { logged } = this.props;
         return (
             <div>
                 <AuthWrapper>
                     <Route path="/auth/login" component={LoginContainer}/>
                     <Route path="/auth/register" component={RegisterContainer}/>
                 </AuthWrapper>
+                <CompanySearchModalContainer/>
             </div>
         );
     }
@@ -33,7 +36,7 @@ class Auth extends Component {
 
 export default connect(
     (state) => ({
-
+        logged: state.user.get('logged')
     }),
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch)

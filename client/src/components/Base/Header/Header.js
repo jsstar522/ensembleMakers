@@ -69,8 +69,7 @@ const Header = ({children}) => {
                 <HeaderContents>
                     <Logo>ensemble makers</Logo>
                     <Spacer/>
-                    {/* 로그인 메뉴 */}
-                    {/* {children} */}
+                    {children}
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>

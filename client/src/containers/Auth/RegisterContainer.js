@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
+import { bindActionCreators } from 'redux';
+import { AuthContent } from '../../components/Auth/AuthContent';
+import { AuthButton } from '../../components/Auth/AuthButton';
+import { AuthError } from '../../components/Auth/AuthError';
+import { InputWithLabel } from '../../components/Auth/InputWithLabel';
+import { RightAlignedLink } from '../../components/Auth/RightAlignedLink';
+import { KindButton } from '../../components/Auth/KindButton';
+import { MakersRegister } from '../../components/Auth/MakersRegister';
 import * as authActions from '../../store/modules/auth';
 import * as userActions from '../../store/modules/user';
+import * as modalActions from '../../store/modules/modal';
 import {isEmail, isLength, isAlphanumeric} from 'validator';
-
-
 
 class RegisterContainer extends Component {
 
@@ -29,32 +34,100 @@ class RegisterContainer extends Component {
         // 검증작업 진행
         const validation = this.validate[name](value);
         if(name.indexOf('password') > -1 || !validation) return; // 비밀번호 검증이거나, 검증 실패하면 여기서 마침
-
-        // TODO: 이메일, 아이디 중복 확인
-        // const check = name === 'email' ? this.checkEmailExists : this.checkUsernameExists; // name 에 따라 이메일체크할지 아이디 체크 할지 결정
-        // check(value);
     }
+
+    handleCompanyChange = (e) => {
+        const { AuthActions } = this.props;
+        const { name, value } = e.target;
+        AuthActions.changeCompanyInput({
+            name,
+            value,
+            form: 'register'
+        })
+
+        // 검증작업 진행
+        const validation = this.validate[name](value);
+        if(name.indexOf('password') > -1 || !validation) return; // 비밀번호 검증이거나, 검증 실패하면 여기서 마침
+    }
+
+    handleChangeKind = (kind) => {
+        const { AuthActions } = this.props;
+        AuthActions.changeKind({
+            form: 'register',
+            kind: kind
+        })
+        if(kind === 'general'){
+            AuthActions.initializeRole();
+        }
+    }
+
+    handleChangeRole = (role) => {
+        const { AuthActions } = this.props;
+        AuthActions.changeRole({
+            form: 'register',
+            role: role
+        })
+    }
+
+    handleOpenCompanySearchModal = () => {
+        const { ModalActions } = this.props;
+        ModalActions.show({
+            visible: 'company'
+        })
+    }
+
     handleLocalRegister = async () => {
         const { form, AuthActions, UserActions, error, history } = this.props;
-        const { email, username, password, passwordConfirm } = form.toJS();
-
+        const { kind, role, email, username, password, passwordConfirm, company, group } = form.toJS();
         const { validate } = this;
 
         if(error) return; // 현재 에러가 있는 상태라면 진행하지 않음
-        if(!validate['email'](email) 
-            || !validate['username'](username) 
-            || !validate['password'](password) 
-            || !validate['passwordConfirm'](passwordConfirm)) { 
-            // 하나라도 실패하면 진행하지 않음
-            return;
-        }
-
         try {
-            await AuthActions.localRegister({
-                email, password
-            });
+            // 일반회원 검증작업
+            if(kind==='general'){
+                if(!validate['email'](email) 
+                || !validate['username'](username) 
+                || !validate['password'](password) 
+                || !validate['passwordConfirm'](passwordConfirm)) { 
+                // 하나라도 실패하면 진행하지 않음
+                return;
+                }
+                await AuthActions.localRegister({
+                email, password, username, kind
+                });
+            }
+            // 사장님회원 검증작업 
+            if(kind==='makers'&&role==='manager'){
+                if(!validate['email'](email) 
+                || !validate['username'](username) 
+                || !validate['password'](password) 
+                || !validate['passwordConfirm'](passwordConfirm)
+                || !validate['companyName'](company.companyName)
+                || !validate['companyAddress'](company.companyAddress)
+                || !validate['companyPhone'](company.companyPhone)) { 
+                // 하나라도 실패하면 진행하지 않음
+                return;
+                }
+                await AuthActions.localRegister({
+                    email, password, username, kind, role, company
+                })
+            }
+            if(kind==='makers'&&role==='maker'){
+                if(!validate['email'](email) 
+                || !validate['username'](username) 
+                || !validate['password'](password) 
+                || !validate['passwordConfirm'](passwordConfirm)
+                || !validate['group'](group.grouped)) {
+                // 하나라도 실패하면 진행하지 않음
+                return;
+                }
+                await AuthActions.localRegister({
+                    email, password, username, kind, role, group
+                })
+            }
+
             const loggedInfo = this.props.result.toJS();
-            console.log(loggedInfo);
+            // console.log(loggedInfo);
             UserActions.setLoggedInfo(loggedInfo);
             UserActions.setValidated(true);
             // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
@@ -63,9 +136,9 @@ class RegisterContainer extends Component {
         } catch(e) {
             // 에러 처리하기
             if(e.response.status === 404) {
-                const { key } = e.response.data;
-                const message = key === 'email' ? '이미 존재하는 이메일입니다.' : '이미 존재하는 아이디입니다.';
-                return this.setError(message);
+                const { key, message } = e.response.data;
+                const errorMessage = key === 'email' ? message : '알 수 없는 에러가 발생했습니다.';
+                return this.setError(errorMessage);
             }
             this.setError('알 수 없는 에러가 발생했습니다.')
         }
@@ -85,8 +158,8 @@ class RegisterContainer extends Component {
             return true;
         },
         username: (value) => {
-            if(!isAlphanumeric(value) || !isLength(value, { min:4, max: 15 })) {
-                this.setError('아이디는 4~15 글자의 알파벳 혹은 숫자로 이뤄져야 합니다.');
+            if(!value) {
+                this.setError('이름을 입력하세요.');
                 return false;
             }
             // 이메일 중복 확인하는 곳에 최종적으로 null을 만들 것
@@ -110,34 +183,46 @@ class RegisterContainer extends Component {
             }
             this.setError(null); 
             return true;
-        }
-    };
-
-    checkEmailExists = async (email) => {
-        const { AuthActions } = this.props;
-        try {
-            await AuthActions.checkEmailExists(email);
-            if(this.props.exists.get('email')) {
-                this.setError('이미 존재하는 이메일입니다.');
-            } else {
+        },
+        companyName: (value) => {
+            if(!value) {
+                this.setError('업체 이름을 입력하세요.');
+                return false;
+            }
+            else{
                 this.setError(null);
             }
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    checkUsernameExists = async (username) => {
-        const { AuthActions } = this.props;
-        try {
-            await AuthActions.checkUsernameExists(username);
-            if(this.props.exists.get('username')) {
-                this.setError('이미 존재하는 아이디입니다.');
-            } else {
+            return true;
+        },
+        companyAddress: (value) => {
+            if(!value) {
+                this.setError('업체 주소를 입력하세요.');
+                return false;
+            }
+            else{
                 this.setError(null);
             }
-        } catch (e) {
-            console.log(e);
+            return true;
+        },
+        companyPhone: (value) => {
+            if(!value) {
+                this.setError('전화번호를 입력하세요.');
+                return false;
+            }
+            else{
+                this.setError(null);
+            }
+            return true;
+        },
+        group: (value) => {
+            if(!value) {
+                this.setError('소속되어 있는 곳을 선택하세요.');
+                return false;
+            }
+            else{
+                this.setError(null);
+            }
+            return true;
         }
     };
 
@@ -151,38 +236,47 @@ class RegisterContainer extends Component {
 
     render() {
         const { error } = this.props;
-        const { email, username, password, passwordConfirm } = this.props.form.toJS();
-        const { handleChange, handleLocalRegister } = this;
-
+        const { kind, role, email, username, password, passwordConfirm, company } = this.props.form.toJS();
+        const { selectedGroup } = this.props;
+        const { handleChange, handleCompanyChange, handleChangeRole, handleOpenCompanySearchModal,handleLocalRegister, handleChangeKind } = this;
         return (
-            <AuthContent title="회원가입">
+            <AuthContent title='회원가입'>
+                <KindButton kind={kind} onChangeKind={handleChangeKind}/>
+                {kind === 'makers' && <MakersRegister 
+                    role={role}
+                    company={company}
+                    selectedGroup={selectedGroup}
+                    onChange={handleCompanyChange}
+                    onOpenCompanySearchModal={handleOpenCompanySearchModal}
+                    onChangeRole={handleChangeRole}
+                />}
                 <InputWithLabel 
-                    label="이메일"
-                    name="email"
-                    placeholder="이메일" 
+                    label='이메일'
+                    name='email'
+                    placeholder='이메일' 
                     value={email} 
                     onChange={handleChange}
                 />
                 <InputWithLabel 
-                    label="아이디" 
-                    name="username" 
-                    placeholder="아이디" 
+                    label='이름' 
+                    name='username' 
+                    placeholder='이름' 
                     value={username} 
                     onChange={handleChange}
                 />
                 <InputWithLabel 
-                    label="비밀번호" 
-                    name="password" 
-                    placeholder="비밀번호"
-                    type="password" 
+                    label='비밀번호' 
+                    name='password' 
+                    placeholder='비밀번호'
+                    type='password' 
                     value={password} 
                     onChange={handleChange}
                 />
                 <InputWithLabel 
-                    label="비밀번호 확인" 
-                    name="passwordConfirm" 
-                    placeholder="비밀번호 확인" 
-                    type="password" 
+                    label='비밀번호 확인' 
+                    name='passwordConfirm' 
+                    placeholder='비밀번호 확인' 
+                    type='password' 
                     value={passwordConfirm}
                     onChange={handleChange}
                 />
@@ -190,7 +284,7 @@ class RegisterContainer extends Component {
                     error && <AuthError>{error}</AuthError>
                 }
                 <AuthButton onClick={handleLocalRegister}>회원가입</AuthButton>
-                <RightAlignedLink to="/auth/login">로그인</RightAlignedLink>
+                <RightAlignedLink to='/auth/login'>로그인</RightAlignedLink>
             </AuthContent>
         );
     }
@@ -201,10 +295,12 @@ export default connect(
         form: state.auth.getIn(['register', 'form']),
         error: state.auth.getIn(['register', 'error']),
         exists: state.auth.getIn(['register', 'exists']),
-        result: state.auth.get('result')
+        result: state.auth.get('result'),
+        selectedGroup: state.auth.getIn(['register', 'selectedGroup'])
     }),
     (dispatch) => ({
         AuthActions: bindActionCreators(authActions, dispatch),
-        UserActions: bindActionCreators(userActions, dispatch)
+        UserActions: bindActionCreators(userActions, dispatch),
+        ModalActions: bindActionCreators(modalActions, dispatch)
     })
 )(RegisterContainer);

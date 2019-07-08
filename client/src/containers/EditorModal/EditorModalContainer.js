@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import { Modal } from '../../components/OrderManage/Modal';
+import { Modal } from '../../components/Modal';
 import { EditorModal } from '../../components/OrderManage/EditorModal';
 import { Dimmed } from '../../components/OrderManage/Dimmed';
 
@@ -25,8 +24,8 @@ class EditorModalContainer extends Component {
     const id = modalContents.get('_id');
     const contents = modalContents.toJS();
     OrderActions.patchOrder({
-      id,
-      contents
+      id: id,
+      contents: contents
     })
     ModalActions.hide()
   }

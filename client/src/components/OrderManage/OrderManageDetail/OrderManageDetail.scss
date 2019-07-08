@@ -13,6 +13,8 @@
   justify-content: space-between;
   // width: 100%;
   margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 33px;
   
   // phone
   @media screen and (min-width: 320px) {
@@ -36,8 +38,6 @@
     display: flex;
     flex-direction: row;
   }
-
-
 }
 
 .detail-default-content {
@@ -65,10 +65,13 @@
 
 .header-name {
   font-size: 28px;
+  font-weight: 600;
+  color: #484848;
 }
 .header-date {
   margin-top: 4.8px;
   font-size: 16px;
+  color: #484848;
 
   // phone
   @media screen and (min-width: 320px) {
@@ -97,15 +100,18 @@
   font-size: 16px;
   text-align: right;
   margin-top: -43px;
+  color: #484848;
 }
 
 .header-phone {
   margin-top: 4.8px;
   font-size: 16px;
+  color: #484848;
 }
 .header-order-number {
   margin-top: 4.8px;
   font-size: 16px;
+  color: #484848;
 }
 
 

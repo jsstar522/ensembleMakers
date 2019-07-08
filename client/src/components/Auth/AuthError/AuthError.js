@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { transitions } from '../../lib/styleUtils';
+import { transitions } from '../../../lib/styleUtils';
 
 const Wrapper = styled.div`
     margin-top: 1rem;

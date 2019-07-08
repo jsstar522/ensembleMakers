@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:700');
 
+html {
+  margin: 0;
+  height: 100%;
+  z-index: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: sans-serif;
   box-sizing: border-box;
-  background: #f1f1f5;
+  background: white;
 }
 
 *, *:before, *:after {

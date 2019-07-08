@@ -7,6 +7,7 @@ import customer from './customer';
 import order from './order';
 import modal from './modal';
 import review from './review';
+import search from './search';
 import { penderReducer } from 'redux-pender';
 import { sessionReducer } from 'redux-react-session';
 
@@ -19,6 +20,7 @@ export default combineReducers({
     order,
     modal,
     review,
+    search,
     pender: penderReducer,
     session: sessionReducer
 });

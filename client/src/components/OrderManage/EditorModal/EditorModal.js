@@ -161,6 +161,7 @@ class EditorModal extends Component {
                 name="material"
                 label="소재"
                 placeholder="소재"
+                // value={material ? material.value : ''}
                 value={material || ''}
                 onChange={handleChange}
               /></td>
@@ -183,8 +184,7 @@ class EditorModal extends Component {
                   value={detail || ''}
                   onChange={handleChange}
                 /></td>
-            </tr>
-            
+            </tr>      
             </tbody>
           </table>
         <div className="editor-modal-post-button" onClick={handlePatch}>저장하기</div>

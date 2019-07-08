@@ -135,6 +135,7 @@ class OrderManageContainer extends Component {
           sockLining={orderById.toJS().sockLining}
           heel={orderById.toJS().heel}
           decoration={orderById.toJS().decoration}
+          // material={orderById.getIn(['material', 'value'])}
           material={orderById.toJS().material}
           innerMaterial={orderById.toJS().innerMaterial}
           color={orderById.toJS().color}
