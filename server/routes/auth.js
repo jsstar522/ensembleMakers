@@ -3,31 +3,33 @@ const passport = require('passport');
 
 const { hashPassword } = require('../lib/hashPassword');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { User } = require('../models/user');
+const { User, validate } = require('../models/user');
 
 const router = express.Router();
 
 // signup
 router.post('/register', isNotLoggedIn, async (req, res, next) => {
-  
+  const { error } = validate(req.body);
+  if (error) { 
+    console.log(error.message)
+    return res.status(400).send(error.message);
+  }
   const {email, password} = req.body;
   try {
+    // 이메일 중복 확인
     const exUser = await User.find({ email: email });
     if (exUser[0]) {
-      req.flash('registerError', '이미 가입된 이메일입니다.');
-      // return res.redirect('/register');
-      return res.status(404).json('registerError');
+      return res.status(404).json({"key": "email", "message": "이미 가입된 이메일입니다."});
     }
+    // 비밀번호 해쉬화 이후 rebody
     const rebody = {};
     rebody['password'] = await hashPassword(password);
     Object.keys(req.body).map(async (key) => {
       if (key === 'password') return;
       else return rebody[key] = req.body[key];
     });
-    // console.log(rebody);
     let user = new User(rebody);
     user = await user.save();
-  
     return res.json(user);
   } catch (error) {
     console.error(error);
@@ -61,7 +63,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 
 // logout
 router.get('/logout', isLoggedIn, (req, res) => {
-  console.log('----------------logout')
+  // console.log('----------------logout')
   req.logout();
   req.session.destroy();
   res.redirect('/');

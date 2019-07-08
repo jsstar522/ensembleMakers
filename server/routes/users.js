@@ -5,6 +5,7 @@ const { hashPassword } = require('./middlewares');
 
 const express = require('express');
 const router = express.Router();
+const queryString = require('querystring')
 
 // get all users
 router.get('/', async (req, res) => {
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // get user by id
-router.get('/:id', async (req, res) => {
+router.get('/searchById/:id', async(req, res) => {
   const user = await User.findById(req.params.id)
     .populate('posts_host')
     .populate('posts_join');
@@ -26,6 +27,13 @@ router.get('/:id', async (req, res) => {
   
   res.send(user);
 });
+
+// get user by company name
+router.get('/searchByCompany', async(req, res) => {
+  const user = await User.find({"company.companyName": {$regex: req.query.companyName, $options: 'ix' }})
+  if(!user) return res.status(404).json({"key": "company", "message": "공장 및 회사를 찾을 수 없습니다."});
+  res.send(user);
+})
 
 // create user
 router.post('/', async (req, res) => {

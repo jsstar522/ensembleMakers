@@ -8,6 +8,8 @@ const router = express.Router();
 // get review by id
 router.get('/:id', async(req, res, next) => {
   let review = await Review.findOne({"orderNumber": req.params.id}).populate('customerId');
+
+  // Error::Cannot set headers after they are sent to the client 뜸 (false 뱉을때)
   if(!review) res.send(false);
   res.send(review);
 });
