@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from '../../components/OrderManage/Modal';
+import { Modal } from '../../components/Modal';
 import { ImageModal } from '../../components/OrderManage/ImageModal';
 import { Dimmed } from '../../components/OrderManage/Dimmed';
 import * as modalActions from '../../store/modules/modal';

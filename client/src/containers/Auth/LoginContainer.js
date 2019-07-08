@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from '../../components/Auth';
+import { AuthContent } from '../../components/Auth/AuthContent';
+import { AuthButton } from '../../components/Auth/AuthButton';
+import { AuthError } from '../../components/Auth/AuthError';
+import { InputWithLabel } from '../../components/Auth/InputWithLabel';
+import { RightAlignedLink } from '../../components/Auth/RightAlignedLink';
 import * as authActions from '../../store/modules/auth';
 import * as userActions from '../../store/modules/user';
 import queryString from 'query-string';

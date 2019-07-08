@@ -1,0 +1,44 @@
+.company-search-list-item-wrapper {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.2px;
+  &:hover {
+    background-color: #d8efff;
+  }
+  cursor: pointer;
+}
+
+.company-search-list-item-left {
+  width: 40%;
+  height: 60px;
+  line-height: 60px;
+  padding-left: 25px;
+}
+
+.company-search-list-item-right {
+  width: 60%;
+  height: 60px;
+  line-height: 30px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.company-search-list-item-company-name {
+  height: 60px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #484848;
+}
+
+.company-search-list-item-manager-name {
+  font-size: 20px;
+  color: #484848;
+}
+
+.company-search-list-item-company-address {
+  font-size: 15px;
+  color: #484848;
+}

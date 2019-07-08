@@ -36,8 +36,8 @@ const portionsRouter = require('./routes/portions');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const reviewsRouter = require('./routes/reviews');
-const customerRouter = require('./routes/customer');
-const orderRouter = require('./routes/order');
+const customersRouter = require('./routes/customers');
+const ordersRouter = require('./routes/orders');
 
 /**
  * Middleware
@@ -51,27 +51,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(flash());
 // 로그인 세션
-// app.use(session({
-//   resave: false,
-//   saveUninitialized: true,
-//   secret: process.env.COOKIE_SECRET,
-//   cookie: {
-//     httpOnly: true,
-//     secure: false,
-//     maxAge: (60 * 60 * 1000)
-//   },
-// }));
-// app.use(flash());
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use('/auth', authRouter);
-// app.use('/api/users', usersRouter);
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: (60 * 60 * 24000) // 24시간
+  },
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/portions', portionsRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/reviews', reviewsRouter);
-app.use('/api/customer', customerRouter);
-app.use('/api/order', orderRouter);
+app.use('/api/customers', customersRouter);
+app.use('/api/orders', ordersRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

@@ -1,0 +1,54 @@
+.company-search-modal-wrapper {
+  margin: 1.5rem;
+  margin-top: 3rem;
+  overflow: auto;
+}
+
+.company-search-modal-cancel-button {
+  position: absolute;
+  margin-top: 0.6rem;
+  right: 1rem;
+  top: 0.2rem;
+  color: black;
+  cursor: pointer;
+  font-size: 1.5rem;
+  &:hover {
+    color: red;
+  }
+}
+
+.company-search-modal-header {
+  font-size: 24px;
+  font-weight: 600;
+  color: #757575;
+  margin-bottom: 14px;
+}
+
+.company-search-modal-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.company-search-button {
+  width: 15%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 18px;
+  color: white;
+  background-color: #fa6e57;
+  transition: .2s all;
+  border-radius: 5px;
+  &:hover {
+    box-shadow: 0px 1px 3px 0px #484848;
+  }
+  cursor: pointer;
+}
+
+.company-search-list {
+  border: 1px solid #484848;
+  height: 340px;
+  overflow-y: auto;
+}

@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import { shadow } from '../../../lib/styleUtils';
 
 const BorderedButton = styled(Link)`
+    width: 20%;
     font-weight: 500;
     color: ${oc.blue[4]};
-    border: 1px solid ${oc.blue[4]};
+    // border: 1px solid ${oc.blue[4]};
     padding: 0.5rem;
     padding-bottom: 0.4rem;
     cursor: pointer;
     border-radius: 2px;
+    text-align: center;
     text-decoration: none;
     transition: .2s all;
 
@@ -30,9 +32,8 @@ const BorderedButton = styled(Link)`
 `;
 
 const LoginButton = () => (
-    
     <BorderedButton to="/auth/login">
-            login / register
+            로그인 및 회원가입
     </BorderedButton>
 
 );

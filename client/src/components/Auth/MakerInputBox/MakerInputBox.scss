@@ -1,0 +1,70 @@
+.maker-input-box-wrapper {
+  margin-bottom: 14px;
+}
+
+.maker-input-box-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #757575;
+  margin-bottom: 14px;
+}
+
+.maker-input-box-search-button {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-bottom: 14px;
+  color: white;
+  background-color: #fa6e57;
+  transition: .2s all;
+  &:hover {
+    box-shadow: 0px 1px 3px 0px #757575;
+  }
+  cursor: pointer;
+}
+
+.maker-input-box-selected-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #757575;
+  margin-bottom: 14px;
+}
+
+.maker-input-box-selected-wrapper {
+  border: 1px solid #484848;
+  border-radius: 5px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.maker-input-box-selected-left {
+  width: 40%;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+}
+
+.maker-input-box-selected-right {
+  width: 60%;
+  height: 50px;
+  line-height: 25px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.maker-input-box-selected-company-name {
+  font-size: 25px;
+  font-weight: 500;
+  color: #484848;
+}
+
+.maker-input-box-selected-manager-name {
+  font-size: 20px;
+  color: #484848;
+}
+
+.maker-input-box-selected-company-address {
+  font-size: 15px;
+  color: #484848;
+}

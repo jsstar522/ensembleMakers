@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { UserButton } from '../../components/Base/UserButton';
 import * as baseActions from '../../store/modules/base';
+import * as userActions from '../../store/modules/user';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import storage from '../../lib/storage';
 
 
 class UserButtonContainer extends Component {
@@ -13,11 +15,23 @@ class UserButtonContainer extends Component {
     BaseActions.showUserMenu(!visible);
   }
 
+  handleLogout = async () => {
+    const { UserActions } = this.props;
+    try {
+        await UserActions.logout();
+    } catch (e) {
+        console.log(e);
+    }
+
+    storage.remove('loggedInfo');
+    window.location.href = '/'; // 홈페이지로 새로고침
+  };
+
   render(){
     const { user } = this.props;
+    const { handleLogout } = this; 
     return(
-      <UserButton onClick={this.handleShowUserMenu}> {user.getIn(['loggedInfo', 'email'])} </UserButton>
-      // <div onClick={this.handleLogout}>로그아웃</div>
+      <UserButton onLogout={handleLogout}> <b>{user.getIn(['loggedInfo', 'username'])}</b> 님 어서오세요 </UserButton>
     )
   }
 }
@@ -29,5 +43,6 @@ export default connect(
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),
+    UserActions: bindActionCreators(userActions, dispatch) 
   })
 )(UserButtonContainer);

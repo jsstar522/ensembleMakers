@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 const uniqueValidator = require('mongoose-unique-validator');
 const { Schema } = mongoose;
 
@@ -10,21 +11,39 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true 
   },
+  userNumber: {
+    type: Number,
+    required: true,
+  }
+  ,
+  username: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
     trim: true
   },
-  firstName: String,
-  lastName: String,
-  countryOfResidence: {
+  kind: {
     type: String,
-    uppercase: true
+    enum: ['makers', 'general', 'admin'],
+    // required: true,
   },
-  onType: {
+  role: {
     type: String,
-    enum: ['supplier', 'buyer', 'admin']
-  }, 
+    // middleManager
+    enum: ['manager', 'maker']
+  },
+  company: {
+    companyName: { type: String },
+    companyAddress: { type: String },
+    companyPhone: { type: String }
+  },
+  group: {
+    grouped: { type: Boolean },
+    groupId: { type: mongoose.Schema.Types.ObjectId },
+  },
   provider: {
     type: String,
     required: true,
@@ -35,14 +54,15 @@ const userSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post"
   }],
-  posts_join: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post"
-  }]
+  // posts_join: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Post"
+  // }]
 }, {
   timestamps: true
 });
-userSchema.plugin(uniqueValidator);
+
+userSchema.plugin(uniqueValidator)
 
 const User = mongoose.model('User', userSchema);
 
@@ -50,11 +70,12 @@ function validateUser(user) {
   const schema = {
     email: Joi.string().email({ minDomainAtoms: 2 }).required(),
     password: Joi.string().required(),
-    firstName: Joi.string().min(1),
-    lastName: Joi.string().min(1),
-    countryOfResidence: Joi.string().min(1).uppercase(),
-    onType: Joi.string(),
-    provider: Joi.string().required(),
+    username: Joi.string().min(1).required(),
+    kind: Joi.string().required(),
+    role: Joi.string(),
+    company: { companyName: Joi.string(), companyAddress: Joi.string(), companyPhone: Joi.string()},
+    group: { grouped: Joi.boolean(), groupId: Joi.string() },
+    provider: Joi.string(),
     oauth2: Joi.string()
   }
   return Joi.validate(user, schema);

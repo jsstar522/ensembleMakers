@@ -27,7 +27,6 @@ class HeaderContainer extends Component {
 
         return (
             <Header>
-                <UserButtonContainer/>
                 { user.get('logged')
                     ? <UserButtonContainer/> : <LoginButton/>
                 }

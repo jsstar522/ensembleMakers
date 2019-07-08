@@ -1,0 +1,1 @@
+export { default as KindButton } from './KindButton';

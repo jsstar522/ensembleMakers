@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow } from '../../lib/styleUtils';
+import { shadow } from '../../../lib/styleUtils';
 
 const Wrapper = styled.div`
     margin-top: 1rem;
     padding-top: 0.6rem;
     padding-bottom: 0.5rem;
 
-    background: ${oc.blue[4]};
+    background: #4695D6;
     color: white;
 
     text-align: center;
@@ -20,12 +20,12 @@ const Wrapper = styled.div`
     transition: .2s all;
 
     &:hover {
-        background: ${oc.blue[4]};
+        background: #4695D6;
         ${shadow(0)}
     }
 
     &:active {
-        background: ${oc.blue[4]};
+        background: #4695D6;
     }
 
 `;

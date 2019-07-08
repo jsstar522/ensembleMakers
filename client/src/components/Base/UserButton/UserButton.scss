@@ -1,20 +1,23 @@
 .UserButton {
   position: relative;
-  color: blue;
-  border: 1px solid;
-  width: 85px;
-  height: 55px;
+  width: 20%;
   transition: all 0.15s ease-in;
   cursor: pointer;
   &:hover {
     color: red;
   }
-  .content {
-    margin: 0;
-    color: black;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
+}
+
+.content {
+  text-align: center;
+  color: #4695D6;
+  margin-bottom: 3px;
+}
+
+.logout {
+  text-align: center;
+  color: black;
+  &:hover {
+    color: red;
   }
 }
