@@ -13,11 +13,14 @@ import * as reviewActions from '../../store/modules/review';
 import { formatDate } from '../../lib/dateFunction';
 
 class OrderManageContainer extends Component {
-  
-  componentDidMount() {
-    const { CustomerActions } = this.props;
-    // OrderManageList에 customerInfo 불러오기
-    CustomerActions.getAllCustomerInfo();
+
+  // 로그인 정보 받은 후(props를 받은 후) 실행
+  componentWillReceiveProps(nextProps) {
+    if(this.props.loggedInfo !== nextProps.loggedInfo){
+      const { CustomerActions } = this.props;
+      CustomerActions.getCustomerInfoByMakerId(nextProps.loggedInfo.get('_id')) 
+      // CustomerActions.getAllCustomerInfo();
+    }
   }
 
   handleViewChange = (view) => {
@@ -163,6 +166,7 @@ class OrderManageContainer extends Component {
 
 export default connect(
   (state) => ({
+    loggedInfo: state.user.get('loggedInfo'),
     view: state.order.get('view'),
     detailView: state.order.get('detailView'),
     imgTextView: state.order.get('imgTextView'),

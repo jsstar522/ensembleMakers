@@ -98,7 +98,6 @@ export default handleActions({
     ...pender({
         type: LOCAL_LOGIN,
         onSuccess: (state, action) => {
-            console.log(action.payload.data);
             return state.set('result', Map(action.payload.data))
         }
     }),

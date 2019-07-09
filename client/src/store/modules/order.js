@@ -3,21 +3,21 @@ import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 import * as OrderAPI from '../../lib/api/order';
 
-const CHANGE_INPUT = 'order/changeInput';
-const VIEW_CHANGE = 'order/viewChange';
-const DETAIL_VIEW_CHANGE = 'order/detailViewChange'
-const IMG_TEXT_VIEW_CHANGE = 'order/imgTextViewChange';
-const ORDER_INIT = 'order/orderInit';
-const GET_ALL_ORDER = 'order/getAllOrder';
-const GET_ORDER_BY_ID = 'order/getOrderById';
-const GET_ORDER_BY_NUM = 'order/getOrderByNum';
-const POST_ORDER = 'order/postOrder';
-const PATCH_ORDER = 'order/patchOrder';
-const PATCH_IMG = 'order/patchImg';
-const REMOVE_IMG = 'order/removeImg';
-const PATCH_PROCESSING = 'order/patchProcessing';
-const DELETE_PROCESSING = 'order/deleteProcessing';
-const CHANGE_PROCESSING_STATE = 'order/changeProcessingState';
+const CHANGE_INPUT = 'order/CHANGE_INPUT';
+const VIEW_CHANGE = 'order/VIEW_CHANGE';
+const DETAIL_VIEW_CHANGE = 'order/DETAIL_VIEW_CHANGE'
+const IMG_TEXT_VIEW_CHANGE = 'order/IMG_TEXT_VIEW_CHANGE';
+const ORDER_INIT = 'order/ORDER_INIT';
+const GET_ALL_ORDER = 'order/GET_ALL_ORDER';
+const GET_ORDER_BY_ID = 'order/GET_ORDER_BY_ID';
+const GET_ORDER_BY_NUM = 'order/GET_ORDER_BY_NUM';
+const POST_ORDER = 'order/POST_ORDER';
+const PATCH_ORDER = 'order/PATCH_ORDER';
+const PATCH_IMG = 'order/PATCH_IMG';
+const REMOVE_IMG = 'order/REMOVE_IMG';
+const PATCH_PROCESSING = 'order/PATCH_PROCESSING';
+const DELETE_PROCESSING = 'order/DELETE_PROCESSING';
+const CHANGE_PROCESSING_STATE = 'order/CHANGE_PROCESSING_STATE';
 
 export const changeInput = createAction(CHANGE_INPUT);
 export const viewChange = createAction(VIEW_CHANGE);

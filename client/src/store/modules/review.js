@@ -3,13 +3,13 @@ import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 import * as ReviewAPI from '../../lib/api/review';
 
-const CHANGE_MODE = 'review/changeMode';
-const CHANGE_INPUT = 'review/changeInput';
-const CHANGE_RATING = 'review/changeRating';
-const GET_REVIEW_BY_NUM = 'review/getReviewById';
-const GET_REVIEW_BY_CUSTOMER_ID = 'review/getReviewByCustomerId'
-const POST_REVIEW = 'review/postReview';
-const PATCH_REVIEW = 'review/patchReview';
+const CHANGE_MODE = 'review/CHANGE_MODE';
+const CHANGE_INPUT = 'review/CHANGE_INPUT';
+const CHANGE_RATING = 'review/CHANGE_RATING';
+const GET_REVIEW_BY_NUM = 'review/GET_REVIEW_BY_NUM';
+const GET_REVIEW_BY_CUSTOMER_ID = 'review/GET_REVIEW_BY_CUSTOMER_ID'
+const POST_REVIEW = 'review/POST_REVIEW';
+const PATCH_REVIEW = 'review/PATCH_REVIEW';
 
 export const changeMode = createAction(CHANGE_MODE);
 export const changeInput = createAction(CHANGE_INPUT);

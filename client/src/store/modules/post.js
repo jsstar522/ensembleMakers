@@ -3,11 +3,11 @@ import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 import * as PostAPI from '../../lib/api/post';
 
-const CHANGE_INPUT = 'post/changeInput';
-const GET_All_POST = 'post/getAllPost';
-const GET_POST_BY_ID = 'post/getPostById';
-const POST = 'post/post';
-const POST_IMG = 'post/postImg';
+const CHANGE_INPUT = 'post/CHANGE_INPUT';
+const GET_All_POST = 'post/GET_All_POST';
+const GET_POST_BY_ID = 'post/GET_POST_BY_ID';
+const POST = 'post/POST';
+const POST_IMG = 'post/POST_IMG';
 
 export const changeInput = createAction(CHANGE_INPUT);
 export const getAllPost = createAction(GET_All_POST, PostAPI.getAllPost);

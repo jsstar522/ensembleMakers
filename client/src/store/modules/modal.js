@@ -2,16 +2,16 @@ import { createAction, handleActions } from 'redux-actions';
 import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 
-const SHOW = 'modal/show';
-const HIDE = 'modal/hide';
-const CHANGE = 'modal/change';
-const IMAGE_CHANGE = 'modal/imageChange';
-const IMAGE_DELETE = 'modal/imageDelete'
-const IMAGE_INIT = 'modal/imageInit';
-const IMAGE_URL_CHANGE = 'modal/imageURLChange';
-const IMAGE_URL_DELETE = 'modal/imageURLDelete'
-const IMAGE_URL_INIT = 'modal/imageURLInit';
-const IMAGE_DB_DELETE = 'modal/imageDBDelete'
+const SHOW = 'modal/SHOW';
+const HIDE = 'modal/HIDE';
+const CHANGE = 'modal/CHANGE';
+const IMAGE_CHANGE = 'modal/IMAGE_CHANGE';
+const IMAGE_DELETE = 'modal/IMAGE_DELETE'
+const IMAGE_INIT = 'modal/IMAGE_INIT';
+const IMAGE_URL_CHANGE = 'modal/IMAGE_URL_CHANGE';
+const IMAGE_URL_DELETE = 'modal/IMAGE_URL_DELETE'
+const IMAGE_URL_INIT = 'modal/IMAGE_URL_INIT';
+const IMAGE_DB_DELETE = 'modal/IMAGE_DB_DELETE'
 
 export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
