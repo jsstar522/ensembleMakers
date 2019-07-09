@@ -17,6 +17,12 @@ router.get('/:id', async(req, res, next) => {
   res.send(customer);
 })
 
+// get customerInfo by makerId
+router.get('/byMakerId/:id', async(req, res, next) => {
+  const customer = await Customer.find({makerId: req.params.id})
+  res.send(customer)
+})
+
 // post customerInfo
 router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
@@ -29,7 +35,7 @@ router.post('/', async(req, res, next) => {
 })
 
 // change customerInfo state
-router.patch('/:id', async(req, res, next) => {
+router.patch('/changeState/:id', async(req, res, next) => {
   const customer = await Customer.findByIdAndUpdate(
     req.params.id,
     // {"state": "proceessing"} or {"state": "ordered"}...

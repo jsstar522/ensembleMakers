@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../components/Base/Header';
 import { LoginButton } from '../../components/Base/LoginButton';
 import { UserButtonContainer } from '../../containers/Base';
-import * as userActions from '../../store/modules/user';
+import * as authActions from '../../store/modules/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import storage from '../../lib/storage';
@@ -10,9 +10,9 @@ import storage from '../../lib/storage';
 
 class HeaderContainer extends Component {
     handleLogout = async () => {
-        const { UserActions } = this.props;
+        const { AuthActions } = this.props;
         try {
-            await UserActions.logout();
+            await AuthActions.logout();
         } catch (e) {
             console.log(e);
         }
@@ -41,6 +41,6 @@ export default connect(
         user: state.user,
     }),
     (dispatch) => ({
-        UserActions: bindActionCreators(userActions, dispatch)
+        AuthActions: bindActionCreators(authActions, dispatch)
     })
 )(HeaderContainer);

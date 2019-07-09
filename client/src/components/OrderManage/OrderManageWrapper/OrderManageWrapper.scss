@@ -1,6 +1,11 @@
 // border 높이 화면 100% 유지하기
 // order-manage-wrapper element까지 포함된 모든 element의 higth를 100%로 유지해야한다.
-#root, #root>div, #root>div>div:nth-child(2), #root>div>div:nth-child(2)>div:nth-child(1){
+// #root, #root>div, #root>div>div:nth-child(2), #root>div>div:nth-child(2)>div:nth-child(1){
+//   margin: 0;
+//   height: 100%;
+//   z-index: 0;
+// }
+#root, #root>div {
   margin: 0;
   height: 100%;
   z-index: 0;

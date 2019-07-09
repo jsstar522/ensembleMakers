@@ -4,8 +4,10 @@ import { CustomerInfoContainer } from '../containers/CustomerInfo';
 
 class CustomerInfo extends Component {
   render(){
+    const { id } = this.props.match.params;
     return(
-      <CustomerInfoContainer/>
+      <CustomerInfoContainer userNumber={id}/>
+      
     )
   }
 }

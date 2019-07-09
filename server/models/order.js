@@ -9,11 +9,6 @@ const orderSchema = new Schema({
     required: true,
     ref: "Customer"
   },
-  makerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User"
-  },
   orderNumber: {
     type: Number,
     required: true,
@@ -92,6 +87,8 @@ const orderSchema = new Schema({
 });
 
 // 주문번호 생성
+// autoIncrement 초기화
+autoIncrement.initialize(mongoose.connection);
 orderSchema.plugin(autoIncrement.plugin, {
   model: 'Order', 
   field: 'orderNumber',
@@ -104,7 +101,6 @@ const Order = mongoose.model('Order', orderSchema);
 function validateOrder(order) {
   const schema = {
     customerId: Joi.string().required(),
-    makerId: Joi.string().required(),
     model: Joi.string(),
     rightSize: Joi.string(),
     leftSize: Joi.string(),

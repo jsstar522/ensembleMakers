@@ -19,14 +19,17 @@ router.get('/', async (req, res) => {
 
 // get user by id
 router.get('/searchById/:id', async(req, res) => {
-  const user = await User.findById(req.params.id)
-    .populate('posts_host')
-    .populate('posts_join');
-  
-  if (!user) return res.status(404).send(`ID ${req.params.id} is not found`);
-  
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(404).json({"key": "user", "message": "사용자를 찾을 수 없습니다."});
   res.send(user);
 });
+
+// get user by userNumber
+router.get('/searchByNum/:id', async(req, res) => {
+  let user = await User.findOne({"userNumber": req.params.id});
+  if (!user) return res.status(404).json({"key": "user", "message": "사용자를 찾을 수 없습니다."});
+  res.send(user)
+})
 
 // get user by company name
 router.get('/searchByCompany', async(req, res) => {

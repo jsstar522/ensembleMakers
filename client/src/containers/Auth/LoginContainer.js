@@ -58,7 +58,7 @@ class LoginContainer extends Component {
             const loggedInfo = this.props.result.toJS();
             UserActions.setLoggedInfo(loggedInfo);
             history.push('/');
-            storage.set('loggedInfo', loggedInfo);
+            await storage.set('loggedInfo', loggedInfo);
 
         } catch (e) {
             this.setError('잘못된 계정정보입니다.');

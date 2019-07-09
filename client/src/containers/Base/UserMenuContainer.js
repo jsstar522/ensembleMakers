@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { UserMenu } from '../../components/Base/UserMenu';
-import * as userActions from '../../store/modules/user';
+import * as authActions from '../../store/modules/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import storage from '../../lib/storage';
@@ -8,9 +8,9 @@ import storage from '../../lib/storage';
 class UserButtonContainer extends Component {
 
   handleLogout = async () => {
-    const { UserActions } = this.props;
+    const { AuthActions } = this.props;
     try {
-        await UserActions.logout();
+        await AuthActions.logout();
     } catch (e) {
         console.log(e);
     }
@@ -36,6 +36,6 @@ export default connect(
     visible: state.base.getIn(['userMenu']),
   }),
   (dispatch) => ({
-    UserActions: bindActionCreators(userActions, dispatch)
+    AuthActions: bindActionCreators(authActions, dispatch)
   })
 )(UserButtonContainer);

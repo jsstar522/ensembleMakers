@@ -28,9 +28,13 @@ class App extends Component {
         }
     }
 
-    componentDidMount(){
+    // componentDidMount(){
+    //     this.initializeUserInfo()
+    // };
+    constructor(props) {
+        super(props);
         this.initializeUserInfo()
-    };
+    }
 
     render() {
         return (
@@ -42,7 +46,7 @@ class App extends Component {
                 <Route path="/auth" component={Auth}/>
                 <Route path="/post" component={Post}/>
                 <Route path="/product" component={Product}/>
-                <Route path="/customerInfo" component={CustomerInfo}/>
+                <Route path="/customerInfo/:id" component={CustomerInfo}/>
                 <Route path="/customerInfoSuccess" component={CustomerInfoSuccess}/>
                 <Route path="/orderManage" component={OrderManage}/>
             </div>
