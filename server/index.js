@@ -24,9 +24,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch(error => console.error(error.message));
 
-// autoIncrement 초기화
-autoIncrement.initialize(mongoose.connection);
-
 /**  
  * Routes
  */

@@ -18,6 +18,10 @@ const customerSchema = new Schema({
   state: {
     type: String,
     default: "ordered"
+  },
+  makerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
   }
 }, {
   timestamps: true
@@ -29,7 +33,8 @@ function validateCustomer(customer) {
   const schema = {
     name: Joi.string().required(),
     phone: Joi.string().required(),
-    address: Joi.string()
+    address: Joi.string(),
+    makerId: Joi.string().required()
   }
   return Joi.validate(customer, schema);
 }

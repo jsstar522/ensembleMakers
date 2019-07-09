@@ -29,6 +29,7 @@ router.get('/byNum/:id', async(req, res, next) => {
 // post order
 router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
+  console.log(req.body)
   if (error) return res.status(400).send(error.message);
   console.log(req.body);
   let order = new Order(req.body);
