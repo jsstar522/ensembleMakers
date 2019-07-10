@@ -43,7 +43,7 @@ class App extends Component {
                 <UserMenuContainer/>
                 <Route exact path="/" component={Home}/>
                 <Route path="/order/:id" component={Order}/>
-                <Route path="/auth" component={Auth}/>
+                <Route path="/login" component={Auth}/>
                 <Route path="/post" component={Post}/>
                 <Route path="/product" component={Product}/>
                 <Route path="/customerInfo/:id" component={CustomerInfo}/>
