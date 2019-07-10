@@ -9,7 +9,7 @@ import { CompanySearchModalContainer } from '../containers/CompanySearchModal';
 import * as baseActions from '../store/modules/base';
 import { stat } from 'fs';
 
-class Auth extends Component {
+class Login extends Component {
     // 페이지에 진입 할 때 헤더를 비활성화
     componentWillMount() {
         this.props.BaseActions.setHeaderVisibility(false);
@@ -25,9 +25,8 @@ class Auth extends Component {
         return (
             <div>
                 <AuthWrapper>
-                    <RegisterContainer/>
-                    {/* <Route path="/auth/login" component={LoginContainer}/>
-                    <Route path="/auth/register" component={RegisterContainer}/> */}
+                    <Route path="/login/signin" component={LoginContainer}/>
+                    <Route path="/login/signup" component={RegisterContainer}/>
                 </AuthWrapper>
                 <CompanySearchModalContainer/>
             </div>
@@ -42,4 +41,4 @@ export default connect(
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch)
     })
-)(Auth);
+)(Login);

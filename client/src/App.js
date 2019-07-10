@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, Auth, Post, Product, CustomerInfo, CustomerInfoSuccess, OrderManage, Order } from './pages';
+import { Home, Login, Post, Product, CustomerInfo, CustomerInfoSuccess, OrderManage, Order } from './pages';
 import { HeaderContainer } from './containers/Base';
 import { UserMenuContainer } from './containers/Base';
 
@@ -24,7 +24,7 @@ class App extends Component {
             await UserActions.checkStatus();
         }catch(e){
             storage.remove('loggedInfo');
-            window.location.href = '/auth/login?expired';
+            window.location.href = '/login/signin?expired';
         }
     }
 
@@ -43,7 +43,7 @@ class App extends Component {
                 <UserMenuContainer/>
                 <Route exact path="/" component={Home}/>
                 <Route path="/order/:id" component={Order}/>
-                <Route path="/login" component={Auth}/>
+                <Route path="/login" component={Login}/>
                 <Route path="/post" component={Post}/>
                 <Route path="/product" component={Product}/>
                 <Route path="/customerInfo/:id" component={CustomerInfo}/>
