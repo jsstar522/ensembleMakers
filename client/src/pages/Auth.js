@@ -25,8 +25,9 @@ class Auth extends Component {
         return (
             <div>
                 <AuthWrapper>
-                    <Route path="/auth/login" component={LoginContainer}/>
-                    <Route path="/auth/register" component={RegisterContainer}/>
+                    <RegisterContainer/>
+                    {/* <Route path="/auth/login" component={LoginContainer}/>
+                    <Route path="/auth/register" component={RegisterContainer}/> */}
                 </AuthWrapper>
                 <CompanySearchModalContainer/>
             </div>
