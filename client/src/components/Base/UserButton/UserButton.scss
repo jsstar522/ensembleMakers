@@ -1,11 +1,29 @@
 .UserButton {
   position: relative;
-  width: 20%;
   transition: all 0.15s ease-in;
   cursor: pointer;
   &:hover {
     color: red;
   }
+
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 34%;
+    font-size: 12px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 20%;
+    font-size: 14px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 16%;
+    font-size: 14px;
+  }
+
+  
+
 }
 
 .content {

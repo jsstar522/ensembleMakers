@@ -284,7 +284,7 @@ class RegisterContainer extends Component {
                     error && <AuthError>{error}</AuthError>
                 }
                 <AuthButton onClick={handleLocalRegister}>회원가입</AuthButton>
-                <RightAlignedLink to='/auth/login'>로그인</RightAlignedLink>
+                <RightAlignedLink to='/login/signin'>로그인</RightAlignedLink>
             </AuthContent>
         );
     }

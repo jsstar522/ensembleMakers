@@ -1,5 +1,5 @@
 export { default as Home } from './Home';
-export { default as Auth } from './Auth';
+export { default as Login } from './Login';
 export { default as Post } from './Post';
 export { default as Product } from './Product'; 
 export { default as CustomerInfo } from './CustomerInfo';

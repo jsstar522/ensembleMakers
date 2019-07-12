@@ -43,9 +43,10 @@ export default handleActions({
   },
   [CHANGE]: (state, action) => {
     const { name, value, label } = action.payload;
-    return state.setIn(['modalContents', name, 'value'], value)
-                .setIn(['modalContents', name, 'label'], "테스트")
-    // return state.setIn(['modalContents', name], value)
+    // console.log(value)
+    // return state.setIn(['modalContents', name, 'value'], value)
+    // TODO: 리스트 커스터마이징 작업
+    return state.setIn(['modalContents', name], value)
   },
   [IMAGE_CHANGE]: (state, action) => {
     const images = state.get('images')

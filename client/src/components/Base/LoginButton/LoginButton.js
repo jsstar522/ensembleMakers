@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { Link } from 'react-router-dom';
-import { shadow } from '../../../lib/styleUtils';
+import { shadow, device } from '../../../lib/styleUtils';
+
+const ButtonWrapper = styled.div`
+    height: 55px;
+    align-items: center;
+`;
 
 const BorderedButton = styled(Link)`
-    width: 20%;
-    font-weight: 500;
-    color: ${oc.blue[4]};
-    // border: 1px solid ${oc.blue[4]};
+    font-weight: 600;
+    color: #4695D6;
     padding: 0.5rem;
     padding-bottom: 0.4rem;
     cursor: pointer;
@@ -18,21 +21,33 @@ const BorderedButton = styled(Link)`
     transition: .2s all;
 
     &:hover {
-        background: ${oc.blue[4]};
+        background: #4695D6;
         color: white;
         ${shadow(1)}
     }
 
-    &:active {
-        /* 마우스 클릭시 아래로 미세하게 움직임 */
-        transform: translateY(3px);
+    @media ${device.phone} { 
+        font-size: 12px;
+        width: 110px;
+    }
+    @media ${device.tablet} { 
+        font-size: 15px;
+        width: 140px;
+    }
+    @media ${device.desktop} { 
+        font-size: 15px;
+        width: 140px;
+    }
+    @media ${device.wide} { 
+        font-size: 18px;
+        width: 170px;
     }
 
 
 `;
 
 const LoginButton = () => (
-    <BorderedButton to="/auth/login">
+    <BorderedButton to="/login/signin">
             로그인 및 회원가입
     </BorderedButton>
 

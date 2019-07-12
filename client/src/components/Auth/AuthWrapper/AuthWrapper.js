@@ -30,7 +30,7 @@ const Logo = styled(Link)`
     color: white;
     font-family: 'Rajdhani';
     font-size: 2.4rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
 `;
 
