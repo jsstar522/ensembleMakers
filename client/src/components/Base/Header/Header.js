@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow, media } from '../../../lib/styleUtils';
+import { shadow, media, device } from '../../../lib/styleUtils';
+
 
 // 상단 고정, 그림자
 const Positioner = styled.div`
@@ -24,31 +25,60 @@ const WhiteBackground = styled.div`
 
 // 해더의 내용
 const HeaderContents = styled.div`
-    width: 1200px;
     height: 55px;
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    padding-right: 1rem;
-    padding-left: 1rem;
-    ${media.wide`
-        width: 992px;
-    `}
+    @media ${device.phone} { 
+        padding-right: 5px;
+        padding-left: 5px;
+        width: 98%;
+    }
+    @media ${device.tablet} { 
+        padding-right: 10px;
+        padding-left: 10px;
+        width: 91%;
+    }
+    @media ${device.desktop} { 
+        padding-right: 20px;
+        padding-left: 20px;
+        width: 85%;
+    }
+    @media ${device.wide} { 
+        padding-right: 20px;
+        padding-left: 20px;
+        width: 88%;
+    }
 
-    ${media.tablet`
-        width: 100%;
-    `}
 `;
 
 // 로고
-const Logo = styled.div`
-    width: 100%;
-    font-size: 1.4rem;
-    text-align: center;
-    letter-spacing: 2px;
-    color: #4695D6;
+const Logo = styled.a`
+    position: absolute;
+    letter-spacing: 1px;
+    color: #f69e53;
     font-family: 'Rajdhani';
+    text-decoration: none;
+    transition: .2s all;
+    text-align: center;
+
+    @media ${device.phone} { 
+        font-size: 20px;
+        width: 52%;
+    }
+    @media ${device.tablet} { 
+        font-size: 20px;
+        width: 24%;
+    }
+    @media ${device.desktop} { 
+        font-size: 28px;
+        width: 24%;
+    }
+    @media ${device.wide} { 
+        font-size: 28px;
+        width: 20%;
+    }
 `;
 
 // 중간 여백
@@ -67,7 +97,7 @@ const Header = ({children}) => {
         <Positioner>
             <WhiteBackground>
                 <HeaderContents>
-                    <Logo>ensemble makers</Logo>
+                    <Logo href="/">ensemble makers</Logo>
                     <Spacer/>
                     {children}
                 </HeaderContents>
