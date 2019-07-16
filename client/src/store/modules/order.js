@@ -3,7 +3,6 @@ import { pender } from 'redux-pender';
 import { Map, List } from 'immutable';
 import * as OrderAPI from '../../lib/api/order';
 
-const CHANGE_INPUT = 'order/CHANGE_INPUT';
 const VIEW_CHANGE = 'order/VIEW_CHANGE';
 const DETAIL_VIEW_CHANGE = 'order/DETAIL_VIEW_CHANGE'
 const IMG_TEXT_VIEW_CHANGE = 'order/IMG_TEXT_VIEW_CHANGE';
@@ -19,7 +18,6 @@ const PATCH_PROCESSING = 'order/PATCH_PROCESSING';
 const DELETE_PROCESSING = 'order/DELETE_PROCESSING';
 const CHANGE_PROCESSING_STATE = 'order/CHANGE_PROCESSING_STATE';
 
-export const changeInput = createAction(CHANGE_INPUT);
 export const viewChange = createAction(VIEW_CHANGE);
 export const detailViewChange = createAction(DETAIL_VIEW_CHANGE);
 export const imgTextViewChange = createAction(IMG_TEXT_VIEW_CHANGE);
@@ -44,10 +42,6 @@ const initialState = Map({
 });
 
 export default handleActions({
-  [CHANGE_INPUT]: (state, action) => {
-    const { name, value } = action.payload;
-    return state.setIn(['postForm', name], value);
-  },
   [VIEW_CHANGE]: (state, action) => {
     return state.set('view', action.payload)
   },
@@ -83,7 +77,7 @@ export default handleActions({
   }),
   ...pender({
     type: PATCH_ORDER,
-    onSuccess: (state, action) => state.set('orderById', Map(action.payload.data))
+    onSuccess: (state, action) => state.setIn(['orderById', 'contents'], List(action.payload.data))
   }),
   ...pender({
     type: PATCH_IMG,

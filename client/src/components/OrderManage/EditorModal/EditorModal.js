@@ -34,22 +34,27 @@ StateBox.propTypes = {
 
 class EditorModal extends Component {
 
-  handleChange = (e) => {
-    const { onChange } = this.props;
-    onChange({
-      name: e.target.name,
-      value: e.target.value,
-    })
-  }
-
   render() {
-    const { name, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail } = this.props;
-    const { handleChange } = this;
+    const { name, state, detail, contents } = this.props;
+    const { onChange } = this.props;
     const { handlePatch, handleHide } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
     : "제작완료";
+
+    const detailInputList = contents.map(
+      (content, i) => 
+        <DetailInput
+          key={i}
+          label={content.label}
+          placeholder={content.label}
+          // id, name, value, type are valid with input tags.
+          name={i}
+          value={content.value || ''}
+          onChange={onChange}
+        />
+    )
 
     return(
       <div className="edit-modal-wrapper">
@@ -60,7 +65,8 @@ class EditorModal extends Component {
         </div>
         <StateBox state={state}>{stateText}</StateBox>
         <div className="edit-modal-header">{name}</div>
-          <table className="edit-modal-form-table">
+          {detailInputList}
+          {/* <table className="edit-modal-form-table">
             <tbody>
             <tr>
               <td>
@@ -186,7 +192,7 @@ class EditorModal extends Component {
                 /></td>
             </tr>      
             </tbody>
-          </table>
+          </table> */}
         <div className="editor-modal-post-button" onClick={handlePatch}>저장하기</div>
       </div>
     )

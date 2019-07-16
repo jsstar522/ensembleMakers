@@ -10,11 +10,11 @@ import * as orderActions from '../../store/modules/order';
 
 class EditorModalContainer extends Component {
 
-  handleChange = ({name, value}) => {
+  handleChange = (e) => {
     const { ModalActions } = this.props;
     ModalActions.change({
-      name, 
-      value
+      name: e.target.name,
+      value: e.target.value,
     });
   }
 
@@ -22,7 +22,7 @@ class EditorModalContainer extends Component {
     const { OrderActions, ModalActions } = this.props;
     const { modalContents } = this.props;
     const id = modalContents.get('_id');
-    const contents = modalContents.toJS();
+    const contents = modalContents.get('contents');
     OrderActions.patchOrder({
       id: id,
       contents: contents
@@ -45,18 +45,7 @@ class EditorModalContainer extends Component {
           <EditorModal
           name={modalContents.getIn(['customerId', 'name'])}
           state={modalContents.getIn(['customerId', 'state'])}
-          model={modalContents.toJS().model}
-          rightSize={modalContents.toJS().rightSize}
-          leftSize={modalContents.toJS().leftSize}
-          last={modalContents.toJS().last}
-          sole={modalContents.toJS().sole}
-          midsole={modalContents.toJS().midsole}
-          sockLining={modalContents.toJS().sockLining}
-          heel={modalContents.toJS().heel}
-          decoration={modalContents.toJS().decoration}
-          material={modalContents.toJS().material}
-          innerMaterial={modalContents.toJS().innerMaterial}
-          color={modalContents.toJS().color}
+          contents={modalContents.toJS().contents}
           detail={modalContents.toJS().detail}
           onChange={handleChange}
           handlePatch={handlePatch}

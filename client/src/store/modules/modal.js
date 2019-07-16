@@ -42,11 +42,9 @@ export default handleActions({
     return state.set('visible', false)
   },
   [CHANGE]: (state, action) => {
-    const { name, value, label } = action.payload;
-    // console.log(value)
-    // return state.setIn(['modalContents', name, 'value'], value)
-    // TODO: 리스트 커스터마이징 작업
-    return state.setIn(['modalContents', name], value)
+    const { name, value } = action.payload;
+    const content = state.getIn(['modalContents', 'contents'])[name]
+    return state.setIn(['modalContents', 'contents', name, 'value'], value)
   },
   [IMAGE_CHANGE]: (state, action) => {
     const images = state.get('images')

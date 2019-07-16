@@ -33,13 +33,20 @@ class CustomerInfoContainer extends Component {
     const { postForm, history } = this.props;
     const { name, phone, address } = postForm.toJS();
     const makerId = this.props.loadedUserInfo.get('_id');
+    const orderContentList = this.props.loadedUserInfo.get('orderContentList')
+    let contents = [];
+    orderContentList.map(
+      (orderList) => {
+        contents.push({ "label" : orderList, "value": null})
+      }
+    )
 
     try {
      let customerInfo = await CustomerActions.postCustomerInfo({name, phone, address, makerId});
      // customerInfo 작성과 비워진 주문서(order) 동시에 작성
      // makerId를 customerInfo에 넣었음 TODO: 한명이 다른곳에서 각각 두개의 주문을 할 때, 비효율이 생김
      const customerId = customerInfo.data._id;
-     await OrderActions.postOrder({customerId});
+     await OrderActions.postOrder({customerId, contents});
      window.location = await '/customerInfoSuccess/';
     } catch(e) {
       console.log(e);
@@ -50,6 +57,7 @@ class CustomerInfoContainer extends Component {
     const { name, phone, address } = this.props.postForm;
     const { loadedUserInfo } = this.props;
     const { handleChange, handlePost } = this;
+
     return(
       <CustomerInfoWrapper>
         <div className="customer-info-header"><b>{loadedUserInfo.getIn(['company', 'companyName'])}</b></div>
