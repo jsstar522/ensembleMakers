@@ -35,14 +35,21 @@ const userSchema = new Schema({
     // middleManager
     enum: ['manager', 'maker']
   },
+  // 사장님(kind=='makers', role=='manager'일 때 회사정보 입력)
   company: {
     companyName: { type: String },
     companyAddress: { type: String },
     companyPhone: { type: String }
   },
+  // 제화공(kind=='makers' role='maker'일 때 소속된 사장님 Id 입력)
   group: {
     grouped: { type: Boolean },
     groupId: { type: mongoose.Schema.Types.ObjectId },
+  },
+  // 주문서 list 커스터마이징 목록
+  orderContentList: {
+    type: [ String ],
+    default: [ '모델', '라스트', '창', '중창', '굽', '장식', '까래', '오른발 사이즈', '왼발 사이즈', '소재', '내피', '색상' ]
   },
   provider: {
     type: String,
