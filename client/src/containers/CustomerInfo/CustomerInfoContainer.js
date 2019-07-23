@@ -7,15 +7,17 @@ import { CustomerInfoInput } from '../../components/CustomerInfo/CustomerInfoInp
 import { CustomerInfoPostButton } from '../../components/CustomerInfo/CustomerInfoPostButton';
 import * as customerActions from '../../store/modules/customer';
 import * as orderActions from '../../store/modules/order';
+import * as orderTemplateActions from '../../store/modules/orderTemplate';
 import * as userActions from '../../store/modules/user';
 
 class CustomerInfoContainer extends Component {
 
   componentDidMount() {
-    const { UserActions } = this.props;
+    const { UserActions, OrderTemplateActions } = this.props;
     const { userNumber } = this.props;
     // 회사정보 가져오기
     UserActions.getUserByNum(userNumber);
+    OrderTemplateActions.getOrderTemplateByNum(userNumber)
   }
 
   handleChange = (e) => {
@@ -33,11 +35,16 @@ class CustomerInfoContainer extends Component {
     const { postForm, history } = this.props;
     const { name, phone, address } = postForm.toJS();
     const makerId = this.props.loadedUserInfo.get('_id');
-    const orderContentList = this.props.loadedUserInfo.get('orderContentList')
-    let contents = [];
-    orderContentList.map(
+    const orderTemplate = this.props.orderTemplate;
+    let contents = { modelTemplate: [], template: []};
+    orderTemplate.get('modelTemplate').map(
       (orderList) => {
-        contents.push({ "label" : orderList, "value": null})
+        contents.modelTemplate.push({ "label" : orderList, "value": null })
+      }
+    )
+    orderTemplate.get('template').map(
+      (orderList) => {
+        contents.template.push({ "label" : orderList, "value": null })
       }
     )
 
@@ -90,11 +97,13 @@ class CustomerInfoContainer extends Component {
 export default connect(
   (state) => ({
     postForm: state.customer.get('postForm'),
-    loadedUserInfo: state.user.get('loadedUserInfo')
+    loadedUserInfo: state.user.get('loadedUserInfo'),
+    orderTemplate: state.orderTemplate
   }),
   (dispatch) => ({
     CustomerActions: bindActionCreators(customerActions, dispatch),
     OrderActions: bindActionCreators(orderActions, dispatch),
+    OrderTemplateActions: bindActionCreators(orderTemplateActions, dispatch),
     UserActions: bindActionCreators(userActions, dispatch)
   })
 )(CustomerInfoContainer);

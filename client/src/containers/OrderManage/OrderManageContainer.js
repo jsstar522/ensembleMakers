@@ -72,7 +72,7 @@ class OrderManageContainer extends Component {
 
     ModalActions.show({
       visible: "editor",
-      modalContents: orderById.toJS()
+      modalContents: orderById
     })
   }
 

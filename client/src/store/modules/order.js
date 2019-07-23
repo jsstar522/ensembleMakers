@@ -77,7 +77,7 @@ export default handleActions({
   }),
   ...pender({
     type: PATCH_ORDER,
-    onSuccess: (state, action) => state.setIn(['orderById', 'contents'], List(action.payload.data))
+    onSuccess: (state, action) => state.setIn(['orderById', 'contents'], action.payload.data)
   }),
   ...pender({
     type: PATCH_IMG,

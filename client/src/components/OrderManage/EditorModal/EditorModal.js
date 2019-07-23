@@ -35,24 +35,40 @@ StateBox.propTypes = {
 class EditorModal extends Component {
 
   render() {
-    const { name, state, detail, contents } = this.props;
-    const { onChange } = this.props;
+    const { addMode, addContent, name, state, detail, contents } = this.props;
+    const { onChange, onChangeAddMode, onChangeAddInput, onAddList, onDeleteList } = this.props;
     const { handlePatch, handleHide } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
     : "제작완료";
 
-    const detailInputList = contents.map(
+    const detailInputList = contents.modelTemplate.map(
       (content, i) => 
         <DetailInput
           key={i}
+          id={i}
           label={content.label}
           placeholder={content.label}
-          // id, name, value, type are valid with input tags.
+          // only id, name, value, type are valid with input tags.
           name={i}
           value={content.value || ''}
-          onChange={onChange}
+          onChange={(e, kind) => onChange(e, 'modelTemplate')}
+          onDeleteList={() => onDeleteList(i, 'modelTemplate')}
+        />
+    )
+    const detailInputList_2 = contents.template.map(
+      (content, i) => 
+        <DetailInput
+          key={i}
+          id={i}
+          label={content.label}
+          placeholder={content.label}
+          // only id, name, value, type are valid with input tags.
+          name={i}
+          value={content.value || ''}
+          onChange={(e, kind) => onChange(e, 'template')}
+          onDeleteList={() => onDeleteList(i, 'template')}
         />
     )
 
@@ -65,134 +81,20 @@ class EditorModal extends Component {
         </div>
         <StateBox state={state}>{stateText}</StateBox>
         <div className="edit-modal-header">{name}</div>
-          {detailInputList}
-          {/* <table className="edit-modal-form-table">
-            <tbody>
-            <tr>
-              <td>
-              <DetailInput
-                name="model"
-                label="모델명"
-                placeholder="모델명"
-                value={model || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-                <DetailInput
-                  name="last"
-                  label="라스트"
-                  placeholder="라스트"
-                  value={last || ''}
-                  onChange={handleChange}
-                /></td>
-            </tr>
-            <tr><td colSpan="2"><hr className="editor-modal-line"></hr></td></tr>
-            <tr>
-              <td>
-              <DetailInput
-                name="leftSize"
-                label="왼쪽 사이즈"
-                placeholder="왼쪽 사이즈"
-                value={leftSize || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-              <DetailInput
-                name="rightSize"
-                label="오른쪽 사이즈"
-                placeholder="오른쪽 사이즈"
-                value={rightSize || ''}
-                onChange={handleChange}
-              /></td>
-            </tr>
-            <tr><td colSpan="2"><hr className="editor-modal-line"></hr></td></tr>
-            <tr>
-              <td>
-              <DetailInput
-                name="sole"
-                label="창"
-                placeholder="창"
-                value={sole || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-              <DetailInput
-                name="midsole"
-                label="중창"
-                placeholder="중창"
-                value={midsole || ''}
-                onChange={handleChange}
-              /></td>
-            </tr>
-            <tr>
-              <td>
-              <DetailInput
-                name="sockLining"
-                label="까래"
-                placeholder="까래"
-                value={sockLining || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-              <DetailInput
-                name="heel"
-                label="굽"
-                placeholder="굽"
-                value={heel || ''}
-                onChange={handleChange}
-              /></td>
-            </tr>
-            <tr><td colSpan="2"><hr className="editor-modal-line"></hr></td></tr>
-            <tr>
-              <td>
-              <DetailInput
-                name="decoration"
-                label="장식"
-                placeholder="장식"
-                value={decoration || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-              <DetailInput
-                name="color"
-                label="색상"
-                placeholder="색상"
-                value={color || ''}
-                onChange={handleChange}
-              /></td>
-            </tr>
-            <tr>
-              <td>
-              <DetailInput
-                name="material"
-                label="소재"
-                placeholder="소재"
-                // value={material ? material.value : ''}
-                value={material || ''}
-                onChange={handleChange}
-              /></td>
-              <td>
-              <DetailInput
-                name="innerMaterial"
-                label="내피"
-                placeholder="내피"
-                value={innerMaterial || ''}
-                onChange={handleChange}
-              /></td>
-            </tr>
-            <tr><td colSpan="2"><hr className="editor-modal-line"></hr></td></tr>
-            <tr>
-              <td colSpan="2">
-                <DetailInput
-                  name="detail"
-                  label="특이사항"
-                  placeholder="특이사항"
-                  value={detail || ''}
-                  onChange={handleChange}
-                /></td>
-            </tr>      
-            </tbody>
-          </table> */}
+          {detailInputList}{detailInputList_2}
+        {addMode === false && <div className="editor-modal-open-add-input-button" onClick={() => onChangeAddMode(true)}> 작성 목록 추가하기 </div>}
+        {addMode === true && 
+          <div className="editor-modal-add-wrapper">
+            <input 
+              className="editor-modal-add-input"
+              placeholder="추가할 목록을 작성하세요"
+              value={addContent || ''}
+              onChange={onChangeAddInput}
+            />
+            <div className="editor-modal-add-button" onClick={() => onAddList(addContent)}>추가하기</div>
+            <div className="editor-modal-add-cancel-button" onClick={() => onChangeAddMode(false)}>X</div>
+          </div>
+        }
         <div className="editor-modal-post-button" onClick={handlePatch}>저장하기</div>
       </div>
     )

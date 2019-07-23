@@ -6,8 +6,15 @@ class DetailContentsTable extends Component {
     const { imgTextView } = this.props;
     const { address, state, detail, images, contents } = this.props;
     const { onChangeImgText, onOpenImageModal } = this.props;
-    
-    const contentsList = contents.map(
+
+    const contentsList = contents.modelTemplate.map(
+      (content, i) => 
+        <div key={i} className="detail-contents-row">
+          <div className="detail-contents-cell-header">{content.label}</div>
+          <div className="detail-contents-cell">{content.value}</div>
+        </div>
+    )
+    const contentsList_2 = contents.template.map(
       (content, i) => 
         <div key={i} className="detail-contents-row">
           <div className="detail-contents-cell-header">{content.label}</div>
@@ -18,7 +25,7 @@ class DetailContentsTable extends Component {
     return(
       <div className="detail-contents-table-wrapper">
         <div className="detail-contents-table">
-          {contentsList}
+          {contentsList}{contentsList_2}
         </div>
         <div className="detail-contents-table-line"/>
         <div className="detail-contents-row">

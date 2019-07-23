@@ -6,8 +6,8 @@ class CustomerInfoInput extends Component {
     const { label, ...rest } = this.props;
     return(
       <div>
-        <div className="label">{label}</div>
-        <input className="input" {...rest}/>
+        <div className="customer-info-label">{label}</div>
+        <input className="customer-info-input" {...rest}/>
       </div>
     )
   }
