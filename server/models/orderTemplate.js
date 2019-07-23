@@ -13,13 +13,9 @@ const orderTemplateSchema = new Schema({
     required: true,
     ref: "User"
   },
-  modelTemplate: {
-    type: [ String ],
-    default: ['모델', '라스트', '창', '중창', '굽', '장식', '까래', '소재', '내피']
-  },
   template: {
     type: [ String ],
-    default: ['오른발 사이즈', '왼발 사이즈', '색상']
+    default: ['모델', '라스트', '창', '중창', '굽', '장식', '까래', '소재', '내피', '오른발 사이즈', '왼발 사이즈', '색상']
   }
 }, {
   timestamps: true
@@ -31,7 +27,6 @@ function validateOrderTemplate(orderTemplate) {
   const schema = {
     userId: Joi.string().required(),
     userNumber: Joi.number().required(),
-    modelTemplate: Joi.array(),
     template: Joi.array()
   }
   return Joi.validate(orderTemplate, schema);

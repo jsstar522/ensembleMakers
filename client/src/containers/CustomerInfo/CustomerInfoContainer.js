@@ -36,12 +36,7 @@ class CustomerInfoContainer extends Component {
     const { name, phone, address } = postForm.toJS();
     const makerId = this.props.loadedUserInfo.get('_id');
     const orderTemplate = this.props.orderTemplate;
-    let contents = { modelTemplate: [], template: []};
-    orderTemplate.get('modelTemplate').map(
-      (orderList) => {
-        contents.modelTemplate.push({ "label" : orderList, "value": null })
-      }
-    )
+    let contents = { template: []};
     orderTemplate.get('template').map(
       (orderList) => {
         contents.template.push({ "label" : orderList, "value": null })

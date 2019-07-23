@@ -75,11 +75,6 @@ function validateOrder(order) {
       })
     ),
     contents: { 
-      modelTemplate: Joi.array().items(
-        Joi.object().keys({
-          "label": Joi.string(),
-          "value": Joi.any()
-        })), 
       template: Joi.array().items(
         Joi.object().keys({
           "label": Joi.string(),

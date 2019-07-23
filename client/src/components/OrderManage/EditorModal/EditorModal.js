@@ -43,21 +43,7 @@ class EditorModal extends Component {
     : state=="processing" ? "제작중" 
     : "제작완료";
 
-    const detailInputList = contents.modelTemplate.map(
-      (content, i) => 
-        <DetailInput
-          key={i}
-          id={i}
-          label={content.label}
-          placeholder={content.label}
-          // only id, name, value, type are valid with input tags.
-          name={i}
-          value={content.value || ''}
-          onChange={(e, kind) => onChange(e, 'modelTemplate')}
-          onDeleteList={() => onDeleteList(i, 'modelTemplate')}
-        />
-    )
-    const detailInputList_2 = contents.template.map(
+    const detailInputList = contents.template.map(
       (content, i) => 
         <DetailInput
           key={i}
@@ -81,7 +67,7 @@ class EditorModal extends Component {
         </div>
         <StateBox state={state}>{stateText}</StateBox>
         <div className="edit-modal-header">{name}</div>
-          {detailInputList}{detailInputList_2}
+          {detailInputList}
         {addMode === false && <div className="editor-modal-open-add-input-button" onClick={() => onChangeAddMode(true)}> 작성 목록 추가하기 </div>}
         {addMode === true && 
           <div className="editor-modal-add-wrapper">
