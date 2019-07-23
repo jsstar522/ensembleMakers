@@ -9,9 +9,9 @@ const PATCH_ORDER_TEMPLATE = 'orderTemplate/PATCH_ORDER_TEMPLATE';
 
 export const getOrderTemplateByNum = createAction(GET_ORDER_TEMPLATE_BY_NUM, OrderTemplateAPI.getOrderTemplateByNum);
 export const postOrderTemplate = createAction(POST_ORDER_TEMPLATE, OrderTemplateAPI.postOrderTemplate);
+export const patchOrderTemplate = createAction(PATCH_ORDER_TEMPLATE, OrderTemplateAPI.patchOrderTemplate);
 
 const initialState = Map({
-  modelTemplate: List([]),
   template: List([])
 });
 
@@ -19,12 +19,17 @@ export default handleActions({
   ...pender({
     type: GET_ORDER_TEMPLATE_BY_NUM,
     onSuccess: (state, action) => {
-      return state.set('modelTemplate', List(action.payload.data.modelTemplate))
-                  .set('template', List(action.payload.data.template))
+      return state.set('template', List(action.payload.data.template))
     }
   }),
   ...pender({
     type: POST_ORDER_TEMPLATE,
+    onSuccess: (state, action) => {
+      console.log(action.payload.data)
+    }
+  }),
+  ...pender({
+    type: PATCH_ORDER_TEMPLATE,
     onSuccess: (state, action) => {
       console.log(action.payload.data)
     }
