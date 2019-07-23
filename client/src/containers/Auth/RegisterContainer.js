@@ -11,7 +11,10 @@ import { MakersRegister } from '../../components/Auth/MakersRegister';
 import * as authActions from '../../store/modules/auth';
 import * as userActions from '../../store/modules/user';
 import * as modalActions from '../../store/modules/modal';
+import * as orderTemplateActions from '../../store/modules/orderTemplate';
 import {isEmail, isLength, isAlphanumeric} from 'validator';
+
+import storage from '../../lib/storage';
 
 class RegisterContainer extends Component {
 
@@ -77,7 +80,8 @@ class RegisterContainer extends Component {
     }
 
     handleLocalRegister = async () => {
-        const { form, AuthActions, UserActions, error, history } = this.props;
+        const { form, error, history } = this.props;
+        const { AuthActions, UserActions, OrderTemplateActions} = this.props;
         const { kind, role, email, username, password, passwordConfirm, company, group } = form.toJS();
         const { validate } = this;
 
@@ -108,10 +112,17 @@ class RegisterContainer extends Component {
                 // 하나라도 실패하면 진행하지 않음
                 return;
                 }
-                await AuthActions.localRegister({
+                let registerInfo = await AuthActions.localRegister({
                     email, password, username, kind, role, company
                 })
+                // orderTemplate 생성
+                await OrderTemplateActions.postOrderTemplate({
+                    userId: registerInfo.data._id, 
+                    userNumber: registerInfo.data.userNumber
+                });
+                
             }
+            // 제화공회원 검증작업
             if(kind==='makers'&&role==='maker'){
                 if(!validate['email'](email) 
                 || !validate['username'](username) 
@@ -301,6 +312,7 @@ export default connect(
     (dispatch) => ({
         AuthActions: bindActionCreators(authActions, dispatch),
         UserActions: bindActionCreators(userActions, dispatch),
-        ModalActions: bindActionCreators(modalActions, dispatch)
+        ModalActions: bindActionCreators(modalActions, dispatch),
+        OrderTemplateActions: bindActionCreators(orderTemplateActions, dispatch)
     })
 )(RegisterContainer);

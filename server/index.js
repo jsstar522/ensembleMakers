@@ -35,6 +35,7 @@ const usersRouter = require('./routes/users');
 const reviewsRouter = require('./routes/reviews');
 const customersRouter = require('./routes/customers');
 const ordersRouter = require('./routes/orders');
+const orderTemplatesRouter = require('./routes/orderTemplates');
 
 /**
  * Middleware
@@ -69,6 +70,7 @@ app.use('/api/posts', postsRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/customers', customersRouter);
 app.use('/api/orders', ordersRouter);
+app.use('/api/orderTemplates', orderTemplatesRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

@@ -35,7 +35,7 @@ const StateBox = styled.div`
 class OrderManageDetail extends Component {
   render() {
     const { imgTextView, detailView, review } = this.props;
-    const { id, orderNumber, name, phone, address ,date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { id, orderNumber, name, phone, address, contents, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
     const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
     let stateText;
@@ -70,18 +70,7 @@ class OrderManageDetail extends Component {
             <div className="detail-contents-wrapper">
               <DetailContentsTable
                 address={address}
-                model={model}
-                rightSize={rightSize}
-                leftSize={leftSize}
-                last={last}
-                sole={sole}
-                midsole={midsole}
-                sockLining={sockLining}
-                heel={heel}
-                decoration={decoration}
-                material={material}
-                innerMaterial={innerMaterial}
-                color={color}
+                contents={contents}
                 detail={detail}
                 images={images}
                 imgTextView={imgTextView}
@@ -95,18 +84,18 @@ class OrderManageDetail extends Component {
                 phone={phone}
                 address={address}
                 date={date}
-                model={model}
-                rightSize={rightSize}
-                leftSize={leftSize}
-                last={last}
-                sole={sole}
-                midsole={midsole}
-                sockLining={sockLining}
-                heel={heel}
-                decoration={decoration}
-                material={material}
-                innerMaterial={innerMaterial}
-                color={color}
+                // model={model}
+                // rightSize={rightSize}
+                // leftSize={leftSize}
+                // last={last}
+                // sole={sole}
+                // midsole={midsole}
+                // sockLining={sockLining}
+                // heel={heel}
+                // decoration={decoration}
+                // material={material}
+                // innerMaterial={innerMaterial}
+                // color={color}
                 detail={detail}
                 images={images}
                 imgTextView={imgTextView}

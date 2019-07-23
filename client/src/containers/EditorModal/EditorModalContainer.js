@@ -10,24 +10,56 @@ import * as orderActions from '../../store/modules/order';
 
 class EditorModalContainer extends Component {
 
-  handleChange = ({name, value}) => {
+  handleChange = (e, kind) => {
     const { ModalActions } = this.props;
     ModalActions.change({
-      name, 
-      value
+      name: e.target.name,
+      value: e.target.value,
+      kind: kind
     });
+  }
+
+  handleChangeAddInput =(e) => {
+    const { ModalActions } = this.props;
+    ModalActions.changeAddInput({
+      value: e.target.value
+    })
+  }
+
+  handleChangeAddMode = (mode) => {
+    const { ModalActions } = this.props;
+    ModalActions.changeAddMode(mode)
+  }
+
+  handleAddList = (list) => {
+    const { ModalActions } = this.props;
+    ModalActions.addList(list)
+    ModalActions.changeAddMode(false)
+  }
+
+  handleDeleteList = (id, kind) => {
+    const { ModalActions } = this.props;
+    ModalActions.deleteList({
+      id: id, 
+      kind: kind
+    })
   }
 
   handlePatch = () => {
     const { OrderActions, ModalActions } = this.props;
     const { modalContents } = this.props;
     const id = modalContents.get('_id');
-    const contents = modalContents.toJS();
+    const contents = modalContents.get('contents');
     OrderActions.patchOrder({
       id: id,
       contents: contents
     })
     ModalActions.hide()
+    const { orderContents } = this.props;
+    console.log(contents)
+    console.log(orderContents.get('contents'))
+    console.log(orderContents.get('contents') === contents)
+    
   }
 
   handleHide = () => {
@@ -36,29 +68,24 @@ class EditorModalContainer extends Component {
   }
 
   render() {
-    const { customerById, modalContents, visible} = this.props;
-    const { handleChange, handlePatch, handleHide } = this;
+    const { customerById, modalContents, visible, addMode, addContent } = this.props;
+    const { handleChange, handleChangeAddInput, handleChangeAddMode, handleAddList, handleDeleteList, handlePatch, handleHide } = this;
     return(
       visible==="editor" &&
       <div>
         <Modal mode={visible}>
           <EditorModal
+          addMode={addMode}
+          addContent={addContent}
           name={modalContents.getIn(['customerId', 'name'])}
           state={modalContents.getIn(['customerId', 'state'])}
-          model={modalContents.toJS().model}
-          rightSize={modalContents.toJS().rightSize}
-          leftSize={modalContents.toJS().leftSize}
-          last={modalContents.toJS().last}
-          sole={modalContents.toJS().sole}
-          midsole={modalContents.toJS().midsole}
-          sockLining={modalContents.toJS().sockLining}
-          heel={modalContents.toJS().heel}
-          decoration={modalContents.toJS().decoration}
-          material={modalContents.toJS().material}
-          innerMaterial={modalContents.toJS().innerMaterial}
-          color={modalContents.toJS().color}
+          contents={modalContents.toJS().contents}
           detail={modalContents.toJS().detail}
           onChange={handleChange}
+          onChangeAddInput={handleChangeAddInput}
+          onChangeAddMode={handleChangeAddMode}
+          onAddList={handleAddList}
+          onDeleteList={handleDeleteList}
           handlePatch={handlePatch}
           handleHide={handleHide}
           >
@@ -73,7 +100,10 @@ class EditorModalContainer extends Component {
 export default connect(
   (state) => ({
     modalContents: state.modal.get('modalContents'),
-    visible: state.modal.get('visible')
+    orderContents: state.order.get('orderById'),
+    addContent: state.modal.get('addContent'),
+    visible: state.modal.get('visible'),
+    addMode: state.modal.get('addMode')
   }),
   (dispatch) => ({
     ModalActions : bindActionCreators(modalActions, dispatch),

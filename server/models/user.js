@@ -35,11 +35,13 @@ const userSchema = new Schema({
     // middleManager
     enum: ['manager', 'maker']
   },
+  // 사장님(kind=='makers', role=='manager'일 때 회사정보 입력)
   company: {
     companyName: { type: String },
     companyAddress: { type: String },
     companyPhone: { type: String }
   },
+  // 제화공(kind=='makers' role='maker'일 때 소속된 사장님 Id 입력)
   group: {
     grouped: { type: Boolean },
     groupId: { type: mongoose.Schema.Types.ObjectId },

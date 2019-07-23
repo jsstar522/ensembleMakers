@@ -13,41 +13,8 @@ const orderSchema = new Schema({
     type: Number,
     required: true,
   },
-  model: {
-    type: String,
-  },
-  rightSize: {
-    type: String,
-  },
-  leftSize: {
-    type: String,
-  },
-  last: {
-    type: String,
-  },
-  sole: {
-    type: String,
-  },
-  midsole: {
-    type: String,
-  },
-  sockLining: {
-    type: String,
-  },
-  heel: {
-    type: String,
-  },
-  decoration: {
-    type: String,
-  },
-  material: {
-    type: String,
-  },
-  innerMaterial: {
-    type: String,
-  },
-  color: {
-    type: String,
+  contents: {
+    type: Object,
   },
   detail: {
     type: String,
@@ -101,6 +68,24 @@ const Order = mongoose.model('Order', orderSchema);
 function validateOrder(order) {
   const schema = {
     customerId: Joi.string().required(),
+    contents: Joi.array().items(
+      Joi.object().keys({
+        "label": Joi.string(),
+        "value": Joi.any()
+      })
+    ),
+    contents: { 
+      modelTemplate: Joi.array().items(
+        Joi.object().keys({
+          "label": Joi.string(),
+          "value": Joi.any()
+        })), 
+      template: Joi.array().items(
+        Joi.object().keys({
+          "label": Joi.string(),
+          "value": Joi.any()
+        }))
+    },
     model: Joi.string(),
     rightSize: Joi.string(),
     leftSize: Joi.string(),

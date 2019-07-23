@@ -5,28 +5,37 @@ import { Map, List } from 'immutable';
 const SHOW = 'modal/SHOW';
 const HIDE = 'modal/HIDE';
 const CHANGE = 'modal/CHANGE';
-const IMAGE_CHANGE = 'modal/IMAGE_CHANGE';
-const IMAGE_DELETE = 'modal/IMAGE_DELETE'
-const IMAGE_INIT = 'modal/IMAGE_INIT';
-const IMAGE_URL_CHANGE = 'modal/IMAGE_URL_CHANGE';
-const IMAGE_URL_DELETE = 'modal/IMAGE_URL_DELETE'
-const IMAGE_URL_INIT = 'modal/IMAGE_URL_INIT';
-const IMAGE_DB_DELETE = 'modal/IMAGE_DB_DELETE'
+const CHANGE_ADD_MODE = 'modal/CHANGE_ADD_MODE';
+const CHANGE_ADD_INPUT = 'modal/CHANGE_ADD_INPUT';
+const ADD_LIST = 'modal/ADD_LIST';
+const DELETE_LIST = 'modal/DELETE_LIST'
+const CHANGE_IMAGE = 'modal/CHANGE_IMAGE';
+const DELETE_IMAGE = 'modal/DELETE_IMAGE'
+const INIT_IMAGE = 'modal/INIT_IMAGE';
+const CHANGE_IMAGE_URL = 'modal/CHANGE_IMAGE_URL';
+const DELETE_IMAGE_URL = 'modal/DELETE_IMAGE_URL'
+const INIT_IMAGE_URL = 'modal/INIT_IMAGE_URL';
 
 export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
 export const change = createAction(CHANGE);
-export const imageChange = createAction(IMAGE_CHANGE);
-export const imageDelete = createAction(IMAGE_DELETE);
-export const imageInit = createAction(IMAGE_INIT);
-export const imageURLChange = createAction(IMAGE_URL_CHANGE);
-export const imageURLInit = createAction(IMAGE_URL_INIT);
-export const imageURLDelete = createAction(IMAGE_URL_DELETE);
-
+export const changeAddMode = createAction(CHANGE_ADD_MODE);
+export const changeAddInput = createAction(CHANGE_ADD_INPUT);
+export const addList = createAction(ADD_LIST);
+export const deleteList = createAction(DELETE_LIST);
+export const changeImage = createAction(CHANGE_IMAGE);
+export const deleteImage = createAction(DELETE_IMAGE);
+export const initImage = createAction(INIT_IMAGE);
+export const changeImageURL = createAction(CHANGE_IMAGE_URL);
+export const deleteImageURL = createAction(DELETE_IMAGE_URL);
+export const initImageURL = createAction(INIT_IMAGE_URL);
 
 const initialState = Map({
   // visible = image, editor, company
   visible: false,
+  // add list
+  addMode: false,
+  addContent: '',
   modalContents: Map({}),
   images: List([]),
   imageURLs: List([])
@@ -40,34 +49,49 @@ export default handleActions({
   },
   [HIDE]: (state, action) => {
     return state.set('visible', false)
+                // 초기화
+                .set('modalContents', Map({}))
   },
   [CHANGE]: (state, action) => {
-    const { name, value, label } = action.payload;
-    // console.log(value)
-    // return state.setIn(['modalContents', name, 'value'], value)
-    // TODO: 리스트 커스터마이징 작업
-    return state.setIn(['modalContents', name], value)
+    const { name, value, kind } = action.payload;
+    return state.setIn(['modalContents', 'contents', kind, name, 'value'], value)
   },
-  [IMAGE_CHANGE]: (state, action) => {
+  [CHANGE_ADD_MODE]: (state, action) => {
+    return state.set('addMode', action.payload)
+  },
+  [CHANGE_ADD_INPUT]: (state, action) => {
+    return state.set('addContent', action.payload.value)
+  },
+  [ADD_LIST]: (state, action) => {
+    let contents = List(state.getIn(['modalContents', 'contents', 'template']))
+    return state.setIn(['modalContents', 'contents', 'template'], contents.push({"label": action.payload, "value": null}).toJS())
+                .set('addContent', '')
+  },
+  [DELETE_LIST]: (state, action) => {
+    const { id, kind } = action.payload;
+    let contents = List(state.getIn(['modalContents', 'contents', kind]))
+    return state.setIn(['modalContents', 'contents', kind], contents.delete(id).toJS())
+  },
+  [CHANGE_IMAGE]: (state, action) => {
     const images = state.get('images')
     return state.set('images', images.push(action.payload))
   },
-  [IMAGE_DELETE]: (state, action) => {
+  [DELETE_IMAGE]: (state, action) => {
     const images = state.get('images')
     return state.set('images', images.delete(action.payload))
   },
-  [IMAGE_INIT]: (state, action) => {
+  [INIT_IMAGE]: (state, action) => {
     return state.set('images', List([]))
   },
-  [IMAGE_URL_CHANGE]: (state, action) => {
+  [CHANGE_IMAGE_URL]: (state, action) => {
     const imageURLs = state.get('imageURLs')
     return state.set('imageURLs', imageURLs.push(action.payload))
   },
-  [IMAGE_URL_DELETE]: (state, action) => {
+  [DELETE_IMAGE_URL]: (state, action) => {
     const imageURLs = state.get('imageURLs')
     return state.set('imageURLs', imageURLs.delete(action.payload))
   },
-  [IMAGE_URL_INIT]: (state, action) => {
+  [INIT_IMAGE_URL]: (state, action) => {
     return state.set('imageURLs', List([]))
   }
 }, initialState)

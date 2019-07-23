@@ -29,9 +29,7 @@ router.get('/byNum/:id', async(req, res, next) => {
 // post order
 router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
-  console.log(req.body)
   if (error) return res.status(400).send(error.message);
-  console.log(req.body);
   let order = new Order(req.body);
   order = await order.save();
   res.send(order);
@@ -39,12 +37,9 @@ router.post('/', async(req, res, next) => {
 
 // input order contents (by patch)
 router.patch('/:id', async(req, res, next) => {
-  const order = await Order.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  // await console.log(req.body);
+  const order = await Order.findById(req.params.id)
+  order.contents = req.body;
+  await order.save();
   await res.send(req.body);
 })
 

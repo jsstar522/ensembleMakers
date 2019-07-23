@@ -3,11 +3,14 @@ import './DetailInput.scss';
 
 class DetailInput extends Component {
   render() {
-    const { label, ...rest } = this.props;
+    const { label, id, onDeleteList, ...rest } = this.props;
     return(
-      <div className="input-wrapper">
-        <div className="label">{label}</div>
-        <input className="input" {...rest}/>
+      <div className="detail-input-wrapper">
+        <div className="detail-label">{label}</div>
+        <div style={{display:'flex', flexDirection: 'row', alignItems:'center'}}>
+        <input className="detail-input" {...rest}/>
+        <div className="detail-delete-button" onClick={(i, kind)=>onDeleteList(i, kind)}>-</div>
+        </div>
       </div>
     )
   }

@@ -15,12 +15,12 @@ class ImageModalContainer extends Component {
     // 사진 계속 추가 가능(미리보기 URL 포함)
     for(let i=0; i < e.target.files.length; i++){
       // images formData를 만들기 위한 action
-      ModalActions.imageChange(e.target.files[i])
+      ModalActions.changeImage(e.target.files[i])
       // images URL를 만들기 위한 action
       let reader = new FileReader();
       reader.readAsDataURL(e.target.files[i])
       reader.onload = () => {
-        ModalActions.imageURLChange(reader.result);
+        ModalActions.changeImageURL(reader.result);
       }
     }
 
@@ -50,8 +50,8 @@ class ImageModalContainer extends Component {
   // 올릴 이미지 목록, 미리보기 제거
   handleDeleteURL = async(i) => {
     const { ModalActions } = this.props;
-    await ModalActions.imageDelete(i);
-    await ModalActions.imageURLDelete(i);
+    await ModalActions.deleteImage(i);
+    await ModalActions.deleteImageURL(i);
   }
 
   // 등록되어 있는 사진 삭제
@@ -70,8 +70,8 @@ class ImageModalContainer extends Component {
 
     // post 후 images state 초기화
     if(images){
-      ModalActions.imageInit();
-      ModalActions.imageURLInit();
+      ModalActions.initImage();
+      ModalActions.initImageURL();
     }
 
     // modal 종료
