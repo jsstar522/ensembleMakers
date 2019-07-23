@@ -46,11 +46,6 @@ const userSchema = new Schema({
     grouped: { type: Boolean },
     groupId: { type: mongoose.Schema.Types.ObjectId },
   },
-  // 주문서 list 커스터마이징 목록
-  orderContentList: {
-    type: [ String ],
-    default: [ '모델', '라스트', '창', '중창', '굽', '장식', '까래', '오른발 사이즈', '왼발 사이즈', '소재', '내피', '색상' ]
-  },
   provider: {
     type: String,
     required: true,

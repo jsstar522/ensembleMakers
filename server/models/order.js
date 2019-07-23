@@ -14,7 +14,7 @@ const orderSchema = new Schema({
     required: true,
   },
   contents: {
-    type: [ Object ]
+    type: Object,
   },
   detail: {
     type: String,
@@ -74,6 +74,18 @@ function validateOrder(order) {
         "value": Joi.any()
       })
     ),
+    contents: { 
+      modelTemplate: Joi.array().items(
+        Joi.object().keys({
+          "label": Joi.string(),
+          "value": Joi.any()
+        })), 
+      template: Joi.array().items(
+        Joi.object().keys({
+          "label": Joi.string(),
+          "value": Joi.any()
+        }))
+    },
     model: Joi.string(),
     rightSize: Joi.string(),
     leftSize: Joi.string(),

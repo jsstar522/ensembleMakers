@@ -18,21 +18,21 @@ router.get('/', async (req, res) => {
 });
 
 // get user by id
-router.get('/searchById/:id', async(req, res) => {
+router.get('/byId/:id', async(req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) return res.status(404).json({"key": "user", "message": "사용자를 찾을 수 없습니다."});
   res.send(user);
 });
 
 // get user by userNumber
-router.get('/searchByNum/:id', async(req, res) => {
+router.get('/byNum/:id', async(req, res) => {
   let user = await User.findOne({"userNumber": req.params.id});
   if (!user) return res.status(404).json({"key": "user", "message": "사용자를 찾을 수 없습니다."});
   res.send(user)
 })
 
 // get user by company name
-router.get('/searchByCompany', async(req, res) => {
+router.get('/byCompany', async(req, res) => {
   const user = await User.find({"company.companyName": {$regex: req.query.companyName, $options: 'ix' }})
   if(!user) return res.status(404).json({"key": "company", "message": "공장 및 회사를 찾을 수 없습니다."});
   res.send(user);
