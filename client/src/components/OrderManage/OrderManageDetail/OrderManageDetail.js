@@ -35,7 +35,7 @@ const StateBox = styled.div`
 class OrderManageDetail extends Component {
   render() {
     const { imgTextView, detailView, review } = this.props;
-    const { id, orderNumber, name, phone, address, contents, date, state, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { id, orderNumber, name, phone, address, contents, date, state, detail, images } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
     const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
     let stateText;
@@ -84,6 +84,7 @@ class OrderManageDetail extends Component {
                 phone={phone}
                 address={address}
                 date={date}
+                contents={contents}
                 // model={model}
                 // rightSize={rightSize}
                 // leftSize={leftSize}
