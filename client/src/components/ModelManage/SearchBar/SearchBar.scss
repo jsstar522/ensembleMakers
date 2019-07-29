@@ -1,0 +1,32 @@
+.model-manage-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 400px;
+  height: 42px;
+  border: 1px solid #EBEBEB;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+}
+
+.model-manage-input-icon {
+  width: 45px;
+  font-size: 30px;
+  text-align: center;
+  color: #484848;
+}
+
+.model-manage-input {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 355px;
+  height: 40px;
+  font-size: 20px;
+  outline: none;
+
+  &::placeholder {
+    color: #cecece;
+  }
+
+}

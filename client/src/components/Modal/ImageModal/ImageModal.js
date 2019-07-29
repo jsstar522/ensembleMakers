@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ImageModal.scss';
-import { FaAngleLeft, FaAngleRight, FaTimes } from 'react-icons/fa';
+import { FaAngleLeft, FaAngleRight, FaTimes, FaPlus } from 'react-icons/fa';
 import MdAdd from 'react-ionicons/lib/MdAdd';
 
 class ImageModal extends Component {
@@ -49,20 +49,13 @@ class ImageModal extends Component {
 
     return(
       <div className="image-modal-wrapper">
-        <div className="file-box">
-          <input 
-            value="+"
-            className="file-button"
-            onChange={onChange}
-          />
-          <input
-            type="file"
-            className="file-button-hidden"
-            onChange={onChange}
-            multiple
-          />
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '14px'}}>
+          <div className="image-modal-image-button-box">
+            <label htmlFor="ex_file"><FaPlus/></label>
+            <input type="file" id="ex_file" multiple onChange={onChange}/>
+          </div>
+          <div className="preview-ref-text">사진을 추가하려면 + 버튼을 누르세요</div>
         </div>
-        <div className="preview-ref-text">사진을 추가하려면 + 버튼을 누르세요</div>
         <div className="image-preview-wrapper">
           {imageURLList}
         </div>

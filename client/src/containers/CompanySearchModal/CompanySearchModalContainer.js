@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from '../../components/Modal';
+import { ModalWrapper } from '../../components/Modal/ModalWrapper';
 import { CompanySearchModal } from '../../components/Auth/CompanySearchModal';
-import { Dimmed } from '../../components/OrderManage/Dimmed';
+import { Dimmed } from '../../components/Modal/Dimmed';
 import * as authActions from '../../store/modules/auth';
 import * as modalActions from '../../store/modules/modal';
 import * as searchActions from '../../store/modules/search';
@@ -48,7 +48,7 @@ class CompanySearchModalContainer extends Component {
     return (
       visible==="company" && 
       <div>
-        <Modal mode={visible}>
+        <ModalWrapper mode={visible}>
           <CompanySearchModal
             keyword={keyword}
             searchList={searchList}
@@ -58,7 +58,7 @@ class CompanySearchModalContainer extends Component {
             onHide={handleHide}
           >
           </CompanySearchModal>
-        </Modal>
+        </ModalWrapper>
         <Dimmed/>
       </div>
     )

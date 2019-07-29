@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal } from '../../components/Modal';
-import { ImageModal } from '../../components/OrderManage/ImageModal';
-import { Dimmed } from '../../components/OrderManage/Dimmed';
+import { ModalWrapper } from '../../components/Modal/ModalWrapper';
+import { ImageModal } from '../../components/Modal/ImageModal';
+import { Dimmed } from '../../components/Modal/Dimmed';
 import * as modalActions from '../../store/modules/modal';
 import * as orderActions from '../../store/modules/order';
 
@@ -44,7 +44,6 @@ class ImageModalContainer extends Component {
     })
     // imgPost 후 modal 종료
     await this.handleHide();
-    // console.log(formData.getAll('images'));
   }
 
   // 올릴 이미지 목록, 미리보기 제거
@@ -85,7 +84,7 @@ class ImageModalContainer extends Component {
     return(
       visible === "image" &&
       <div>
-        <Modal mode={visible}>
+        <ModalWrapper mode={visible}>
           <ImageModal 
             images={orderById.get('images')}
             imageURLs={imageURLs}
@@ -95,7 +94,7 @@ class ImageModalContainer extends Component {
             onDeleteImg={handleDeleteImg}
             onHide={handleHide}
           />
-        </Modal>
+        </ModalWrapper>
         <Dimmed/>
       </div>
     )

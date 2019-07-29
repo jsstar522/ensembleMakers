@@ -72,7 +72,9 @@ class OrderManageContainer extends Component {
 
     ModalActions.show({
       visible: "editor",
-      modalContents: orderById
+      modalContents: orderById.get('contents'),
+      // 등록되어있는 modelImage를 모달 modelImage와 imageURL(미리보기)로 넘긴다.
+      modelImage: orderById.get('modelImage')
     })
   }
 
@@ -146,6 +148,7 @@ class OrderManageContainer extends Component {
           detail={orderById.toJS().detail}
           images={orderById.toJS().images}
           imgTextView={imgTextView}
+          modelImage={orderById.toJS().modelImage}
           detailView={detailView}
           lastComplete={orderById.toJS().lastComplete && formatDate(orderById.toJS().lastComplete)}
           cutComplete={orderById.toJS().cutComplete && formatDate(orderById.toJS().cutComplete)}

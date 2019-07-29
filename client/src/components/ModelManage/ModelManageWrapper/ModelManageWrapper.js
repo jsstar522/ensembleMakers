@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FaSistrix } from 'react-icons/fa';
 import './ModelManageWrapper.scss';
 
 class ModelManageWrapper extends Component {

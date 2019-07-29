@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FaMinusCircle } from 'react-icons/fa';
 import './DetailInput.scss';
 
 class DetailInput extends Component {
@@ -9,7 +10,7 @@ class DetailInput extends Component {
         <div className="detail-label">{label}</div>
         <div style={{display:'flex', flexDirection: 'row', alignItems:'center'}}>
         <input className="detail-input" {...rest}/>
-        <div className="detail-delete-button" onClick={(i, kind)=>onDeleteList(i, kind)}>-</div>
+        <FaMinusCircle className="detail-delete-button" onClick={onDeleteList}/>
         </div>
       </div>
     )

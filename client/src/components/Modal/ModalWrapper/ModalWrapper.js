@@ -1,9 +1,9 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Modal.scss' 
+import './ModalWrapper.scss' 
 import styled, { keyframes } from 'styled-components';
 
-class Modal extends Component { 
+class ModalWrapper extends Component { 
   render() {
     const { children } = this.props;
     const { mode } = this.props;
@@ -20,4 +20,4 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+export default ModalWrapper;

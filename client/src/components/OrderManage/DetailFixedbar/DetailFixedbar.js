@@ -42,13 +42,22 @@ const StateButton = styled.div`
 class DetailFixedbar extends Component {
   render() {
     const { imgTextView } = this.props;
-    const { state, orderNumber, name, phone, address ,date, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images } = this.props;
+    const { state, orderNumber, name, phone, address ,date, model, rightSize, leftSize, last, sole, midsole, sockLining, heel, decoration, material, innerMaterial, color, detail, images, modelImage } = this.props;
     const { onOpenEditorModal, onOpenImageModal, onChangeState, onChangeImgText } = this.props;
     return(
       <div className="detail-fixedbar-wrapper">
         <div className="detail-fixedbar">
+          <div className="detail-model-image-wrapper">
+            {modelImage===null?
+            <div className="detail-model-image"/>
+            :<img className="detail-model-image" src={modelImage}/>
+            }
+          </div>
           <div className="detail-image-wrapper" onClick={onOpenImageModal} onMouseOver={() => {onChangeImgText(true)}} onMouseOut={() => {onChangeImgText(false)}}>
-            {images && <img className="detail-image" src={images[0]}/>}
+            {images.length===0?
+            <div className="detail-image"/>
+            :<img className="detail-image" src={images[0]}/>
+            }
             {imgTextView && <div className="detail-image-ref-text">등록된 이미지: <b>{images.length}</b>개 <br/><br/> 이미지를 등록/삭제 하시려면 <b>클릭</b>하세요.</div>}
           </div>
           { // state가 ordered일 때,  주문번호 등록창 보이기

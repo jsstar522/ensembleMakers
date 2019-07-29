@@ -1,0 +1,28 @@
+.model-list-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  // phone
+  @media screen and (min-width: 320px) {
+    padding: 10px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    padding: 50px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    padding: 50px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    padding: 50px;
+  }
+}
+
+.model-list-add-button {
+  position: fixed;
+  border: 1px solid black;
+  bottom: 30px;
+  right: 30px;
+}

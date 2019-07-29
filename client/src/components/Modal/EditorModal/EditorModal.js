@@ -35,15 +35,15 @@ StateBox.propTypes = {
 class EditorModal extends Component {
 
   render() {
-    const { addMode, addContent, name, state, detail, contents } = this.props;
-    const { onChange, onChangeAddMode, onChangeAddInput, onAddList, onDeleteList } = this.props;
+    const { addMode, addContent, name, state, detail, contents, modelImageURL } = this.props;
+    const { onChange, onChangeModelImg, onDeleteModelImg, onChangeAddMode, onChangeAddInput, onAddList, onDeleteList } = this.props;
     const { handlePatch, handleHide } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
     : "제작완료";
 
-    const detailInputList = contents.template.map(
+    const detailInputList = contents.get('template').map(
       (content, i) => 
         <DetailInput
           key={i}
@@ -59,15 +59,37 @@ class EditorModal extends Component {
     )
 
     return(
-      <div className="edit-modal-wrapper">
+      <div className="editor-modal-wrapper">
         <div 
           className="modal-cancel-button"
           onClick={handleHide}
         ><FaTimes/>
         </div>
         <StateBox state={state}>{stateText}</StateBox>
-        <div className="edit-modal-header">{name}</div>
-          {detailInputList}
+        <div className="editor-modal-header">{name}</div>
+        <div className="editor-modal-line"/>
+        <div style={{marginTop: '10px', textAlign: 'left', fontSize: '18px', color: '#767676', marginBottom: '10px', fontWeight: '600'}}>모델 이미지</div>
+        <div className="editor-modal-image-wrapper">
+          {modelImageURL===null?
+          <div className="editor-modal-image"/>
+          :<img className="editor-modal-image" src={modelImageURL}/>
+          }
+          <div className="editor-modal-image-button-wrapper">
+            <div style={{color: '#767676', fontSize: '16  px',fontWeight: '600', marginBottom: '5px'}}>모델 이미지 올리기</div>
+            <div style={{color: '#767676', fontSize: '13px', fontWeight: '600', marginBottom: '5px'}}>아래 버튼을 클릭해서 모델 이미지를 등록하거나 수정할 수 있습니다.</div>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+              <div className="editor-modal-image-button-box">
+                <label htmlFor="ex_file">사진선택</label>
+                <input type="file" id="ex_file" onChange={onChangeModelImg}/>
+              </div>
+              <div className="editor-modal-image-delete-button-box">
+                <label onClick={onDeleteModelImg}>사진삭제</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="editor-modal-line"/>
+        {detailInputList}
         {addMode === false && <div className="editor-modal-open-add-input-button" onClick={() => onChangeAddMode(true)}> 작성 목록 추가하기 </div>}
         {addMode === true && 
           <div className="editor-modal-add-wrapper">
@@ -78,6 +100,7 @@ class EditorModal extends Component {
               onChange={onChangeAddInput}
             />
             <div className="editor-modal-add-button" onClick={() => onAddList(addContent)}>추가하기</div>
+            
             <div className="editor-modal-add-cancel-button" onClick={() => onChangeAddMode(false)}>X</div>
           </div>
         }

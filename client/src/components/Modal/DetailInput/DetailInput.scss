@@ -8,6 +8,7 @@
   margin-top: 10px;
   text-align: left;
   font-size: 18px;
+  font-weight: 600;
   color: #767676;
 }
 
@@ -28,18 +29,10 @@
 }
 
 .detail-delete-button {
-  margin-top: 5px;
-  margin-bottom: 0.3rem;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  font-weight: 800;
-  border-radius: 19.5px;
-  background-color: #fa6e57;
-  color: white;
+  font-size: 28px;
+  color: #fa6e57;
   &:hover {
-    background-color: #d65946;
+    color: red;
   }
   cursor: pointer;
 }

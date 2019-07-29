@@ -1,0 +1,137 @@
+.model-list-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 33.33333%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 25%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    width: 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.model-list-item {
+  box-shadow: 0px 2px 5px 0px #d8d6d6;
+  border-radius: 2px;
+  // phone
+  @media screen and (min-width: 320px) {
+    width: 142px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    width: 210px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    width: 206px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    width: 254px;
+  }
+
+  &:hover {
+    border: 2px solid red;
+  }
+
+  cursor: pointer;
+}
+
+.model-list-img {
+  width: 100%;
+  @media screen and (min-width: 320px) {
+    height: 106.5px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 157.5px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 154.5px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    height: 190.5px;
+  }
+}
+
+.model-list-model-name {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  color: #484848;
+  font-weight: 600;
+  @media screen and (min-width: 320px) {
+    height: 40px;
+    font-size: 20px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 40px;
+    font-size: 20px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 40px;
+    font-size: 25px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    height: 40px;
+    font-size: 25px;
+  }
+}
+.model-list-model-content {
+  width: 100%;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  @media screen and (min-width: 320px) {
+    height: 40px;
+    font-size: 15px;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 40px;
+    font-size: 15px;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 40px;
+    font-size: 18px;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    height: 40px;
+    font-size: 20px;
+  }
+}

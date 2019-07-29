@@ -14,6 +14,8 @@ const POST_ORDER = 'order/POST_ORDER';
 const PATCH_ORDER = 'order/PATCH_ORDER';
 const PATCH_IMG = 'order/PATCH_IMG';
 const REMOVE_IMG = 'order/REMOVE_IMG';
+const PATCH_MODEL_IMG = 'order/PATCH_MODEL_IMG';
+const REMOVE_MODEL_IMG = 'order/REMOVE_MODEL_IMG';
 const PATCH_PROCESSING = 'order/PATCH_PROCESSING';
 const DELETE_PROCESSING = 'order/DELETE_PROCESSING';
 const CHANGE_PROCESSING_STATE = 'order/CHANGE_PROCESSING_STATE';
@@ -29,6 +31,8 @@ export const postOrder = createAction(POST_ORDER, OrderAPI.postOrder);
 export const patchOrder = createAction(PATCH_ORDER, OrderAPI.patchOrder);
 export const patchImg = createAction(PATCH_IMG, OrderAPI.patchImg);
 export const removeImg = createAction(REMOVE_IMG, OrderAPI.removeImg);
+export const patchModelImg = createAction(PATCH_MODEL_IMG, OrderAPI.patchModelImg);
+export const removeModelImg = createAction(REMOVE_MODEL_IMG, OrderAPI.removeModelImg);
 export const patchProcessing = createAction(PATCH_PROCESSING, OrderAPI.patchProcessing);
 export const deleteProcessing = createAction(DELETE_PROCESSING, OrderAPI.deleteProcessing);
 export const changeProcessingState = createAction(CHANGE_PROCESSING_STATE, OrderAPI.changeProcessingState);
@@ -91,6 +95,18 @@ export default handleActions({
     onSuccess: (state, action) => {
       const images = List(state.getIn(['orderById', 'images']));
       return state.setIn(['orderById', 'images'], images.delete(images.indexOf(`/img/${action.payload.data}`)))
+    }
+  }),
+  ...pender({
+    type: PATCH_MODEL_IMG,
+    onSuccess: (state, action) => {
+      return state.setIn(['orderById', 'modelImage'], action.payload.data)
+    }
+  }),
+  ...pender({
+    type: REMOVE_MODEL_IMG,
+    onSuccess: (state, action) => {
+      return state.setIn(['orderById', 'modelImage'], null)
     }
   }),
   ...pender({

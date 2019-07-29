@@ -3,40 +3,39 @@
   overflow: auto;
 }
 
-.file-box {
-  position: relative;
-  left: 50%; 
-  margin-left: -35px;
+.image-modal-image-button-box {
+  font-size: 20px;
+  label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: inherit; 
+    text-align: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background-color: #fa6e57;
+    color: #FFFFFF;
+    cursor: pointer; 
+  }
+  input[type="file"] {
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0;
+  }
 }
-.file-button {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  background-color: #fa6e57;
-  color: #FFFFFF;
-  border-style: solid;
-  font-size: 30px;
-  text-align: center;
-}
-.file-button-hidden {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  opacity: 0;
-  cursor: pointer;
 
-  filter: alpha(opacity=0);
-  -ms-filter: "alpha(opacity=0)";
-  -khtml-opacity: 0;
-  -moz-opacity: 0;
-}
 
 .preview-ref-text {
   width: 100%;
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 14px;
   color: #cccccc;
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;

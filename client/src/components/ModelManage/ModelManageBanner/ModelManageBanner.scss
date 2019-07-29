@@ -1,0 +1,34 @@
+.model-manage-banner-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 250px;
+  padding-top: 90px;
+  padding-bottom: 35px;
+  background: linear-gradient(to right, #f69e53, #fa6e57);
+  @media screen and (min-width: 320px) {
+    height: 30vh;
+  }
+  // tablet
+  @media screen and (min-width: 768px) {
+    height: 30vh;
+  }
+  // desktop
+  @media screen and (min-width: 992px) {
+    height: 30vh;
+  }
+  // wide
+  @media screen and (min-width: 1440px) {
+    height: 20vh;
+  }
+}
+
+.model-manage-banner-header {
+  color: white;
+  font-weight: 600;
+  font-size: 35px;
+}
+
+
+
