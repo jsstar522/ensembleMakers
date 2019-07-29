@@ -22,6 +22,10 @@ const orderSchema = new Schema({
   images: {
     type: [ String ]
   },
+  modelImage: {
+    type: String,
+    default: null,
+  },
   // 공정완료시각
   // 라스트
   lastComplete: {

@@ -125,9 +125,6 @@ router.patch('/img/:id', upload.array('images', 10), async(req, res) => {
 
 // delete images
 router.delete('/img/:id', async(req, res) => {
-  console.log(req.params.id);
-  console.log(req.body.imgName)
-
   // uploads/파일 삭제
   fs.unlink(`uploads/${req.body.imgName}`, async(err) => {
     // db내용 삭제
@@ -140,6 +137,38 @@ router.delete('/img/:id', async(req, res) => {
       { new : true }
     )
     await res.send(req.body.imgName);
+  })
+})
+
+// post model image
+router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
+  // 이전에 있던 이미지 삭제
+  fs.unlink(`uploads/${req.body.exImgName}`, async(err) =>{
+    // 새로운 이미지 db 등록
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        "modelImage": `/img/${req.file.filename}`
+      },
+      { new: true }
+    )
+    await res.send(`/img/${req.file.filename}`);
+  })
+})
+
+// delete model image
+router.delete('/modelImg/:id', async(req, res) => {
+  // uploads/파일 삭제
+  fs.unlink(`uploads/${req.body.exImgName}`, async(err) => {
+    // db내용 삭제
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        "modelImage": null
+      },
+      { new : true }
+    )
+    await res.send(null);
   })
 })
 
