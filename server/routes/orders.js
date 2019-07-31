@@ -143,7 +143,7 @@ router.delete('/img/:id', async(req, res) => {
 // post model image
 router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
   // 이전에 있던 이미지 삭제
-  fs.unlink(`uploads/${req.body.exImgName}`, async(err) =>{
+  fs.unlink(`uploads/${req.body.preImgName}`, async(err) =>{
     // 새로운 이미지 db 등록
     const order = await Order.findByIdAndUpdate(
       req.params.id,
@@ -159,7 +159,7 @@ router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
 // delete model image
 router.delete('/modelImg/:id', async(req, res) => {
   // uploads/파일 삭제
-  fs.unlink(`uploads/${req.body.exImgName}`, async(err) => {
+  fs.unlink(`uploads/${req.body.preImgName}`, async(err) => {
     // db내용 삭제
     const order = await Order.findByIdAndUpdate(
       req.params.id,

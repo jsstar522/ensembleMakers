@@ -6,6 +6,12 @@ const { OrderTemplate, validate } = require('../models/orderTemplate');
 
 const router = express.Router();
 
+// get orderTemplate by userId
+router.get('/byId/:id', async(req, res) => {
+  let orderTemplate = await OrderTemplate.findOne({'userId': req.params.id})
+  await res.send(orderTemplate);
+})
+
 // get orderTemplate by userNumber
 router.get('/byNum/:id', async(req, res) => {
   let orderTemplate = await OrderTemplate.findOne({'userNumber': req.params.id})
