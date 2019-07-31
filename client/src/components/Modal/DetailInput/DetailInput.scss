@@ -14,10 +14,10 @@
 
 .detail-input {
   position: relative;
-  width: 100%;
+  width: calc(100% - 37px);
   margin-top: 5px;
   margin-bottom: 0.3rem;
-  margin-right: 2%;
+  margin-right: 2px;
   padding: 0.5rem;
   border: 1px solid #c3c3c3;
   border-radius: 0.2rem;
@@ -29,7 +29,11 @@
 }
 
 .detail-delete-button {
-  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  width: 35px;
   color: #fa6e57;
   &:hover {
     color: red;

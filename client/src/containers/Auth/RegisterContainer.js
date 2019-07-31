@@ -75,7 +75,7 @@ class RegisterContainer extends Component {
     handleOpenCompanySearchModal = () => {
         const { ModalActions } = this.props;
         ModalActions.show({
-            visible: 'company'
+            visible: 'company',
         })
     }
 

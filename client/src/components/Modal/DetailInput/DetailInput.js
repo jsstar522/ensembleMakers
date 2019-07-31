@@ -10,7 +10,7 @@ class DetailInput extends Component {
         <div className="detail-label">{label}</div>
         <div style={{display:'flex', flexDirection: 'row', alignItems:'center'}}>
         <input className="detail-input" {...rest}/>
-        <FaMinusCircle className="detail-delete-button" onClick={onDeleteList}/>
+        {id!==0?<div className="detail-delete-button" onClick={onDeleteList}><FaMinusCircle/></div>:<div className="detail-delete-button"/>}
         </div>
       </div>
     )

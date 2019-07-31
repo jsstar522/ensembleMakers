@@ -82,7 +82,7 @@ class ImageModalContainer extends Component {
     const { handleChange, handlePost, handleHide, handleDeleteURL, handleDeleteImg } = this;
 
     return(
-      visible === "image" &&
+      visible === 'image' &&
       <div>
         <ModalWrapper mode={visible}>
           <ImageModal 

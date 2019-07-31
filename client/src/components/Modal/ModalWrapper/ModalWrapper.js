@@ -6,11 +6,11 @@ import styled, { keyframes } from 'styled-components';
 class ModalWrapper extends Component { 
   render() {
     const { children } = this.props;
-    const { mode } = this.props;
+    const { visible } = this.props;
     return(
       <div className="modal-wrapper">
         {
-        mode && 
+        visible && 
         (<div className="modal-box">
           {children}
         </div>)

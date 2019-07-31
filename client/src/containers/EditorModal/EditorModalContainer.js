@@ -8,7 +8,7 @@ import { Dimmed } from '../../components/Modal/Dimmed';
 import * as modalActions from '../../store/modules/modal';
 import * as orderActions from '../../store/modules/order';
 import * as orderTemplateActions from '../../store/modules/orderTemplate';
-import { getOrderById } from '../../lib/api/order';
+import { stringify } from 'querystring';
 
 class EditorModalContainer extends Component {
 
@@ -66,7 +66,7 @@ class EditorModalContainer extends Component {
 
   handlePatch = async() => {
     const { OrderActions, ModalActions, OrderTemplateActions } = this.props;
-    const { loggedInfo, modalContents, orderContents, modelImage, modelImageURL } = this.props;
+    const { loggedInfo, modalContents, preModalContents, orderContents, modelImage, modelImageURL } = this.props;
     const userId = loggedInfo.get('_id');
     const id = orderContents.get('_id');
     const contents = modalContents;
@@ -81,15 +81,15 @@ class EditorModalContainer extends Component {
       // 이미지 교체
       if(modelImage !== null) {
         // 이전에 등록해놓은 모델사진이 있을 경우
-        let exImgName;
+        let preImgName;
         if(orderContents.get('modelImage') !== null) {
-          exImgName = orderContents.get('modelImage').split('/')[2];
+          preImgName = orderContents.get('modelImage').split('/')[2];
         }else {
-          exImgName = null;
+          preImgName = null;
         }
         const formData = new FormData();
         formData.append('modelImage', modelImage)
-        formData.append('exImgName', exImgName)
+        formData.append('preImgName', preImgName)
         await OrderActions.patchModelImg({
           id: id,
           formData: formData
@@ -98,10 +98,10 @@ class EditorModalContainer extends Component {
       // 이미지 삭제
       if(modelImage === null) {
         // 이전에 등록해놓은 모델사진이 있을 경우
-        const exImgName = orderContents.get('modelImage').split('/')[2];
+        const preImgName = orderContents.get('modelImage').split('/')[2];
         await OrderActions.removeModelImg({
           id: id,
-          exImgName: exImgName
+          preImgName: preImgName
         })
       }
     }
@@ -117,14 +117,18 @@ class EditorModalContainer extends Component {
     }
 
     // 현재 수정한 modal의 content list(modalContent)와 이전에 사용하던 content list(orderContent)가 다르면 템플릿 변경
-    if(orderContents.get('contents') !== contents) {
-      const templateList = [];
-      contents.get('template').map(
-        (temp) => templateList.push(temp.label)
-      )
+    let preContents = [];
+    preModalContents.toJS().template.map(
+      (list) => preContents.push(list.label)
+    )
+    let nextContents = [];
+    modalContents.toJS().template.map(
+      (list) => nextContents.push(list.label)
+    )
+    if(JSON.stringify(preContents) !== JSON.stringify(nextContents)) { 
       OrderTemplateActions.patchOrderTemplate({
         userId: userId,
-        template: templateList
+        template: nextContents
       })
     }
 
@@ -138,12 +142,12 @@ class EditorModalContainer extends Component {
   }
 
   render() {
-    const { customerById, orderContents, modalContents, visible, addMode, addContent, modelImageURL } = this.props;
+    const { customerById, orderContents, modalContents, visible, mode, addMode, addContent, modelImageURL } = this.props;
 
     const { handleChange, handleChangeModelImg, handleChangeAddInput, handleDeleteModelImg, handleChangeAddMode, handleAddList, handleDeleteList, handlePatch, handleHide } = this;
 
     return(
-      visible==="editor" &&
+      visible==='editor' && mode==='modify' &&
       <div>
         <ModalWrapper mode={visible}>
           <EditorModal
@@ -163,8 +167,7 @@ class EditorModalContainer extends Component {
           onDeleteList={handleDeleteList}
           handlePatch={handlePatch}
           handleHide={handleHide}
-          >
-          </EditorModal>
+          />
         </ModalWrapper>
         <Dimmed/>
       </div>
@@ -176,9 +179,11 @@ export default connect(
   (state) => ({
     loggedInfo: state.user.get('loggedInfo'),
     modalContents: state.modal.get('modalContents'),
+    preModalContents: state.modal.get('preModalContents'),
     orderContents: state.order.get('orderById'),
     addContent: state.modal.get('addContent'),
     visible: state.modal.get('visible'),
+    mode: state.modal.get('mode'),
     addMode: state.modal.get('addMode'),
     modelImage: state.modal.get('modelImage'),
     modelImageURL: state.modal.get('modelImageURL')

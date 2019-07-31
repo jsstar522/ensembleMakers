@@ -6,6 +6,7 @@ import post from './post';
 import customer from './customer';
 import order from './order';
 import orderTemplate from './orderTemplate';
+import model from './model';
 import modal from './modal';
 import review from './review';
 import search from './search';
@@ -20,6 +21,7 @@ export default combineReducers({
     customer,
     order,
     orderTemplate,
+    model,
     modal,
     review,
     search,

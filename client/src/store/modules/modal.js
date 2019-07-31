@@ -41,12 +41,15 @@ export const deleteModelImgURL = createAction(DELETE_MODEL_IMG_URL);
 export const initModelImgURL = createAction(INIT_MODEL_IMG_URL);
 
 const initialState = Map({
-  // visible = image, editor, company
+  // visible = image, editor, company, model
   visible: false,
+  // only use at editor and model (modify, create)
+  mode: '',
   // add list
   addMode: false,
   addContent: null,
   modalContents: Map({}),
+  preModalContents: Map({}),
   images: List([]),
   imageURLs: List([]),
   modelImage: null,
@@ -56,12 +59,15 @@ const initialState = Map({
 export default handleActions({
   [SHOW]: (state, action) => {
     return state.set('visible', action.payload.visible)
+                .set('mode', action.payload.mode)
                 .set('modalContents', Map(action.payload.modalContents))
+                .set('preModalContents', Map(action.payload.preModalContents))
                 .set('modelImage', action.payload.modelImage)
                 .set('modelImageURL', action.payload.modelImage)
   },
   [HIDE]: (state, action) => {
     return state.set('visible', false)
+                .set('mode', '')
                 // 초기화
                 .set('modalContents', Map({}))
   },

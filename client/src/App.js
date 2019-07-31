@@ -15,11 +15,10 @@ class App extends Component {
     // 로그인 세션 종료
     initializeUserInfo = async () => {
         const loggedInfo = storage.get('loggedInfo');
-        // console.log(storage.get('loggedInfo'));
         if(!loggedInfo) return;
         
         const { UserActions } = this.props;
-        UserActions.setLoggedInfo(loggedInfo);
+        await UserActions.setLoggedInfo(loggedInfo);
         try{
             await UserActions.checkStatus();
         }catch(e){
@@ -56,7 +55,9 @@ class App extends Component {
 }
 
 export default connect(
-    null,
+    (state) => ({
+        loggedInfo: state.user.get('loggedInfo')
+    }),
     (dispatch) => ({
         UserActions: bindActionCreators(userActions, dispatch)
     })
