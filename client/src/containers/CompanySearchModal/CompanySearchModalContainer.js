@@ -48,7 +48,7 @@ class CompanySearchModalContainer extends Component {
     return (
       visible==="company" && 
       <div>
-        <ModalWrapper mode={visible}>
+        <ModalWrapper visible={visible}>
           <CompanySearchModal
             keyword={keyword}
             searchList={searchList}

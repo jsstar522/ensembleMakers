@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { ModelListItem } from '../ModelListItem';
+import { FaPlus } from 'react-icons/fa';
 import './ModelList.scss';
 
 class ModelList extends Component {
   render() {
-    const { allModels } = this.props;
+    const { userNumber, allModels } = this.props;
     const { onOpenModelModal } = this.props;
   
     const modelList = allModels.map(
@@ -12,14 +13,16 @@ class ModelList extends Component {
         <ModelListItem 
           key={i}
           id={i}
+          userNumber={userNumber}
           modelName={modelListItem.contents.template[0].value}
+          modelImage={modelListItem.modelImage}
           onOpenModelModal={onOpenModelModal}
         />
     )
     return(
       <div className="model-list-wrapper">
         {modelList}
-        <div className="model-list-add-button" onClick={onOpenModelModal['create']}>추가</div>
+        <div className="model-list-add-button" onClick={onOpenModelModal['create']}><FaPlus/></div>
       </div>
     )
   }

@@ -49,7 +49,8 @@ class ModelManageContainer extends Component {
         mode: 'modify',
         modalContents: allModels.toJS()[id].contents,
         preModalContents: allModels.toJS()[id].contents,
-        modelImage: allModels.toJS()[id].modelImage
+        modelImage: allModels.toJS()[id].modelImage,
+        preModelImage: allModels.toJS()[id].modelImage
       })
       
       await ModelActions.setModelById(allModels.toJS()[id])
@@ -57,15 +58,16 @@ class ModelManageContainer extends Component {
   }
 
   render() {
+    const userNumber = this.props.loggedInfo.get('userNumber')
     const { allModels } = this.props;
     const { handleOpenModelModal } = this;
-    
     return(
         <ModelManageWrapper>
           <ModelManageBanner>
             <SearchBar/>
           </ModelManageBanner>
           <ModelList 
+            userNumber={userNumber}
             allModels={allModels}
             onOpenModelModal={handleOpenModelModal}
           />

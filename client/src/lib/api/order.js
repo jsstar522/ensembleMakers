@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getAllOrder = () => axios.get('/api/orders');
 export const getOrderById = (id) => axios.get('/api/orders/'+id);
 export const getOrderByNum = (id) => axios.get('/api/orders/byNum/'+id);
-export const postOrder = ({customerId, contents}) => axios.post('/api/orders', {customerId, contents});
+export const postOrder = ({customerId, contents, modelImage}) => axios.post('/api/orders', {customerId, contents, modelImage});
 export const patchOrder = ({id, contents}) => axios.patch('/api/orders/'+id, contents);
 export const patchImg = ({id, formData}) => axios.patch('/api/orders/img/'+id, formData);
 export const removeImg = ({id, imgName}) => axios.delete('/api/orders/img/'+id, { data: { imgName: imgName }});

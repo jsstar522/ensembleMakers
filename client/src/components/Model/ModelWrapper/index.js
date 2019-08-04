@@ -1,0 +1,1 @@
+export { default as ModelWrapper } from './ModelWrapper';

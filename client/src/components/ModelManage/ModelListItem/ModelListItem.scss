@@ -19,7 +19,7 @@
     padding-right: 5px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     width: 25%;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -48,22 +48,16 @@
     width: 210px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     width: 206px;
   }
   // wide
   @media screen and (min-width: 1440px) {
     width: 254px;
   }
-
-  &:hover {
-    border: 2px solid red;
-  }
-
-  cursor: pointer;
 }
 
-.model-list-img {
+.model-list-item-img {
   width: 100%;
   @media screen and (min-width: 320px) {
     height: 106.5px;
@@ -73,7 +67,7 @@
     height: 157.5px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     height: 154.5px;
   }
   // wide
@@ -82,7 +76,7 @@
   }
 }
 
-.model-list-model-name {
+.model-list-item-model-name {
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -100,7 +94,7 @@
     font-size: 20px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     height: 40px;
     font-size: 22px;
   }
@@ -110,28 +104,71 @@
     font-size: 25px;
   }
 }
-.model-list-model-content {
+.model-list-item-model-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding-bottom: 5px;
   padding-left: 7px;
   padding-right: 7px;
   @media screen and (min-width: 320px) {
-    height: 40px;
     font-size: 15px;
   }
   // tablet
   @media screen and (min-width: 768px) {
-    height: 40px;
     font-size: 15px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
-    height: 40px;
+  @media screen and (min-width: 1024px) {
     font-size: 18px;
   }
   // wide
   @media screen and (min-width: 1440px) {
-    height: 40px;
     font-size: 20px;
   }
+}
+
+.model-list-item-modify-button {
+  width: 48%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 2px solid #484848;;
+  color: #484848;
+  cursor: pointer;
+  &:hover{
+    background-color: #484848;
+    color: white;
+  }
+}
+
+.model-list-item-delete-button {
+  width: 48%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 2px solid #484848;;
+  color: #484848;
+  cursor: pointer;
+  &:hover{
+    background-color: #484848;
+    color: white;
+  }
+}
+
+.model-list-item-post-button {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+  text-align: center;
+  border: 2px solid #484848;;
+  color: #484848;
+  cursor: pointer;
+  &:hover{
+    background-color: #484848;
+    color: white;
+  }
+  text-decoration: none;
 }

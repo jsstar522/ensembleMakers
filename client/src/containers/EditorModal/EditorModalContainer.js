@@ -149,7 +149,7 @@ class EditorModalContainer extends Component {
     return(
       visible==='editor' && mode==='modify' &&
       <div>
-        <ModalWrapper mode={visible}>
+        <ModalWrapper visible={visible}>
           <EditorModal
           addMode={addMode}
           addContent={addContent}

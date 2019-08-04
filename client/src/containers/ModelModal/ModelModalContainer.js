@@ -96,53 +96,69 @@ class ModelModalContainer extends Component {
 
   handlePatch = async() => {
     const { ModelActions, ModalActions, OrderTemplateActions } = this.props;
-    const { loggedInfo, modelById, modalContents, orderContents, modelImage, modelImageURL } = this.props;
+    const { loggedInfo, modelById, preModalContents, modalContents, preModelImage, modelImage, modelImageURL } = this.props;
 
     await ModelActions.patchModel({
       id: modelById.get('_id'),
       contents: modalContents
     })
 
-    // // modelImage 변경
-    // if(modelImage !== orderContents.get('modelImage'))
-    // {
-    //   // 이미지 교체
-    //   if(modelImage !== null) {
-    //     // 이전에 등록해놓은 모델사진이 있을 경우
-    //     let exImgName;
-    //     if(orderContents.get('modelImage') !== null) {
-    //       exImgName = orderContents.get('modelImage').split('/')[2];
-    //     }else {
-    //       exImgName = null;
-    //     }
-    //     const formData = new FormData();
-    //     formData.append('modelImage', modelImage)
-    //     formData.append('exImgName', exImgName)
-    //     await OrderActions.patchModelImg({
-    //       id: id,
-    //       formData: formData
-    //     })
-    //   }
-    //   // 이미지 삭제
-    //   if(modelImage === null) {
-    //     // 이전에 등록해놓은 모델사진이 있을 경우
-    //     const exImgName = orderContents.get('modelImage').split('/')[2];
-    //     await OrderActions.removeModelImg({
-    //       id: id,
-    //       exImgName: exImgName
-    //     })
-    //   }
-    // }
+    // modelImage 변경
+    if(modelImage !== preModelImage)
+    {
+      // 이미지 교체
+      if(modelImage !== null) {
+        // 이전에 등록해놓은 모델사진이 있을 경우
+        let preImgName;
+        if(preModelImage !== null) {
+          preImgName = preModelImage.split('/')[2];
+        }else {
+          preImgName = null;
+        }
+        const formData = new FormData();
+        formData.append('modelImage', modelImage)
+        formData.append('preImgName', preImgName)
+        await ModelActions.patchModelImg({
+          id: modelById.get('_id'),
+          formData: formData
+        })
+      }
+      // 이미지 삭제
+      if(modelImage === null) {
+        // 이전에 등록해놓은 모델사진이 있을 경우
+        const preImgName = preModelImage.split('/')[2];
+        await ModelActions.removeModelImg({
+          id: modelById.get('_id'),
+          preImgName: preImgName
+        })
+      }
+    }
 
-    // // modelImage 삭제시
-    // if(modelImage === null && modelImage !== orderContents.get('modelImage'))
-    // {
-    //   const imgName = orderContents.get('modelImage').split('/')[2]
-    //   await OrderActions.removeModelImg({
-    //     id: id,
-    //     imgName: imgName
-    //   })
-    // }
+    // modelImage 삭제시
+    if(modelImage === null && modelImage !== preModelImage)
+    {
+      const imgName = preModelImage.split('/')[2]
+      await ModelActions.removeModelImg({
+        id: modelById.get('_id'),
+        imgName: imgName
+      })
+    }
+
+    // 현재 수정한 modal의 content list(modalContent)와 이전에 사용하던 content list(orderContent)가 다르면 템플릿 변경
+    let preContents = [];
+    preModalContents.toJS().template.map(
+      (list) => preContents.push(list.label)
+    )
+    let nextContents = [];
+    modalContents.toJS().template.map(
+      (list) => nextContents.push(list.label)
+    )
+    if(JSON.stringify(preContents) !== JSON.stringify(nextContents)) { 
+      OrderTemplateActions.patchOrderTemplate({
+        userId: loggedInfo.get('_id'),
+        template: nextContents
+      })
+    }
 
     this.handleHide();
   }
@@ -202,6 +218,7 @@ export default connect(
     mode: state.modal.get('mode'),
     addMode: state.modal.get('addMode'),
     modelImage: state.modal.get('modelImage'),
+    preModelImage: state.modal.get('preModelImage'),
     modelImageURL: state.modal.get('modelImageURL')
   }),
   (dispatch) => ({

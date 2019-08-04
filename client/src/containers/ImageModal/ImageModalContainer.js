@@ -84,7 +84,7 @@ class ImageModalContainer extends Component {
     return(
       visible === 'image' &&
       <div>
-        <ModalWrapper mode={visible}>
+        <ModalWrapper visible={visible}>
           <ImageModal 
             images={orderById.get('images')}
             imageURLs={imageURLs}

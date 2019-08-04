@@ -11,7 +11,7 @@
     padding: 50px;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     padding: 50px;
   }
   // wide
@@ -22,8 +22,21 @@
 
 .model-list-add-button {
   position: fixed;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: inherit; 
+  text-align: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #fa6e57;
+  color: white;
   bottom: 30px;
   right: 30px;
   cursor: pointer;
+  &:hover {
+    background-color: #e24b34;
+  }
 }

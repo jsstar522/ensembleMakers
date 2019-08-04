@@ -35,7 +35,7 @@ class ModelModal extends Component {
           onClick={handleHide}
         ><FaTimes/>
         </div>
-        <div>모델 등록하기</div>
+        <div className="model-modal-header">모델 등록하기</div>
         <div className="model-modal-line"/>
         <div style={{marginTop: '10px', textAlign: 'left', fontSize: '18px', color: '#767676', marginBottom: '10px', fontWeight: '600'}}>모델 이미지</div>
         <div className="model-modal-image-wrapper">

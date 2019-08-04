@@ -53,6 +53,7 @@ const initialState = Map({
   images: List([]),
   imageURLs: List([]),
   modelImage: null,
+  preModelImage: null,
   modelImageURL: null,
 });
 
@@ -63,6 +64,7 @@ export default handleActions({
                 .set('modalContents', Map(action.payload.modalContents))
                 .set('preModalContents', Map(action.payload.preModalContents))
                 .set('modelImage', action.payload.modelImage)
+                .set('preModelImage', action.payload.modelImage)
                 .set('modelImageURL', action.payload.modelImage)
   },
   [HIDE]: (state, action) => {

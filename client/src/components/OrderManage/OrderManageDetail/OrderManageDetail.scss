@@ -27,7 +27,7 @@
     flex-direction: row;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     width: 668.5px;
     display: flex;
     flex-direction: row;
@@ -83,7 +83,7 @@
     text-align: right;
   }
   // desktop
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1024px) {
     margin-top: -19px;
     text-align: right;
   }
