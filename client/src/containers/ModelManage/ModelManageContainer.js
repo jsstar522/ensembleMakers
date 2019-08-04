@@ -57,10 +57,19 @@ class ModelManageContainer extends Component {
     } 
   }
 
+  handleDelete = async(id, modelImage, index) => {
+    const { ModelActions } = this.props;
+    ModelActions.deleteModel({
+      id: id,
+      modelImage: modelImage,
+      index: index
+    })
+  }
+
   render() {
     const userNumber = this.props.loggedInfo.get('userNumber')
     const { allModels } = this.props;
-    const { handleOpenModelModal } = this;
+    const { handleOpenModelModal, handleDelete } = this;
     return(
         <ModelManageWrapper>
           <ModelManageBanner>
@@ -70,6 +79,7 @@ class ModelManageContainer extends Component {
             userNumber={userNumber}
             allModels={allModels}
             onOpenModelModal={handleOpenModelModal}
+            handleDelete={handleDelete}
           />
         </ModelManageWrapper>
     )

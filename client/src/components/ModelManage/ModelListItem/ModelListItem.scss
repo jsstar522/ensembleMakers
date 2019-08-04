@@ -83,6 +83,7 @@
   padding-left: 7px;
   padding-right: 7px;
   color: #484848;
+  text-align: center;
   font-weight: 600;
   @media screen and (min-width: 320px) {
     height: 40px;
@@ -134,7 +135,8 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
-  border: 2px solid #484848;;
+  border: 1px solid #484848;
+  border-radius: 2px;
   color: #484848;
   cursor: pointer;
   &:hover{
@@ -148,7 +150,8 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
-  border: 2px solid #484848;;
+  border: 1px solid #484848;
+  border-radius: 2px;
   color: #484848;
   cursor: pointer;
   &:hover{
@@ -163,7 +166,8 @@
   line-height: 30px;
   margin-top: 5px;
   text-align: center;
-  border: 2px solid #484848;;
+  border: 1px solid #484848;
+  border-radius: 2px;
   color: #484848;
   cursor: pointer;
   &:hover{

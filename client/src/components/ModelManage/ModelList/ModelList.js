@@ -6,17 +6,19 @@ import './ModelList.scss';
 class ModelList extends Component {
   render() {
     const { userNumber, allModels } = this.props;
-    const { onOpenModelModal } = this.props;
+    const { onOpenModelModal, handleDelete } = this.props;
   
     const modelList = allModels.map(
       (modelListItem, i) =>
         <ModelListItem 
           key={i}
           id={i}
+          modelId={modelListItem._id}
           userNumber={userNumber}
           modelName={modelListItem.contents.template[0].value}
           modelImage={modelListItem.modelImage}
           onOpenModelModal={onOpenModelModal}
+          handleDelete={handleDelete}
         />
     )
     return(

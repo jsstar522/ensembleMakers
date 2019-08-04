@@ -11,20 +11,20 @@ const LinkButtonWrapper = styled.div`
   margin-top: 35vh;
 
   @media ${device.phone} { 
-    width: 86%;
-    height: 20vh;
+    width: 90%;
+    height: 120px;
   }
   @media ${device.tablet} { 
     width: 75%;
-    height: 25vh;
+    height: 180px;
   }
   @media ${device.desktop} { 
     width: 60%;
-    height: 25vh;
+    height: 200px;
   }
   @media ${device.wide} { 
     width: 60%;
-    height: 35vh;
+    height: 300px;
   }
 
 `;
@@ -51,28 +51,32 @@ const BorderedButton = styled.a`
 }
 
   @media ${device.phone} { 
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
     width: 42%;
+    margin: 10px;
   }
   @media ${device.tablet} { 
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 2px;
     width: 40%;
+    margin: 20px;
   }
   @media ${device.desktop} { 
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 2px;
     width: 35%;
+    margin: 30px;
   }
   @media ${device.wide} { 
     font-size: 25px;
     font-weight: 800;
     letter-spacing: 2px;
     width: 35%;
+    margin: 50px;
   }
 `;
 
@@ -82,6 +86,8 @@ class LinkButton extends Component {
     return(
       <LinkButtonWrapper>
         <BorderedButton href={logged?"/customerInfo/"+userNumber:"/login/signin"} color="#f69e53">주문받기
+        </BorderedButton>
+        <BorderedButton href={logged?"/modelManage":"/login/signin"} color="#fa6e57">모델관리
         </BorderedButton>
         <BorderedButton href={logged?"/orderManage":"/login/signin"} color="#4695D6">주문관리
         </BorderedButton>

@@ -6,7 +6,7 @@ class ModelBanner extends Component {
     const { children } = this.props;
     return(
       <div className="model-banner-wrapper">
-        <div className="model-banner-header">모델과 함께 주문하기</div>
+        <div className="model-banner-header">다음 모델로 주문하기</div>
         {children}
       </div>
     )

@@ -12,6 +12,7 @@ const GET_MODELS_BY_MAKER_ID = 'model/GET_MODELS_BY_MAKER_ID';
 const GET_MODEL_BY_MODEL_NAME = 'model/GET_MODEL_BY_MODEL_NAME';
 const POST_MODEL = 'model/POST_MODEL';
 const PATCH_MODEL = 'model/PATCH_MODEL';
+const DELETE_MODEL = 'model/DELETE_MODEL';
 const PATCH_MODEL_IMG = 'model/PATCH_MODEL_IMG';
 const REMOVE_MODEL_IMG = 'model/REMOVE_MODEL_IMG';
 
@@ -23,6 +24,7 @@ export const getModelsByMakerId = createAction(GET_MODELS_BY_MAKER_ID, ModelAPI.
 export const getModelByModelName = createAction(GET_MODEL_BY_MODEL_NAME, ModelAPI.getModelByModelName);
 export const postModel = createAction(POST_MODEL, ModelAPI.postModel);
 export const patchModel = createAction(PATCH_MODEL, ModelAPI.patchModel);
+export const deleteModel = createAction(DELETE_MODEL, ModelAPI.deleteModel);
 export const patchModelImg = createAction(PATCH_MODEL_IMG, ModelAPI.patchModelImg);
 export const removeModelImg = createAction(REMOVE_MODEL_IMG, ModelAPI.removeModelImg);
 
@@ -86,9 +88,17 @@ export default handleActions({
     }
   }),
   ...pender({
-    type: PATCH_MODEL_IMG,
+    type: DELETE_MODEL,
     onSuccess: (state, action) => {
       let models = state.get('allModels')
+      const newModels = models.delete(action.payload.data)
+      return state.set('allModels', newModels)
+    }
+  }),
+  ...pender({
+    type: PATCH_MODEL_IMG,
+    onSuccess: (state, action) => {
+      let models = state.get('allModels');
       let newModels = [];
       models.map(model => {
         if(model._id === action.payload.data.id) {
