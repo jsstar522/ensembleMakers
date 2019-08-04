@@ -73,6 +73,17 @@ router.patch('/:id', async(req, res, next) => {
   await res.send({id: req.params.id, contents: req.body});
 })
 
+router.delete('/:id', async(req, res, next) => {
+  fs.unlink(`uploads/${req.body.modelImage}`, async(err) => {
+    // db내용 삭제
+    const model = await Model.deleteOne({
+      "_id": req.params.id
+    })
+  })
+  const deletedIndex = await req.body.index
+  await res.send(JSON.stringify(deletedIndex))
+})
+
 // post model image
 router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
   // 이전에 있던 이미지 삭제
