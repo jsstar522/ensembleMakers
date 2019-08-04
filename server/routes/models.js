@@ -19,6 +19,15 @@ router.get('/byId/:id', async(req, res, next) => {
   res.send(models);
 });
 
+// get model by modelName
+router.get('/byName/:name', async(req, res, next) => {
+  const models = await Model.find({
+    "contents.template": { $elemMatch: { "label": "모델", "value": req.params.name}}
+  });
+  // res.send(models);
+  res.send(models[0])
+});
+
 // image content patch
 fs.readdir('uploads', (error) => {
   // uploads 폴더 생성
@@ -62,6 +71,38 @@ router.patch('/:id', async(req, res, next) => {
   model.contents = req.body;
   await model.save();
   await res.send({id: req.params.id, contents: req.body});
+})
+
+// post model image
+router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
+  // 이전에 있던 이미지 삭제
+  fs.unlink(`uploads/${req.body.preImgName}`, async(err) =>{
+    // 새로운 이미지 db 등록
+    const model = await Model.findByIdAndUpdate(
+      req.params.id,
+      {
+        "modelImage": `/img/${req.file.filename}`
+      },
+      { new: true }
+    )
+    await res.send({ id: req.params.id, imgName: `/img/${req.file.filename}`});
+  })
+})
+
+// delete model image
+router.delete('/modelImg/:id', async(req, res) => {
+  // uploads/파일 삭제
+  fs.unlink(`uploads/${req.body.preImgName}`, async(err) => {
+    // db내용 삭제
+    const model = await Model.findByIdAndUpdate(
+      req.params.id,
+      {
+        "modelImage": null
+      },
+      { new : true }
+    )
+    await res.send({ id: req.params.id, imgName: null});
+  })
 })
 
 module.exports = router;

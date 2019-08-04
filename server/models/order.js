@@ -97,7 +97,8 @@ function validateOrder(order) {
     material: Joi.string(),
     innerMaterial: Joi.string(),
     color: Joi.string(),
-    detail: Joi.string()
+    detail: Joi.string(),
+    modelImage: Joi.string(),
   }
   return Joi.validate(order, schema);
 }
