@@ -19,7 +19,7 @@ const LinkButtonWrapper = styled.div`
     height: 180px;
   }
   @media ${device.desktop} { 
-    width: 60%;
+    width: 75%;
     height: 200px;
   }
   @media ${device.wide} { 
@@ -68,7 +68,7 @@ const BorderedButton = styled.a`
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 2px;
-    width: 35%;
+    width: 50%;
     margin: 30px;
   }
   @media ${device.wide} { 

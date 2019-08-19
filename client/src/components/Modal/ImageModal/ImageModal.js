@@ -29,7 +29,7 @@ class ImageModal extends Component {
         .map((image, i) => {
           return(
           <div key={i} className="image-list-item">
-            <img src={`http://localhost:5000`+image}/>
+            <img src={image}/>
             <div className="image-remove-button" onClick={() => {onDeleteImg(i)}}><FaTimes/></div>
           </div>
           )

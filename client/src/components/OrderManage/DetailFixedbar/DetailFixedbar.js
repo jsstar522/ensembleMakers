@@ -5,7 +5,7 @@ import { Print } from '../Print';
 import './DetailFixedbar.scss';
 
 import styled from 'styled-components';
-import MdPrint from 'react-ionicons/lib/MdPrint';
+import { FaPrint } from 'react-icons/fa';
 
 const StateButton = styled.div`
   border: 2px solid ${props => 
@@ -69,7 +69,7 @@ class DetailFixedbar extends Component {
                   </div>
                   <div className="print-button">
                     <ReactToPrint
-                      trigger={() => <div><MdPrint/>인쇄하기</div>}
+                      trigger={() => <div><FaPrint/> 인쇄하기</div>}
                       content={() => this.componentRef}
                     />
                     <Print 
