@@ -30,9 +30,25 @@ router.get('/byNum/:id', async(req, res, next) => {
 router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.message);
-  let order = new Order(req.body);
+  let newOrder = req.body;
+
+  // if order by model manager
+  // copy model image
+  if(req.body.modelImage) {
+    // new model image name
+    const ext = path.extname(req.body.modelImage);
+    const newModelImage = path.basename(req.body.modelImage, ext) + '_copied_' + new Date().valueOf() + ext;
+
+    await fs.copyFile(`uploads/${req.body.modelImage.split('/')[2]}`, `uploads/${newModelImage}`,(err) => {
+      if (err) throw err;
+    })
+
+    newOrder.modelImage = `/img/${newModelImage}`;
+  }
+
+  let order = new Order(newOrder);
   order = await order.save();
-  res.send(order);
+  await res.send(order);
 })
 
 // input order contents (by patch)
@@ -41,6 +57,12 @@ router.patch('/:id', async(req, res, next) => {
   order.contents = req.body;
   await order.save();
   await res.send(req.body);
+})
+
+// delete order
+router.delete('/:id', async(req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  // image 삭제
 })
 
 // patch processing date
