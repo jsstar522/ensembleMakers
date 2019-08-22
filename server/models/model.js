@@ -16,7 +16,6 @@ const modelSchema = new Schema({
     type: Object,
   },
 }, {
-  // orderDate는 customerInfo 생성일로 해야함
   timestramps: true
 });
 

@@ -15,14 +15,20 @@ router.get('/', async(req, res, next) => {
 
 // get order by id
 router.get('/:id', async(req, res, next) => {
-  // customerId로 조회
-  let order = await Order.findOne({"customerId": req.params.id}).populate('customerId');
+  let order = await Order.findOne({"_id": req.params.id});
   res.send(order);
 })
 
 // get order by orderNumber
 router.get('/byNum/:id', async(req, res, next) => {
-  let order = await Order.findOne({"orderNumber": req.params.id}).populate('customerId');
+  let order = await Order.findOne({"orderNumber": req.params.id})
+  res.send(order);
+})
+
+// get orders by by makerId
+router.get('/byMakerId/:id', async(req, res, next) => {
+  // customerInfo, state, _id만 반환
+  let order = await Order.find({"makerId": req.params.id},{customerInfo: true, state: true, _id: true});
   res.send(order);
 })
 
@@ -31,7 +37,6 @@ router.post('/', async(req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.message);
   let newOrder = req.body;
-
   // if order by model manager
   // copy model image
   if(req.body.modelImage) {
@@ -59,10 +64,16 @@ router.patch('/:id', async(req, res, next) => {
   await res.send(req.body);
 })
 
-// delete order
+// delete order by id
 router.delete('/:id', async(req, res, next) => {
-  const order = await Order.findById(req.params.id);
   // image 삭제
+  fs.unlink(`uploads/${req.body.modelImage}`, async(err) => {
+    const order = await Order.deleteOne({
+      "_id": req.params.id
+    })
+  })
+  const deleteIndex = await req.body.index
+  await res.send(JSON.stringify(deleteIndex))
 })
 
 // patch processing date
@@ -84,6 +95,16 @@ router.delete('/processingDate/:id/:processing', async(req, res, next) => {
     { $unset : obj }
   );
   await res.send(processing);
+})
+
+// change state
+router.patch('/changeState/:id', async(req, res, next) => {
+  const order = await Order.findByIdAndUpdate(
+    req.params.id,
+    // {"state": "proceessing"} or {"state": "ordered"}...
+    req.body
+  );
+  await res.send(req.body);
 })
 
 // change processing state

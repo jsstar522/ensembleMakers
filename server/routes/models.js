@@ -87,7 +87,7 @@ router.delete('/:id', async(req, res, next) => {
 // post model image
 router.patch('/modelImg/:id', upload.single('modelImage'), async(req, res) => {
   // 이전에 있던 이미지 삭제
-  fs.unlink(`uploads/${req.body.preImgName}`, async(err) =>{
+  fs.unlink(`uploads/${req.body.preImgName}`, async(err) => {
     // 새로운 이미지 db 등록
     const model = await Model.findByIdAndUpdate(
       req.params.id,

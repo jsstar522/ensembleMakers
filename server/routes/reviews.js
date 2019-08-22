@@ -7,19 +7,12 @@ const router = express.Router();
 
 // get review by id
 router.get('/:id', async(req, res, next) => {
-  let review = await Review.findOne({"orderNumber": req.params.id}).populate('customerId');
+  let review = await Review.findOne({"orderId": req.params.id})
 
   // Error::Cannot set headers after they are sent to the client 뜸 (false 뱉을때)
-  if(!review) res.send(false);
+  // if(!review) res.send(false);
   res.send(review);
 });
-
-// get review by customerId
-router.get('/customer/:id', async(req, res, next) => {
-  let review = await Review.findOne({"customerId": req.params.id}).populate('customerId');
-  if(!review) res.send(false);
-  res.send(review);
-})
 
 // create review
 router.post('/', async (req, res) => {
@@ -32,7 +25,7 @@ router.post('/', async (req, res) => {
 
 // patch review
 router.patch('/:id', async(req, res, next) => {
-  let review = await Review.findOne({"orderNumber": req.params.id});
+  let review = await Review.findOne({"orderId": req.params.id});
   review["rating"] = req.body.rating;
   review["content"] = req.body.content;
   review.save();

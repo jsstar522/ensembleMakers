@@ -4,13 +4,25 @@ const { Schema } = mongoose;
 const Joi = require('joi');
 
 const orderSchema = new Schema({
-  customerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "Customer"
+  customerInfo: {
+    name: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String,
+      required: true
+    },
+    address: {
+      type: String
+    }
   },
   orderNumber: {
     type: Number,
+    required: true,
+  },
+  makerId: {
+    type: String,
     required: true,
   },
   contents: {
@@ -51,10 +63,14 @@ const orderSchema = new Schema({
   },
   review: {
     type: String,
+  },
+  // 주문상태
+  state: {
+    type: String,
+    default: "ordered"
   }
 }, {
-  // orderDate는 customerInfo 생성일로 해야함
-  timestramps: true
+  timestamps: true
 });
 
 // 주문번호 생성
@@ -71,13 +87,12 @@ const Order = mongoose.model('Order', orderSchema);
 
 function validateOrder(order) {
   const schema = {
-    customerId: Joi.string().required(),
-    contents: Joi.array().items(
-      Joi.object().keys({
-        "label": Joi.string(),
-        "value": Joi.any()
-      })
-    ),
+    customerInfo: {
+      name: Joi.string().required(),
+      phone: Joi.string().required(),
+      address: Joi.string()
+    },
+    makerId: Joi.string().required(),
     contents: { 
       template: Joi.array().items(
         Joi.object().keys({
@@ -85,18 +100,18 @@ function validateOrder(order) {
           "value": Joi.any()
         }))
     },
-    model: Joi.string(),
-    rightSize: Joi.string(),
-    leftSize: Joi.string(),
-    last: Joi.string(),
-    sole: Joi.string(),
-    midsole: Joi.string(),
-    sockLining: Joi.string(),
-    heel: Joi.string(),
-    decoration: Joi.string(),
-    material: Joi.string(),
-    innerMaterial: Joi.string(),
-    color: Joi.string(),
+    // model: Joi.string(),
+    // rightSize: Joi.string(),
+    // leftSize: Joi.string(),
+    // last: Joi.string(),
+    // sole: Joi.string(),
+    // midsole: Joi.string(),
+    // sockLining: Joi.string(),
+    // heel: Joi.string(),
+    // decoration: Joi.string(),
+    // material: Joi.string(),
+    // innerMaterial: Joi.string(),
+    // color: Joi.string(),
     detail: Joi.string(),
     modelImage: Joi.string(),
   }
