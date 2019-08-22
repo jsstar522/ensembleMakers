@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 class ModelModal extends Component {
   render() {
-    const { mode, addMode, addContent, name, state, detail, contents, modelImageURL } = this.props;
+    const { mode, addMode, addContent, detail, contents, modelImageURL } = this.props;
     const { onChange, onChangeModelImg, onDeleteModelImg, onChangeAddMode, onChangeAddInput, onAddList, onDeleteList } = this.props;
     const { handlePost, handlePatch, handleHide } = this.props;
 

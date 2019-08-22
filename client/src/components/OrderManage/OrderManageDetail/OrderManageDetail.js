@@ -36,7 +36,8 @@ class OrderManageDetail extends Component {
   render() {
     const { imgTextView, detailView, review } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
-    const { onChangeState, onDetailViewChange, onChangeImgText, onOpenEditorModal, onOpenImageModal, onPatchProcessingNext, onPatchProcessingPre } = this.props;
+    const { id , orderNumber, name, date, phone, address, state, contents, detail, images, modelImage } = this.props;
+    const { handleChangeState, handleChangeImgText, handleOpenEditorModal, handleOpenImageModal, handlePatchProcessingNext, handlePatchProcessingPre, handleDeleteOrder } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
     : state=="processing" ? "제작중" 
@@ -59,8 +60,8 @@ class OrderManageDetail extends Component {
               upperComplete={upperComplete}
               soleComplete={soleComplete}
               processingState={processingState}
-              onPatchProcessingNext={onPatchProcessingNext}
-              onPatchProcessingPre={onPatchProcessingPre}/>}
+              handlePatchProcessingNext={handlePatchProcessingNext}
+              handlePatchProcessingPre={handlePatchProcessingPre}/>}
             {state == "finished" && <FinishedTable
               lastComplete={lastComplete}
               cutComplete={cutComplete}
@@ -73,8 +74,6 @@ class OrderManageDetail extends Component {
                 detail={detail}
                 images={images}
                 imgTextView={imgTextView}
-                onChangeImgText={onChangeImgText}
-                onOpenImageModal={onOpenImageModal}
               />
               <DetailFixedbar
                 state={state}
@@ -84,26 +83,15 @@ class OrderManageDetail extends Component {
                 address={address}
                 date={date}
                 contents={contents}
-                // model={model}
-                // rightSize={rightSize}
-                // leftSize={leftSize}
-                // last={last}
-                // sole={sole}
-                // midsole={midsole}
-                // sockLining={sockLining}
-                // heel={heel}
-                // decoration={decoration}
-                // material={material}
-                // innerMaterial={innerMaterial}
-                // color={color}
                 detail={detail}
                 images={images}
                 modelImage={modelImage}
                 imgTextView={imgTextView}
-                onOpenEditorModal={onOpenEditorModal}
-                onOpenImageModal={onOpenImageModal}
-                onChangeState={onChangeState}
-                onChangeImgText={onChangeImgText}
+                handleOpenEditorModal={handleOpenEditorModal}
+                handleOpenImageModal={handleOpenImageModal}
+                handleChangeState={handleChangeState}
+                handleChangeImgText={handleChangeImgText}
+                handleDeleteOrder={handleDeleteOrder}
               />
             </div>
             { // state가 finished일 때, 리뷰창 보이기

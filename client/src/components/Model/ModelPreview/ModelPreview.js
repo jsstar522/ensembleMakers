@@ -31,7 +31,6 @@ class ModelPreview extends Component {
               </div>
             )
           }
-
         }
       )
     }
@@ -51,7 +50,7 @@ class ModelPreview extends Component {
             <div className="label">이름</div>
             <input
               name="name"
-              value={postForm.toJS().customerInfo.name}
+              value={postForm.getIn(['customerInfo', 'name'])}
               onChange={handleChangeInfoInput}
             />
           </div>
@@ -59,7 +58,7 @@ class ModelPreview extends Component {
             <div className="label">전화번호</div>
             <input
               name="phone"
-              value={postForm.toJS().customerInfo.phone}
+              value={postForm.getIn(['customerInfo', 'phone'])}
               onChange={handleChangeInfoInput}
             />
           </div>
@@ -67,7 +66,7 @@ class ModelPreview extends Component {
             <div className="label">주소</div>
             <input
               name="address"
-              value={postForm.toJS().customerInfo.address}
+              value={postForm.getIn(['customerInfo', 'address'])}
               onChange={handleChangeInfoInput}
             />
           </div>

@@ -171,7 +171,7 @@ class ModelModalContainer extends Component {
   }
 
   render() {
-    const { customerById, orderContents, modalContents, visible, mode, addMode, addContent, modelImageURL } = this.props;
+    const { orderContents, modalContents, visible, mode, addMode, addContent, modelImageURL } = this.props;
 
     const { handleChange, handleChangeModelImg, handleChangeAddInput, handleDeleteModelImg, handleChangeAddMode, handleAddList, handleDeleteList, handlePost, handlePatch, handleHide } = this;
 
@@ -183,8 +183,6 @@ class ModelModalContainer extends Component {
             mode={mode}
             addMode={addMode}
             addContent={addContent}
-            name={orderContents.getIn(['customerId', 'name'])}
-            state={orderContents.getIn(['customerId', 'state'])}
             contents={modalContents}
             detail={modalContents.toJS().detail}
             modelImageURL={modelImageURL}

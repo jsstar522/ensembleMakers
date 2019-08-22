@@ -7,7 +7,6 @@ import { ModelPreview } from '../../components/Model/ModelPreview';
 
 import * as userActions from '../../store/modules/user';
 import * as modelActions from '../../store/modules/model';
-import * as customerActions from '../../store/modules/customer';
 import * as orderActions from '../../store/modules/order';
 
 class ModelContainer extends Component {
@@ -40,7 +39,7 @@ class ModelContainer extends Component {
   }
 
   handlePost = async(e) => {
-    const { CustomerActions, OrderActions } = this.props;
+    const { OrderActions } = this.props;
     const { postForm, history } = this.props;
     const { name, phone, address } = postForm.toJS().customerInfo;
     const makerId = this.props.loadedUserInfo.get('_id');
@@ -48,12 +47,12 @@ class ModelContainer extends Component {
     const modelImage = this.props.postForm.toJS().model.modelImage;
 
     try {
-     let customerInfo = await CustomerActions.postCustomerInfo({name, phone, address, makerId});
-     const customerId = customerInfo.data._id;
-     console.log(contents)
-     await OrderActions.postOrder({customerId, contents, modelImage});
-     window.location = await '/customerInfoSuccess/';
-
+      let customerInfo = {}
+      customerInfo['name'] = name;
+      customerInfo['phone'] = phone;
+      customerInfo['address'] = address;
+      await OrderActions.postOrder({customerInfo, makerId, contents, modelImage});
+      window.location = await '/customerInfoSuccess/';
     } catch(e) {
       console.log(e);
     }
@@ -84,7 +83,6 @@ export default connect(
   (dispatch) => ({
     UserActions: bindActionCreators(userActions, dispatch),
     ModelActions: bindActionCreators(modelActions, dispatch),
-    CustomerActions: bindActionCreators(customerActions, dispatch),
     OrderActions: bindActionCreators(orderActions, dispatch)
   })
 )(ModelContainer);

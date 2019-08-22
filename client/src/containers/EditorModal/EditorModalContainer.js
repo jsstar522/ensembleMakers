@@ -142,7 +142,7 @@ class EditorModalContainer extends Component {
   }
 
   render() {
-    const { customerById, orderContents, modalContents, visible, mode, addMode, addContent, modelImageURL } = this.props;
+    const { orderContents, modalContents, visible, mode, addMode, addContent, modelImageURL } = this.props;
 
     const { handleChange, handleChangeModelImg, handleChangeAddInput, handleDeleteModelImg, handleChangeAddMode, handleAddList, handleDeleteList, handlePatch, handleHide } = this;
 
@@ -153,18 +153,18 @@ class EditorModalContainer extends Component {
           <EditorModal
           addMode={addMode}
           addContent={addContent}
-          name={orderContents.getIn(['customerId', 'name'])}
-          state={orderContents.getIn(['customerId', 'state'])}
+          name={orderContents.getIn(['customerInfo', 'name'])}
+          state={orderContents.get('state')}
           contents={modalContents}
           detail={modalContents.toJS().detail}
           modelImageURL={modelImageURL}
-          onChange={handleChange}
-          onChangeModelImg={handleChangeModelImg}
-          onDeleteModelImg={handleDeleteModelImg}
-          onChangeAddInput={handleChangeAddInput}
-          onChangeAddMode={handleChangeAddMode}
-          onAddList={handleAddList}
-          onDeleteList={handleDeleteList}
+          handleChange={handleChange}
+          handleChangeModelImg={handleChangeModelImg}
+          handleDeleteModelImg={handleDeleteModelImg}
+          handleChangeAddInput={handleChangeAddInput}
+          handleChangeAddMode={handleChangeAddMode}
+          handleAddList={handleAddList}
+          handleDeleteList={handleDeleteList}
           handlePatch={handlePatch}
           handleHide={handleHide}
           />

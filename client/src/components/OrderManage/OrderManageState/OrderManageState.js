@@ -32,22 +32,22 @@ StyledStateItem.propTypes = {
 
 class OrderManageState extends Component {
   render() {
-    const { state, onClick } = this.props;
+    const { state, handleChangeView } = this.props;
     return(
       <div className="order-manage-state">
-        <div className="state-button" onClick={() => onClick("ordered")}>
+        <div className="state-button" onClick={() => handleChangeView("ordered")}>
           <StyledStateItem
             state={state==="ordered"}
           >주문완료
           </StyledStateItem>
         </div>
-        <div className="state-button" onClick={() => onClick("processing")}>
+        <div className="state-button" onClick={() => handleChangeView("processing")}>
           <StyledStateItem
             state={state==="processing"}
           >제작중
           </StyledStateItem>
         </div>
-        <div className="state-button" onClick={() => onClick("finished")}>
+        <div className="state-button" onClick={() => handleChangeView("finished")}>
           <StyledStateItem
             state={state==="finished"}
           >제작완료

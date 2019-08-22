@@ -29,12 +29,12 @@ const Item = styled.div`
 
 class OrderManageListItem extends Component {
   render() {
-    const { id, name, customerById } = this.props;
-    const { onClick } = this.props;
+    const { id, name, selectedId } = this.props;
+    const { handleGetById } = this.props;
     return(
       <Item
-        onClick={() => onClick(id)}
-        selected={id==customerById}
+        onClick={() => handleGetById(id)}
+        selected={id==selectedId}
       >{name}
       </Item>
     )

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { CustomerInfoWrapper } from '../../components/CustomerInfo/CustomerInfoWrapper';
 import { CustomerInfoInput } from '../../components/CustomerInfo/CustomerInfoInput';
 import { CustomerInfoPostButton } from '../../components/CustomerInfo/CustomerInfoPostButton';
-import * as customerActions from '../../store/modules/customer';
 import * as orderActions from '../../store/modules/order';
 import * as orderTemplateActions from '../../store/modules/orderTemplate';
 import * as userActions from '../../store/modules/user';
@@ -21,19 +20,19 @@ class CustomerInfoContainer extends Component {
   }
 
   handleChange = (e) => {
-    const { CustomerActions } = this.props;
+    const { OrderActions } = this.props;
     const { name, value } = e.target;
 
-    CustomerActions.changeInput({
+    OrderActions.changeInput({
       name,
       value,
     });
   }
 
   handlePost = async(e) => {
-    const { CustomerActions, OrderActions } = this.props;
+    const { OrderActions } = this.props;
     const { postForm, history } = this.props;
-    const { name, phone, address } = postForm.toJS();
+    const { name, phone, address } = postForm.toJS().customerInfo;
     const makerId = this.props.loadedUserInfo.get('_id');
     const orderTemplate = this.props.orderTemplate;
     let contents = { template: []};
@@ -44,19 +43,19 @@ class CustomerInfoContainer extends Component {
     )
 
     try {
-     let customerInfo = await CustomerActions.postCustomerInfo({name, phone, address, makerId});
-     // customerInfo 작성과 비워진 주문서(order) 동시에 작성
-     // makerId를 customerInfo에 넣었음 TODO: 한명이 다른곳에서 각각 두개의 주문을 할 때, 비효율이 생김
-     const customerId = customerInfo.data._id;
-     await OrderActions.postOrder({customerId, contents});
-     window.location = await '/customerInfoSuccess/';
+    let customerInfo = {}
+    customerInfo['name'] = name;
+    customerInfo['phone'] = phone;
+    customerInfo['address'] = address;
+    await OrderActions.postOrder({customerInfo, makerId, contents});
+    window.location = await '/customerInfoSuccess/';
     } catch(e) {
       console.log(e);
     }
   }
 
   render() {
-    const { name, phone, address } = this.props.postForm;
+    const customerInfo = this.props.postForm.get('customerInfo')
     const { loadedUserInfo } = this.props;
     const { handleChange, handlePost } = this;
 
@@ -66,19 +65,19 @@ class CustomerInfoContainer extends Component {
         <CustomerInfoInput 
           label="이름"
           name="name"
-          value={name}
+          value={customerInfo.name}
           onChange={handleChange}
         />
         <CustomerInfoInput 
           label="연락처"
           name="phone"
-          value={phone}
+          value={customerInfo.phone}
           onChange={handleChange}
         />
         <CustomerInfoInput 
           label="주소"
           name="address"
-          value={address}
+          value={customerInfo.address}
           onChange={handleChange}
         />
         <CustomerInfoPostButton
@@ -91,12 +90,11 @@ class CustomerInfoContainer extends Component {
 
 export default connect(
   (state) => ({
-    postForm: state.customer.get('postForm'),
+    postForm: state.order.get('postForm'),
     loadedUserInfo: state.user.get('loadedUserInfo'),
     orderTemplate: state.orderTemplate
   }),
   (dispatch) => ({
-    CustomerActions: bindActionCreators(customerActions, dispatch),
     OrderActions: bindActionCreators(orderActions, dispatch),
     OrderTemplateActions: bindActionCreators(orderTemplateActions, dispatch),
     UserActions: bindActionCreators(userActions, dispatch)

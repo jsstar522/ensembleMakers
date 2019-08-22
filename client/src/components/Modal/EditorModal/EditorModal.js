@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 const StateBox = styled.div`
   position: relative;
+  right: 0; 
   float: right;
   width: 80px;
   height: 30px;
@@ -19,15 +20,15 @@ const StateBox = styled.div`
 
   border-radius: 5px;
   //state에 따라 박스 색 변경
-  background-color: ${props => props.state == "ordered" ? oc.orange[4] : props.state == "processing" ? oc.pink[4] : oc.lime[3]};
-  text-shadow: 0 0 2px ${props => props.state == "ordered" ? oc.orange[6] : props.state == "processing" ? oc.pink[6] : oc.lime[6]};
+  background-color: ${props => props.state == "ordered" ? "#f69e53" : props.state == "processing" ? "#fa6e57" : "#4695d6"};
+  text-shadow: 0 0 2px ${props => props.state == "ordered" ? "#f69e53" : props.state == "processing" ? "#fa6e57" : "#4695d6"};
   color: white;
   padding-top: 3px;
 
   // 글자드래그 방지
   -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-
 `
+
 StateBox.propTypes = {
   state: PropTypes.string
 };
@@ -36,7 +37,7 @@ class EditorModal extends Component {
 
   render() {
     const { addMode, addContent, name, state, detail, contents, modelImageURL } = this.props;
-    const { onChange, onChangeModelImg, onDeleteModelImg, onChangeAddMode, onChangeAddInput, onAddList, onDeleteList } = this.props;
+    const { handleChange, handleChangeModelImg, handleDeleteModelImg, handleChangeAddMode, handleChangeAddInput, handleAddList, handleDeleteList } = this.props;
     const { handlePatch, handleHide } = this.props;
     let stateText;
     stateText = state=="ordered" ? "주문완료" 
@@ -53,8 +54,8 @@ class EditorModal extends Component {
           // only id, name, value, type are valid with input tags.
           name={i}
           value={content.value || ''}
-          onChange={(e, kind) => onChange(e, 'template')}
-          onDeleteList={() => onDeleteList(i, 'template')}
+          onChange={(e, kind) => handleChange(e, 'template')}
+          onDeleteList={() => handleDeleteList(i, 'template')}
         />
     )
 
@@ -80,28 +81,28 @@ class EditorModal extends Component {
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <div className="editor-modal-image-button-box">
                 <label htmlFor="ex_file">사진선택</label>
-                <input type="file" id="ex_file" onChange={onChangeModelImg}/>
+                <input type="file" id="ex_file" onChange={handleChangeModelImg}/>
               </div>
               <div className="editor-modal-image-delete-button-box">
-                <label onClick={onDeleteModelImg}>사진삭제</label>
+                <label onClick={handleDeleteModelImg}>사진삭제</label>
               </div>
             </div>
           </div>
         </div>
         <div className="editor-modal-line"/>
         {detailInputList}
-        {addMode === false && <div className="editor-modal-open-add-input-button" onClick={() => onChangeAddMode(true)}> 작성 목록 추가하기 </div>}
+        {addMode === false && <div className="editor-modal-open-add-input-button" onClick={() => handleChangeAddMode(true)}> 작성 목록 추가하기 </div>}
         {addMode === true && 
           <div className="editor-modal-add-wrapper">
             <input 
               className="editor-modal-add-input"
               placeholder="추가할 목록을 작성하세요"
               value={addContent || ''}
-              onChange={onChangeAddInput}
+              onChange={handleChangeAddInput}
             />
-            <div className="editor-modal-add-button" onClick={() => onAddList(addContent)}>추가하기</div>
+            <div className="editor-modal-add-button" onClick={() => handleAddList(addContent)}>추가하기</div>
             
-            <div className="editor-modal-add-cancel-button" onClick={() => onChangeAddMode(false)}>X</div>
+            <div className="editor-modal-add-cancel-button" onClick={() => handleChangeAddMode(false)}>X</div>
           </div>
         }
         <div className="editor-modal-post-button" onClick={handlePatch}>저장하기</div>

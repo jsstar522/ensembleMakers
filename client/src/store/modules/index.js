@@ -3,7 +3,6 @@ import base from './base';
 import auth from './auth';
 import user from './user';
 import post from './post';
-import customer from './customer';
 import order from './order';
 import orderTemplate from './orderTemplate';
 import model from './model';
@@ -18,7 +17,6 @@ export default combineReducers({
     auth,
     user,
     post,
-    customer,
     order,
     orderTemplate,
     model,

@@ -6,7 +6,6 @@ import { OrderManageState } from '../../components/OrderManage/OrderManageState'
 import { OrderManageList } from '../../components/OrderManage/OrderManageList';
 import { OrderManageDetail } from '../../components/OrderManage/OrderManageDetail';
 import * as orderActions from '../../store/modules/order';
-import * as customerActions from '../../store/modules/customer';
 import * as modalActions from '../../store/modules/modal';
 import * as reviewActions from '../../store/modules/review';
 import { formatDate } from '../../lib/dateFunction';
@@ -16,47 +15,44 @@ class OrderManageContainer extends Component {
   // 로그인 정보 받은 후(props를 받은 후) 실행
   componentWillReceiveProps(nextProps) {
     if(this.props.loggedInfo !== nextProps.loggedInfo){
-      const { CustomerActions } = this.props;
-      CustomerActions.getCustomerInfoByMakerId(nextProps.loggedInfo.get('_id')) 
+      const { OrderActions } = this.props;
+      OrderActions.getOrdersByMakerId(nextProps.loggedInfo.get('_id'))
     }
   }
 
-  handleViewChange = (view) => {
+  handleChangeView = (view) => {
     const { OrderActions } = this.props;
-    OrderActions.viewChange(view);
+    OrderActions.changeView(view);
   }
 
-  handleImgTextViewChange = (view) => {
+  handleChangeImgTextView = (view) => {
     const { OrderActions } = this.props;
-    OrderActions.imgTextViewChange(view);
+    OrderActions.changeImgTextView(view);
   }
 
   handleGetById = async(id) => {
-    const { allCustomers, customerById, postForm } = this.props;
-    const { CustomerActions, OrderActions, ReviewActions } = this.props;
-
-    const customerInfo = allCustomers.find(customer => customer._id === id );
+    const { OrderActions, ReviewActions } = this.props;
 
     try {
-      await CustomerActions.getCustomerInfoById(customerInfo._id);
-      await OrderActions.getOrderById(customerInfo._id);
-      await ReviewActions.getReviewByCustomerId(customerInfo._id);
-      // order detail 창 보이기
-      await OrderActions.detailViewChange(true)
+      await OrderActions.getOrderById(id);
+      await ReviewActions.getReviewById(id);
+      // // order detail 창 보이기
+      await OrderActions.changeDetailView(true)
+
     }catch(e) {
       console.log(e);
     }
   };
 
   handleChangeState = async(state) => {
-    const { CustomerActions, OrderActions } = this.props;
-    const { customerById } = this.props;
-    const id = customerById.toJS()._id;
+    const { OrderActions } = this.props;
+    const { orderById } = this.props;
+    const id = orderById.get('_id');
 
     try {
-      await CustomerActions.changeState({id, state})
+      await OrderActions.changeState({id, state})
       // order detail view 초기화
-      await OrderActions.detailViewChange(false);
+      await OrderActions.changeDetailView(false);
       // orderById state 초기화
       await OrderActions.orderInit();
     }catch(e) {
@@ -106,47 +102,60 @@ class OrderManageContainer extends Component {
     });
   }
 
+  handleDeleteOrder = async(id) => {
+    const { OrderActions } = this.props;
+    const { orderById, allOrders } = this.props;
+
+    let modelImage = ''
+    if(orderById.get('modelImage')){
+      modelImage = orderById.get('modelImage').split('/')[2]
+    }
+    const index = allOrders.findIndex(order => order._id === orderById.get('_id'))
+
+    try {
+      await OrderActions.deleteOrder({
+        id: orderById.get('_id'),
+        modelImage: modelImage,
+        index: index
+      })
+      // order detail view 초기화
+      await OrderActions.changeDetailView(false);
+      // orderById 초기화
+      await OrderActions.orderInit();
+    }catch(e) {
+      console.log(e);
+    }
+  }
+
   render() {
-    const { view, detailView, imgTextView, allCustomers, customerById, orderById, review } = this.props;
-    const { handleViewChange, handleImgTextViewChange, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal, handlePatchProcessingNext, handlePatchProcessingPre } = this;
+    const { view, detailView, imgTextView, allOrders, orderById, review } = this.props;
+    const { handleChangeView, handleChangeImgTextView, handleGetById, handlePostOrder, handleChangeState, handleOpenEditorModal, handleOpenImageModal, handlePatchProcessingNext, handlePatchProcessingPre, handleDeleteOrder } = this;
+    
     return(
       <OrderManageWrapper>
         <OrderManageState
           state={view}
-          onClick={handleViewChange}
+          handleChangeView={handleChangeView}
         />
         <OrderManageList
-          allCustomers={allCustomers}
+          allOrders={allOrders}
+          selectedId={orderById.get('_id')}
           view={view}
-          customerById={customerById.toJS()._id}
-          onClick={handleGetById}
+          handleGetById={handleGetById}
         />
         <OrderManageDetail
           id={orderById.get('_id')}
           orderNumber={orderById.get('orderNumber')}
-          name={orderById.getIn(['customerId', 'name'])}
-          date={formatDate(orderById.getIn(['customerId', 'createdAt']))}
-          phone={orderById.getIn(['customerId', 'phone'])}
-          address={orderById.getIn(['customerId', 'address'])}
-          state={orderById.getIn(['customerId', 'state'])}
+          name={orderById.getIn(['customerInfo', 'name'])}
+          phone={orderById.getIn(['customerInfo', 'phone'])}
+          address={orderById.getIn(['customerInfo', 'address'])}
+          date={formatDate(orderById.get('createdAt'))}
+          state={orderById.get('state')}
           contents={orderById.get('contents')}
-          // model={orderById.toJS().model}
-          // rightSize={orderById.toJS().rightSize}
-          // leftSize={orderById.toJS().leftSize}
-          // last={orderById.toJS().last}
-          // sole={orderById.toJS().sole}
-          // midsole={orderById.toJS().midsole}
-          // sockLining={orderById.toJS().sockLining}
-          // heel={orderById.toJS().heel}
-          // decoration={orderById.toJS().decoration}
-          // // material={orderById.getIn(['material', 'value'])}
-          // material={orderById.toJS().material}
-          // innerMaterial={orderById.toJS().innerMaterial}
-          // color={orderById.toJS().color}
           detail={orderById.toJS().detail}
           images={orderById.toJS().images}
-          imgTextView={imgTextView}
           modelImage={orderById.toJS().modelImage}
+          imgTextView={imgTextView}
           detailView={detailView}
           lastComplete={orderById.toJS().lastComplete && formatDate(orderById.toJS().lastComplete)}
           cutComplete={orderById.toJS().cutComplete && formatDate(orderById.toJS().cutComplete)}
@@ -154,12 +163,13 @@ class OrderManageContainer extends Component {
           soleComplete={orderById.toJS().soleComplete && formatDate(orderById.toJS().soleComplete)}
           processingState={orderById.toJS().processingState}
           review={review.toJS()}
-          onChangeState={handleChangeState}
-          onChangeImgText={handleImgTextViewChange}
-          onOpenEditorModal={handleOpenEditorModal}
-          onOpenImageModal={handleOpenImageModal}
-          onPatchProcessingNext={handlePatchProcessingNext}
-          onPatchProcessingPre={handlePatchProcessingPre}
+          handleChangeState={handleChangeState}
+          handleChangeImgText={handleChangeImgTextView}
+          handleOpenEditorModal={handleOpenEditorModal}
+          handleOpenImageModal={handleOpenImageModal}
+          handlePatchProcessingNext={handlePatchProcessingNext}
+          handlePatchProcessingPre={handlePatchProcessingPre}
+          handleDeleteOrder={handleDeleteOrder}
         />
       </OrderManageWrapper>
     )
@@ -172,15 +182,12 @@ export default connect(
     view: state.order.get('view'),
     detailView: state.order.get('detailView'),
     imgTextView: state.order.get('imgTextView'),
-    allCustomers: state.customer.get('allCustomers'),
-    customerById: state.customer.get('customerById'),
     allOrders: state.order.get('allOrders'),
     orderById: state.order.get('orderById'),
     review: state.review.get('data'),
   }),
   (dispatch) => ({
     OrderActions: bindActionCreators(orderActions, dispatch),
-    CustomerActions: bindActionCreators(customerActions, dispatch),
     ModalActions: bindActionCreators(modalActions, dispatch),
     ReviewActions: bindActionCreators(reviewActions, dispatch),
   })

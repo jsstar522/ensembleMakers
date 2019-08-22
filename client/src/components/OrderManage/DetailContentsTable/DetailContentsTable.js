@@ -5,7 +5,6 @@ class DetailContentsTable extends Component {
   render() {
     const { imgTextView } = this.props;
     const { address, state, detail, images, contents } = this.props;
-    const { onChangeImgText, onOpenImageModal } = this.props;
 
     const contentsList = contents.template.map(
       (content, i) => 

@@ -12,11 +12,12 @@ import { formatDate } from '../../lib/dateFunction';
 
 class OrderContainer extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     const { OrderActions, ReviewActions } = this.props;
-    const { id, review, orderById } = this.props;
-    OrderActions.getOrderByNum(id);
-    ReviewActions.getReviewByNum(id);
+    const orderNumber = this.props.id;
+    // getOrderByNum 결과 객체로 저장
+    let orderId = await OrderActions.getOrderByNum(orderNumber);
+    await ReviewActions.getReviewById(orderId.data._id);
   }
 
   handleChangeMode = (mode) => {
@@ -39,8 +40,7 @@ class OrderContainer extends Component {
     const { review, orderById } = this.props;
     let data = review.toJS().data;
     // payload에 orderById 추가
-    data['orderNumber'] = orderById.get('orderNumber');
-    data['customerId'] = orderById.getIn(['customerId', '_id']);
+    data['orderId'] = orderById.get('_id');
     await ReviewActions.postReview(data);
     await ReviewActions.changeMode('read');
   }
@@ -49,7 +49,7 @@ class OrderContainer extends Component {
     const { ReviewActions } = this.props;
     const { review, orderById } = this.props;
     let data = review.toJS().data;
-    const id = orderById.get('orderNumber')
+    const id = orderById.get('_id')
     await ReviewActions.patchReview({ id, data })
     await ReviewActions.changeMode('read');
   }
@@ -78,7 +78,7 @@ class OrderContainer extends Component {
 
   render() {
     const { orderById, review } = this.props;
-    const state = orderById.getIn(['customerId', 'state']);
+    const state = orderById.get('state');
     const mode = review.get('mode');
     const { handleChangeMode, handleChangeReviewInput, handleChangeReviewRating, handlePostReview, handlePatchReview, handlePatchProcessingNext, handlePatchProcessingPre } = this;
 
@@ -87,10 +87,10 @@ class OrderContainer extends Component {
         <ProcessingControll
           id={orderById.get('_id')}
           orderNumber={orderById.get('orderNumber')}
-          name={orderById.getIn(['customerId', 'name'])}
-          date={formatDate(orderById.getIn(['customerId', 'createdAt']))}
-          phone={orderById.getIn(['customerId', 'phone'])}
-          state={orderById.getIn(['customerId', 'state'])}
+          name={orderById.getIn(['customerInfo', 'name'])}
+          date={formatDate(orderById.get('createdAt'))}
+          phone={orderById.getIn(['customerInfo', 'phone'])}
+          state={state}
           lastComplete={orderById.toJS().lastComplete && formatDate(orderById.toJS().lastComplete)}
           cutComplete={orderById.toJS().cutComplete && formatDate(orderById.toJS().cutComplete)}
           upperComplete={orderById.toJS().upperComplete && formatDate(orderById.toJS().upperComplete)}

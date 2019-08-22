@@ -33,7 +33,11 @@ const initialState = Map({
   modelById: Map({}),
   postForm: Map({
     model: Map({}),
-    customerInfo: Map({})
+    customerInfo: Map({
+      name: '',
+      phone: '',
+      address: ''
+    })
   })
 });
 

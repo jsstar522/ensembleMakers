@@ -28,7 +28,6 @@ class ProcessingTable extends Component {
   render() {
     const { id } = this.props;
     const { lastComplete, cutComplete, upperComplete, soleComplete, processingState } = this.props;
-    const { onPatchProcessingNext, onPatchProcessingPre } = this.props;
 
     return(
       <div className="processing-table-wrapper">

@@ -4,27 +4,28 @@ import './OrderManageList.scss';
 
 class OrderManageList extends Component {
   render() {
-    const { onClick } = this.props;
-    const { allCustomers, view, customerById } = this.props;
-    //customer 전체명단
-    const allCustomerList = allCustomers
+    const { allOrders, selectedId, view } = this.props;
+    const { handleGetById } = this.props;
+
+    // 전체 order
+    const allOrderList = allOrders
     .map(
-      (allCustomer, i) => {
+      (order, i) => {
       // 주문상태에 따라 다른 곳에 render
-      if(allCustomer.state === view)
+      if(order.state === view)
         return <OrderManageListItem
           key={i}
-          id={allCustomer._id}
-          name={allCustomer.name}
-          phone={allCustomer.phone}
-          address={allCustomer.address}
-          onClick={onClick}
-          customerById={customerById}
+          id={order._id}
+          selectedId={selectedId}
+          name={order.customerInfo.name}
+          phone={order.customerInfo.phone}
+          address={order.customerInfo.address}
+          handleGetById={handleGetById}
           />
     })
 
     return(
-      <div className="order-manage-list-wrapper">{allCustomerList}</div>
+      <div className="order-manage-list-wrapper">{allOrderList}</div>
     )
   }
 }
